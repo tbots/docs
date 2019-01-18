@@ -1,0 +1,23 @@
+
+ Show / manipulate routing, devices, policy routing and tunnels
+
+ ip [ OPTIONS ] OBJECT { COMMAND | help }
+
+ ip addr add|del [address[/mask]] dev [nic] 	# not permanent
+ ip addr show 
+ ip link set [iface] up|down
+ ip route show
+ ip route get
+
+ ip -o|oneline
+ ip -s|--stats|--statistics
+ ip -r
+ ip -c|-color
+
+ ip address add IFADDR dev IFNAME			# add ip address to an interface
+
+
+
+ [objects]
+ 	
+	link - network device

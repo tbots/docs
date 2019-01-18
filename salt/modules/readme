@@ -1,0 +1,3 @@
+ Modules are collection of the execution functions. An execution modules is the Python file. Each public method defined in that Python file is exposed as an execution function. 
+ Modules are run on the minion itself, thus all the libraries need to be installed on the particular minion. Runner modules are run on the master itself?
+

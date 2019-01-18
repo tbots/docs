@@ -1,0 +1,15 @@
+#!/bin/bash
+
+for unit in $*
+do
+	#eval $unit=`
+	systemctl show $unit | grep FragmentPath
+	#2> /dev/null | awk -F= '/FragmentPath/ {print $2}'
+	echo "${!unit}"
+#	if test $?
+#	then
+#		echo -e "$unit:\t${!unit}"
+#	else
+#		echo -e "$unit:\tnot present"
+#	fi
+done

@@ -1,0 +1,10 @@
+
+[list methods]
+ 	append()
+	extend()
+	insert()
+	len()
+	list()
+	L.remove()			// removes first occurance of the value (!index), full match
+	reverse()
+	L.pop([index]) -> item

@@ -1,0 +1,17 @@
+
+ sudo apt-get install mysql-server -y
+ sudo mysql_secure_installation
+
+ mysql --user root --password
+ create database <database_name>;
+ create user '<user>'@'localhost' identified by 'password';
+ grant all on testdb.* to 'testuser' [identified by 'password'];
+
+ use <database_name>;
+ create table customers(costumer_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, first_name TEXT, second_name TEXT);
+
+ # reset password
+ sudo systemctl stop mysql
+ mysqld_safe --skip-grant-tables &
+ use mysql
+ update user set password=PASSWORD('pass') WHERE user='root';

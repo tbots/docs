@@ -1,0 +1,14 @@
+
+ Making an object from a class is called instatiation, and the object itself called instance.
+
+ A function that is a part of a class is called method.
+
+ The init() method.
+
+ The init() is a special method that is called each time whenever we create an instance based on the class. Leading and trailing underscores are denoting 
+ default methods from the custom ones.
+
+ self parameter is required in the method definition, and it must come before the other parameters. Every method call associated with the class automatically passes
+ self, which is reference to the instance itself. It gives the individual instance access to the attributes and methods in the class. 
+
+ Every attribute in a class needs initial value. 

@@ -1,0 +1,8 @@
+
+ nslookup - nameserver			# sets name server on the fly
+ > set all
+ > set domain
+ > set any
+ 
+
+ typequery == ts == q

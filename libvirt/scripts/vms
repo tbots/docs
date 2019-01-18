@@ -1,0 +1,2 @@
+vms=( ut0 ut1 ) # init array
+#echo "vms: ${#vms[@]}"

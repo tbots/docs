@@ -1,0 +1,6 @@
+
+# install openssh-server
+apt-get install openssh-server				#    /etc/ssh
+
+
+# set repositories

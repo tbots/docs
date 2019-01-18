@@ -1,0 +1,15 @@
+Run helptags to add documentation.
+
+Accepted file name representation when adding file type plugin: ext.vim, ext_name.vim, ext/name.vim.
+	
+	Colors: 
+
+		$VIMRUNTIME/colors
+
+		:runtime syntax/colortest.vim
+
+	Marks:
+
+		" 	last position in a file
+		.		last edit in a file
+

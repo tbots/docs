@@ -1,0 +1,13 @@
+	qemu-system-x86_64 [options] [disk_image]
+
+		-enable-kvm       
+											Enable KVM full virtualization support. This option is only available if KVM support is enabled when compiling
+		-hda/hdb file			use 'file' IDE hard disk 0/1 image
+		-cdrom file				use 'file' as IDE cdrom image (cdrom is ide1 master)
+		-boot [order=drives] 'drives': floppy (a), hard disk (c), CD-ROM (d), network (n)            
+		-m [size=]MB 			initial amount of the guest memory
+		-drive file=file
+											Define a new drive. This includes creating a block driver node (the backend) as well as guest device, and is mostly a shortcut for defining the corresponding -blockdev and -device options.
+
+											file
+

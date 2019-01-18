@@ -1,0 +1,120 @@
+
+ Operating System Virtualisation
+
+  The operating system virtualisation technique allows the same physical host to serve different workloads and isolate each of the workloads. This allows a 
+	physical server to run multiple isolated operating system instances, called containers. Operating system virtualisation also called a container-based virtualisation
+	The advantage of this type of virtualisation is that the host operating system does not need to emulate system call interfaces for operating systems that differ
+	from it. Since the mentioned interfaces are not present, alternative operating systems cannot be virtualized or accomodated in this type of virtualisation.
+	This is a common and well-understood limitation of this type virtualisation. The process isolation and resource management is provided by the kernel. The 
+	limitations of this technology is outweighed and by benefits to performance and efficiency, because one operating system is supporting all the virtual environments.
+
+ Protection Rings (Domains)
+
+  Protection rings or priveleged rings are mechanisms that protect data or faults based on the security enforced when accessing the resources on the computer 
+	system. Rings are numbered from the most priveleged to the least priveleged. Most of the general-purpose systems use only two rings, even if the hardware they
+	run on provides more CPU modes than that. The main two CPU modes are the kernel mode and user mode. From an operating system point of view, Ring 0 is called the
+	kernel/supervisor mode and Ring 3 is the user mode. Applications are running in Ring 3.
+	
+	The rings above 0 run instructions in a processor mode called uprotected.  The hypervisor needs access to the memory, CPU, and I/O devices of the host, 
+	this basically blocks the virtual machine in a ring 0. Due to the fact that only one kernel can run in Ring 0 in a time, the guest operating system has to 
+	reside in another ring than 0. This resulted in a an introduction of the full virtualisation and paravirtualisation methods.
+
+ Full Virtualisation
+
+ 	In full virtualisation, priviledged instructions are emulated to overcome the limitations arising from the guest operating system running in ring 1 and 
+	hypervisor running in Ring 0. It relies on techniques, such as binary translation to trap and virtualize the execution of certaing sensitive and non-virtualizable
+	instructions. System calls made to the kernel are interpreted and dynamically rewritten. A binary translation can incur a large perfomance overhead in comparison 
+	to a virtual machine running on natively virtualized architectures as far hypervisor provides a processor emulation to handle and modify the protected CPU
+	operations.
+
+ Paravirtualization
+
+  In paravirtualization the guest operating system needs to be modified in order to allow those instructions to access Ring 0. The communication occures through a
+	hypercall path. Hypervisor provides an API and the OS of the guest virtual machine calls that API which require host operating system modifications. Privileged
+	instruction calls are exchanged with the API functions provided by the hypervisor. In this case, the modified guest operating system can run in ring 0.
+
+ Hardware Assisted Virtualisation
+  
+	Hardware assisted virtualisation is a platform virtualization method designed to efficiently use full virtualization with the hardware capabilities. For better
+	support of the virtualization Intel and AMD introduced Virtualization Technology (VT) and Secure Virtual Machine (SVM) respectively as extensions of the IA-32
+	instruction set. These extensions allow the hypervisor to run a guest OS that expects to run in kernel mode in the lower priviledged rings. Hardware assisted 
+	virtualization not only proposes new instructions, but also introduces a new priviledged access level called ring -1, where the hypervisor can run. Hence guest 
+	virtual machine can run in ring 0. With the hardware assisted virtualization the operating system has direct access to resources without any emulation or OS mo-
+	dification. 
+
+ Hypervisor
+
+  Hypervisor or Virtual Machine Monitor is a piece of software that is responsible for monitoring and controlling virtual machines or guest operating systems. The
+	hypervisor is responsible for ensuring different virtualization management tasks, such as providing virtual hardware, VM life cycle management, migrating of VM,
+	allocating resources in real time, defining policies for virtual machine management, and so on. The hypervisor is also responsible for efficiently controlling
+	physical platform resources, such as memory translation and I/O mapping. VMM is critical component in a virtualization environment.
+
+	Depending on the location of the VMM/hypervisor and where it's placed, it is categorized either as type 1 or 2.
+
+  The hypervisor that runs directly on top of the hardware is generally considered to be a Type 1 hypervisor. If there is an operating system present, and if the
+	hypervisor operates as a separate layer, it will be considered as a Type 2 hypervisor. 
+
+	Type 1 hypervisor also called Bare Metal, Embedded or Native Hypervisors. Type 2 hypervisor called a hosted hypervisor.
+
+ Kernel Virtual Machine (KVM)
+
+  KVM is a full virtualisation solution for Linux on x86 hardware containing virtualisation extensions (Intel VT or AMV-V). It consists of a loadable kernel module
+	kvm.ko, that provides a full virtualisation infrastructure and a processor specific module kvm-intel.ko or kvm-amd.ko. KVM turns the Linux kernel into a hyper-
+	visor when KVM kernel mode is installed. For I/O emulations, KVM uses a software called QEMU that does hardware emulation. It emulates the processor and a peripherial
+	devices on which the guest operating system can be installed.
+
+	A separate qemu-kvm process is launched for each virtual machine by libvirtd at the request of the system-management utilities such as virsh and virt-manager. The 
+	properties of the virtual machines are defined in separate XML files in /etc/libvirt/qemu. libvirt uses the details from these XML files to derive the argument list
+	that is passed to qemu-kvm process.
+
+ 
+ QEMU
+
+  Virtual machine disk image is a file that represents the data on a hard disk. From the perspective of the guest OS, it actually a hard disk, and it can create its own
+	filesystem on the virtual disk.
+
+  QEMU supports several image types. The "native" and most flexible type is qcow2, which supports copy on write, encryption, compression and VM snapshots. Following
+	image types can be used:
+	 
+	 raw (default)
+	 				plain binary image of the disc image and is very portable. On filesystems that support sparse files, images in this format only use the space actually used 
+					by the data recorded in them
+
+	 cloop
+	 				compressed loop format mainly used for reading Knoppix and similar live CD image formats
+
+	 cow
+
+	 				copy on write format, supported for historical reasons only and not available to QEMU on Windows
+
+	 qcow
+
+	 				the old copy on write format, supported for historical reasons only and not available to QEMU on Windows
+
+	 qcow2
+	 				QEMU copy-on-write format with a range of special features, including the ability to take multiple snapshots, smaller images on filesystems that doesn't support
+					sparse files, optional AES encryption, and optional zlib compression
+
+	 vmdk
+	 				VMware
+
+	 vdi	
+	 				VirtualBox 
+
+	 vhdx
+	 				Hyper-V 
+
+	 vpc
+	 				Hyper-V legacy
+
+ Requirements:
+
+  Kernel modules to be enabled:
+	- kvm
+	- kvm-intel
+
+ Commands:
+ 
+	- lsmod(1)
+	- modprobe(1)
+	- rmmod(1)

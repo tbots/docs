@@ -1,0 +1,6 @@
+
+	scripts
+		run.sh			the first executable script that trigger further deployment scripts chain
+
+	directories
+		utilities		deployment related scripts collection utilities

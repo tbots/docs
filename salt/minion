@@ -1,0 +1,43 @@
+
+ Configuration
+
+	/etc/salt/minion
+	 						configuration file
+
+	Configuration file sections:
+
+		master
+							master name	(default is 'salt')
+
+		master_finger
+							fingerprint of the master
+
+ Network configuration:
+
+	Ports:
+		4505		(publish_port)
+		4506		(ret_port)
+
+		^ on the master
+
+
+ Targetting:
+ 	
+	-G			grains
+
+					-G 'os:CentOS'
+					-G 'os:Ubuntu'
+						
+
+	-C			compound
+					
+						Allows logical operators(and,or,not)
+						G@ ?
+	-L			comma-separated list
+	-E			regular expression
+
+
+	Examples:
+		
+		salt -C 'not cmp1*' test.ping
+		salt -C 'not E@cmp1.*' test.ping

@@ -1,0 +1,70 @@
+          			<div id="relations">
+          				<form id="projectForm" >
+          				<table class="table table-condensed">
+							<tr>
+								<th>Project name</th>
+								<td>
+									<input type="text" id="project_name" name="project_name" class="form-control input-medium" style="display:inline" value="{{if project != None: }}{{=project[1]}}{{pass}}"/>
+								</td>
+							</tr>
+							<tr>
+								<th>Project description</th>
+								<td>
+									<textarea id="project_descr" name="project_descr" class="form-control input-medium" >{{if project != None: }}{{=project[2]}}{{pass}}</textarea>
+								</td>
+							</tr>							
+							<tr>
+								<th>Project status</th>
+								<td>
+									<select id="project_status" name="project_status" class="form-control input-medium" >
+										{{for item in statuses:}}
+											<option value="{{=item}}">{{=statuses[item]}}</option>
+										{{pass}}										
+									</select>
+								</td>
+							</tr>							
+							<tr>
+								<th>Project nodes</th>
+								<td>									
+									<label>Main node</label>
+									<select id="main_node" name="main_node" class="form-control input-medium" onchange="setNode(this.value)" >
+										<option value="">...</option>
+										{{for item in nodes:}}
+											<option value="{{=item}}" {{if item == mainNode:}}selected{{pass}}>{{=nodes[item]}}</option>
+										{{pass}}	
+									</select>
+									<br />
+									<label>Another nodes</label>
+									<div class="checkbox-list" style="margin-left:20px">
+									{{j = 0}}
+									{{for item in nodes:}}
+										{{if j%3 == 0:}}
+											</div>
+											<div class="checkbox-list" style="margin-left:20px">										
+										{{pass}}
+										
+										<label class="checkbox-inline"><input id="node{{=item}}" {{if item in selNodes:}}{{if selNodes[item] == 2:}}checked{{else:}}disabled{{pass}}{{pass}} name="projectNodes" value="{{=item}}" type="checkbox"> {{=nodes[item]}} </label>
+										{{j += 1}}
+									{{pass}}
+									</div>
+								</td>
+							</tr>
+							{{if project == None: }}								
+							<tr>
+								<th>Data template</th>
+								<td>
+									<div class="radio-list">
+										{{k = 0}}
+										{{for item in templates:}}
+										<label class="radio-inline"><input {{if k == 0:}}checked{{pass}} name="dataTemplate" value="{{=item[0]}}" type="radio"> {{=item[1]}} </label>
+										{{k += 1}}
+										{{pass}}
+									</div>
+								</td>
+							</tr>				
+							{{pass}}
+						</table>
+						<input type="hidden" name="projectId" id="projectId" value="{{=projectId}}"/>
+						<input type="hidden" name="domainId" id="domainId" value="{{=domainId}}"/>
+						</form>
+          			</div>  

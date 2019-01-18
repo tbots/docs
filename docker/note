@@ -1,0 +1,18 @@
+
+ Images defined by a Dockerfile. Dockerfile defines an environment inside a container.
+ Commands:
+
+ 	docker --version
+ 	docker version
+	docker info
+	docker image ls
+	docker images
+	docker container
+	docker build --tag=<lowercase:)))))>
+
+	docker-compose exec -it container shell
+	docker-compose up -d service
+
+ Directories:
+ 	
+	/var/lib/docker/

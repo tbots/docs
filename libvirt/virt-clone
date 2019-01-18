@@ -1,0 +1,8 @@
+	virt-clone --original name --name new_name --auto-clone --mac MAC 
+						 --file /var/lib/libvirt/images/name.img			# disk image for the new guest
+	
+
+	Explore:
+		--original-xml 
+		--auto-clone
+		sparse file?

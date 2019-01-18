@@ -1,0 +1,5 @@
+PRJ=nginx
+DEP_HOST=192.168.133.84
+PRJ_PTH=/root/lotylda/depl/nginx
+SCRIPT=nginx.sh
+VARS=vars

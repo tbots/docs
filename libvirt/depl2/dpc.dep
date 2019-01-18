@@ -1,0 +1,5 @@
+PRJ=dpc
+DEP_HOST=192.168.133.84
+PRJ_PTH=~/lotylda/depl/dpc
+SCRIPT=dpc.sh
+VARS=/vars

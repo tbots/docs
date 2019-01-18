@@ -1,0 +1,13 @@
+
+	Required packages:
+		libtool 
+		autoconf
+
+  Apache Portable Runtime (APR)
+
+	Unpack to:
+		/httpd/srclib/apr
+ 		/httpd/srclib/apr-util
+
+	Configure options:
+		--with-include-apr

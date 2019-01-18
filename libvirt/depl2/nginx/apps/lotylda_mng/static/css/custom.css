@@ -1,0 +1,22 @@
+.modalWide > .modal-dialog {
+    width:800px !important;
+    margin: 0 auto;
+}
+
+#projectCreateLoader{
+	position:relative;margin:0 auto;
+	z-index:25;
+	top: -200px
+}
+
+#projectCreateLoader img{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#flash {	
+    display:none;
+}
+
+#flash:hover { opacity:0.25; }

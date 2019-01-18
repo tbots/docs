@@ -1,0 +1,42 @@
+{{extend 'layout.html'}}
+  <div class="page-content">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="portlet box blue">
+			    <div class="portlet-title">
+			    	<div class="caption">Users projects</div>
+			    </div>				    
+				<div class="portlet-body" >
+					<div class="table-toolbar">
+					</div>
+					<table class="table table-condensed">
+						<tr>
+							<th>Name</th>
+							<th>Email</th>																	
+							<th>Active</th>
+							<th>&nbsp;</th>
+						</tr>
+						{{if users:}}
+						{{for item in users:}}
+							<tr>
+								<td>{{=item[2]}} {{=item[1]}}</td>
+								<td>{{=item[3]}}</td>
+								<td>
+									{{if item[5] != 'pending':}}
+										<input type="checkbox" id="active-{{=item[4]}}" onclick="updateStatus('{{=item[4]}}')" checked  style="display:inline" />
+									{{else:}}
+										<input type="checkbox" id="active-{{=item[4]}}" onclick="updateStatus('{{=item[4]}}')" style="display:inline"  />
+									{{pass}}								
+								</td>
+								<td>
+									<button onclick="deleteUser('{{=item[4]}}')" class="btn blue" style="display:inline" >Delete user</button>									
+								</td>
+							</tr>
+						{{pass}}
+						{{pass}}
+					</table>					
+				</div>
+			</div>
+		</div>		
+	</div>
+</div>

@@ -1,0 +1,76 @@
+
+ depl/run.sh			issue an installation script on the remote machine
+ ~~~~~~~~~~~			~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 									
+		For any successfull invocation <file>.dep has to be specified (-c file.dep), as it lists all necessarily variables used by script.
+
+		PRJ																		# project name
+		DEP_HOST=192.168.133.84								# target host
+		PRJ_PTH=~/lotylda/depl/nginx					# absolute path to the deployment directory
+		SCRIPT=nginx.sh												# name of the deployment script
+		VARS=vars															# vars file
+		
+		Also any of the following shortcuts found on the command line will alter corresponding dep file.
+
+			NGINX			-	nginx.dep
+			NAGIOS		- nagios.dep
+			DPC				- dpc.dep
+
+		vars file ($VARS) references all the variable actually used by the deployment script, it will be passed as a command line argument
+		and will be `sourced' as a script starts
+
+		NOTE:			if one of the file.dep or vars is missing deployment operation will FALL!
+
+		Options:
+			-h host							specify a target host
+
+			-p proxy						specify proxy server address
+
+			-l [VAR,...]				will print all the variables defined in both config files (file.dep and vars) or just those specified on the 
+													command line
+
+			-s VAR=VAL,...|-i		set VAR to VAL, proper config file will be found automatically
+													in case of  -i  was specified along to  -s  will issue interactive prompt for the 
+													each variable, you can type `ENTER' to keep the defaults or `q' to stop interactive mode
+												
+
+		Either  -s  or  -l  will cause script to terminate without starting installation procedure.
+
+
+		If found VAR=VAL,... but without any  -s  or  -l, pairs will be passed to the deployment script and used ONLY for current session.
+
+
+		Examples:
+
+				./run.sh -c nginx.dep -s UID_NGINX=nginx
+												
+												will reset UID_NGINX to `nginx' within config file
+
+	
+				./run.sh NGINX -l
+												
+												list all the variables used
+
+
+				./run.sh NGINX
+											
+												issue deployment script on the remote host
+				
+
+				./run.sh -c nginx.sh -h 192.168.133.85
+									
+												issue deployment and specify target host address for the current session
+												DEP_HOST within .dep file defines target host
+
+
+				./run.sh -c nginx.sh -p IWEBBENCZ-1.tgn.trw.com:80
+
+												issue deployment script and specify proxy server address for the current session
+												PROXY within vars file defines permanent proxy address
+
+		NOTEs:
+
+				if UID_EMP and GID_EMP values not set in VARS, user will be prompted for them and offered to set it
+				to the current values specified in EMP_INI
+
+				on the remote side this values will overwrite any values set in EMP_INI

@@ -1,0 +1,19 @@
+          			<div id="relations">
+          				<label>User name: {{=username}}</label>
+          				<form id="projectForm" >
+          				<table class="table table-condensed">
+							<tr>
+								<td>		
+									<select id="groupNodes" name="groupNodes" multiple="multiple" class="multi-select">
+									{{for item in domainGroups:}}
+										<option {{if item[0] in selGroups:}}selected{{pass}} value="{{=item[0]}}">{{=item[1]}}</option>
+									{{pass}}
+									</select>							
+								</td>
+							</tr>							
+														
+						</table>
+						<input type="hidden" name="userId" id="userId" value="{{=userId}}"/>
+						<input type="hidden" name="domainId" id="domainId" value="{{=domainId}}"/>
+						</form>
+          			</div>  

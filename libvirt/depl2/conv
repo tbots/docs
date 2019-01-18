@@ -1,0 +1,35 @@
+
+ *** VARIABLE NAMES CONVENTIONS ***
+
+DIR_2PY			name of the web2py directory
+APP_2PY			applications directory name
+LOTYLDA			lotylda application directory
+
+ 
+TMP=/etc
+WWW=/var/www
+UNIT_SYSTEM=/etc/systemd/system
+REPO_SYSTEM=/etc/yum.repos.d
+DIR_INI_UWSGI_SITES=/etc/uwsgi/sites/
+DIR_INI_UWSGI=/etc/uwsgi
+DIR_CONF_NGINX=/etc/nginx
+UNIT_UWSGI=~/nginx/conf.files/uwsgi.service
+INI_UWSGI_WEB2PY=~/nginx/conf.files//web2py.ini
+EMP_INI=~/nginx/conf.files/emperor.ini
+REPO_NGINX=~/nginx/conf.files/nginx.repo
+CONF_NGINX=~/nginx/conf.files/nginx.conf
+PKG_LST=dep.l
+USER_UWSGI=uwsgi
+GROUP_UWSGI=uwsgi
+USER_NGINX=nginx
+GROUP_NGINX=nginx
+EPEL_RELEASE=./nginx/pack/epel-release-7-6.noarch.rpm
+LOG_DIR=log
+INSTALL_LOG=install.log
+DEP_LOG=dep.log
+PROXY=
+	UID_EMP				emperor.ini	uid
+	GID_EMP				emperor.ini	gid
+
+EMP_ARG		emperor argument
+EMP_MON		location monitored by emperor

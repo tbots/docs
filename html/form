@@ -1,0 +1,78 @@
+
+ The most important <form> element is the <input> element. The <input> element specifies an input field where the user can enter data. It can be displayed in several ways
+ depending on the type attribute. If the type attribute is omitted, the input field gets the value default type: "text".
+
+ Attributes:
+
+	accept				file_extension				Specifies the types of the files that the server accepts (only for type="file")
+								audio/*
+								video/*
+								image/*
+								media_type
+
+  align					left									Specifies the alignment of an image input (only for type="image")
+ 								right
+								top
+								middle
+								bottom
+
+ alt						text									Specifies an alternate text for images (only for type="image")
+
+ autocomplete		on										Does not work :(
+ 								off
+
+ autofocus			autofocus							Specifies that an <input> element should automatically get 
+ 																			focus when the page loads
+
+ checked				checked 							Specifies that an input element should be pre-selected when
+ 																			the page loads (for type="checkbox" or type="radio")
+
+ size						number								Specifies the width, in characters, of an <input> element
+
+ dirname				inputname.dir					Specifies that the text direction will be submitted
+
+ disabled				disabled							Specifies that the <input> element should be disabled
+
+ form						form_id								Specifies one or more forms the <input> element belongs to
+
+ formaction			URL										Specifies the URL of the file that will process the input
+ 																			control when the form is submitted (for type="submit" and 
+																			type="image")
+
+ formenctype		application/x-www-form-		Specifies how the form data should be encoded when 
+ 								urlencoded/multipart/			submitting it to the server (for type="submit" and 
+								form-data/text/plain			type="image")
+
+ formmethod			get										Defines the HTTP method for sending data to the action URL
+								post									(for type="submit" and type="image")
+
+ formnovalidate formnovalidate				Defines that form elements should not be validated
+ 																			when submitted
+
+ formatarget		_blank								Specifies where to display the response that is received
+ 								_self									after submitting the form (for type="submit" and type="image")
+								_parent
+								_top
+								framename
+
+ height					pixels								Specifies the height of an <input> element (only
+ 																			for type="image")
+
+ list						datalist_id						Refers to a <datalist> element that contains pre-
+ 																			defined options for an <input> element
+
+ max						number								Specifies the maximum value for an <input> element
+ 								date
+
+ maxlength			number								Specifies the maximum number of characters allowed
+																			in an <input> element
+
+ min						number								Specifies a minimum value of the input element
+ <textarea> element
+ 	
+ <button> element
+ The <input> tag specifies an input field where the user can enter data. It is used within a <form> element to declare input controls that allow
+ users to input data.
+
+
+ Next to read -> label

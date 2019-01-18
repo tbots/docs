@@ -1,0 +1,57 @@
+
+ virsh(console):
+  
+  > console
+  > define
+  > destroy
+  > domiflist [domain]
+  > dumpxml [domain]
+  > edit
+  > list 
+  > list --all
+  net-list
+  net-update --xml <		// try file
+  net-dumpxml
+  start
+  shutdown
+  virt-viewer [id]
+  net-update		--xml // accepts xml entry on the command line of from the file
+  net-dhcp-leases		// if ip address does not returne)
+
+
+[qemu-img]
+ 	qemu-img create [-q] [--object objectdef] [-f fmt] [-b backing_file] [-F backing_fmt] [-u] [-o options] filename [size]
+ 	qemu-img create -f qcow2 vdisk.img 10G
+
+	qemu-img info
+
+  qemu-img convert -p -f {fmt} -O {fmt} FILE OUT_FILE
+
+	qemu-img resize filename [+|-] size
+
+ssh-copy-id costumer@$target
+
+virt-install:
+
+	virt-install --name uxx-1\
+							 --memory 1024\
+							 --vcpus=1\
+							 --disk /var/lib/libvirt/images/uxx-1.img\
+							 --cdrom /home/oleg/Downloads/ubuntu-16.04.3-server-i386.iso\
+							 --graphics vnc,listen=0.0.0.0\
+							 --noautoconsole\
+							 --import			# to create a system from the already installed drive
+	virsh net-update [domain] [action] [section] --xml [file|</>]
+										update live network configuration
+
+										xml string or file: <host mac='52:54:00:aa:8d:6b' ip='192.168.122.2' name='uxx-1' />
+										section: ip-dhcp-host
+
+	net-dhcp-leases	
+										see dhcp leases
+
+ snapshot-create-as domain --name snapshotname
+ snapshot-current [--name] --domain
+ 															Get or set name of the current snapshot
+ snapshot-revert
+

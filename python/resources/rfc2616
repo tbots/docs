@@ -1,0 +1,17 @@
+
+ The Hypertext Transfer Protocol (HTTP) is an application-level protocol for distributed, collaborative, hypermedia information systems. 
+
+ connection 
+    A transport layer virtual circuit established between two programs for the purpose of communication 
+
+ message
+    The basic unit of HTTP communication, consisting of a structured sequence of octects matching defined syntax and transmitted via the connection
+
+ request
+    An HTTP request
+ 
+ response
+    An HTTP response
+
+ resource
+    A network data object or service that be identified by a URI. Resources may be available in multiple representations or vary in other ways

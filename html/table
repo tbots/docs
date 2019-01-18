@@ -1,0 +1,44 @@
+
+ The <table> tag defines an HTML table.
+
+ An HTML table consists of the <table> element and one or more <tr>,<th>, and <td> elements.
+
+ The <tr> element defines a table row, the <th> element defines a table header, and the <td> element defines a table cell.
+
+ A more complex HTML table may also include <caption>, <col>, <colgroup>, <thead>, <tfoot>, and <tbody> elements.
+
+
+ Attributes:
+ 	
+	align=left|center|right
+	bgcolor=rgb(x,x,x)|#xxxxxx|colorname
+	border=1|0
+	cellpadding=pixels
+	frame=void|above|below|hsides|vsides|lhs|rhs|box|border
+	rules=none|groups|rows|cols|all
+	summary=text
+	width=pixels|%
+
+
+ The <tr> tag defines a row in an HTML table.
+
+ A <tr> element contains one or more <th> or <td> elements.
+
+ Attributes:
+
+	align=left|center|right|justify|char
+	bgcolor=rgb(x,x,x)|#xxxxxx|colorname
+	valign=top|middle|bottom|baseline
+
+
+ The <td> tag defines a standard cell in an HTML table.
+
+ An HTML table has two kinds of cells:
+
+    Header cells - contains header information (created with the <th> element)
+		Standard cells - contains data (created with the <td> element)
+
+ The text in <th> elements are bold and centered by default.
+ 
+
+ AAnnnddd

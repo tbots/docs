@@ -1,0 +1,9 @@
+
+ -u, --user
+ 			print only the effective user ID
+ -g, --group	
+ 			print only the effective group ID
+
+ -G, --groups 
+ 			print all group IDs 
+ 

@@ -1,0 +1,18 @@
+
+ There are four buil-in data structures: list, tuple, dictionary and set. They can be organized into four different families:
+
+ 	+ Ordered data structure (tuple, list)
+	+ Unordered data structure (dictionary, set)
+	+ Mutable (set, list, dictionary)
+	+ Unmutable (tuple)
+
+ A mutable data structure can change its size, whereas an immutable data structure will always maintain the same size.
+
+ A list is a data structure that holds an ordered collection of items. Lists indicated by square brackets, and individual elements in the list are separated by commas. 
+
+ Tuples may achieve a performance utilization due to immutability. They should be seen as a dictionary where items are organized logically and not as key pair value.
+
+ A dictionary is a key-value data structure. Value is refered by the index name. Key of the dictionary can be only created by using an immutable object, and the value
+ can be neither mutable or immutable.
+
+ Sets are unordered collection of unique simple elements.

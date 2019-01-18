@@ -1,0 +1,16 @@
+
+ CPU modes (processor modes, CPU states, CPU privelege levels) are operating modes for the central processing unit of some computer architectures that place
+ restrictions on the type and scope of operations that can be performed by certain processes being run by the CPU. The design allows the operating system to
+ run with more priveleges than application software.
+
+ Ideally, only highly trusted kernel code is allowed to execute in the unrestricted mode. Everything else, including non-supervisory portions of the operating
+ system, runs in a restricted mode and must use a system call to request the kernel to perform on its behalf any operation that could damage or compromise the 
+ system, making it impossible for untrusted programs to alter or damage other programs or the computing system itself.
+
+ In practice, however, system calls take time and can hurt the perfomance of a comuting system, so it is not uncommon for system designers to allow some time-
+ critical software (especially device drivers) to run with full kernel privileges.
+
+ Multiple modes can implemented allowing a hypervisor to run multiple operating system supervisors beneath it, which is the basic design of many virtual machine
+ systems available today.
+
+

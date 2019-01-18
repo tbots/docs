@@ -1,0 +1,51 @@
+
+	ssh-copy-id -i [inventory_file] HOST
+
+	ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+
+		-t
+					specifies the type of key to create. The possible values are "rsa1" for protocol version 1 and "dsa", "ecdsa", "ed25519", or "rsa" for protocol
+					version 2
+
+		-C [comment]
+					provides a comment
+
+		-b [bits]
+					specifies the number of bits in the key to create. For RSA keys, the minimum size is 1024 bits and the default is 2048.
+
+		-f filename
+					specifies the filename of the key file
+
+		-q		quite
+					
+		-R hostname
+					removes all keys belonging to hostname from a known hosts file; this option is useful to delete hashed hosts
+
+	/etc/ssh/sshd_config/			
+									sshd server system-wide configuration file
+
+	PermitRootLogin        yes
+	PasswordAuthentication yes
+
+	.ssh/config
+		
+		host *		// ! to negotiate
+
+	
+	Permissions: 
+		
+		.ssh   						700
+		authorized_keys   600
+
+ Examples:
+  
+  ssh-keygen -y -f id_rsa > id_rsa.pub		# generate public key from the existent one
+
+	# to convert from putty
+	ssh-keygon -i -f <file> > id_rsa.pub
+
+	# genereate password hash
+	openssl passwd -1 -salt xyz <pass>
+
+	# remove host from the hosts file 
+	ssh-keygen -R hostname|address [-f known_hosts]

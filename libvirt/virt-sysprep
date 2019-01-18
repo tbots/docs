@@ -1,0 +1,6 @@
+
+
+ virt-sysprep --domain DOMAIN --hostname HOSTNAME
+ virt-sysprep --domain --ssh-inject USER
+
+ Part of the libguestfs-tools. When doing changes to the disk domain should be down.

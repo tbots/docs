@@ -1,0 +1,27 @@
+
+ mysqli::__construct( [ string $host 		 = ini_get("mysqli.default_host")
+ 											 [,	string $username = int_get("mysqli.default_user")
+												[, string $passwd   = ini_get("mysqli.default_pw")
+											 	 [, string $dbname =  ""
+											    [, int $port = ini_get("mysqli.default_port")
+													 [, string $socket = ini_get("mysqli.default_socket") ]]]]]])
+
+	
+
+ mysqli::query( string $query [, int $resultmode = MYSQLI_STORE_RESULT ] )
+
+  
+ mysqli::esape_string ( string $escapestr )
+ mysqli::real_esape_string ( string $escapestr )
+
+  Creates a legal SQL string that can be used in an SQL statement. The given string is encoded to an escaped SQL string, taking into 
+	account the current characater set of the connection.
+
+	The character set must be set either at the server level, or with the API function mysqli_set_charset() for it to affect mysqli_real_ecape_string().
+
+	Characters encoded are NUL, \n, \r, \, ', " and Control-Z.
+
+
+ mysqli::$connect_error
+
+  Returns a string description of the last connect error. NUL is returned if no error occured.

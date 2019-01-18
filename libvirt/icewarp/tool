@@ -1,0 +1,4 @@
+
+ /opt/tool.sh get account "*@domain.domain" U_*
+ /opt/icewarp/tool.sh create domain "domain.domain" D_description "" D_PostMaster ""
+ /opt/icewarp/tool.sh add account "user@domain.domain" U_password "" U_admin ""

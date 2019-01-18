@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+# Example of pattern match in if conditions
+
+var_line="   # name"
+pattern='^(\ \|\t)*#'
+
+if [[ "${var_line[0]}" =~ ^(\ \|\t)*# ]]; then
+	echo match found
+else
+	echo match not found
+fi

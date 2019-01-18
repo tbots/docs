@@ -1,0 +1,18 @@
+
+ https://www.arin.net/ 				American Registry for Internet Numbers (ARIN)
+ https://www.ripe.net/				The Réseaux IP Européens Network Coordination Centre (RIPE NCC). Regional Internet Registry (RIR) for Europe, the Middle East and
+ 															parts of Central Asia.
+
+ The ISP must have an officially registered autonomous system number (ASN). A unique ASN is allocated to each autonomous system for use in BGP routing. AS numbers are
+ important because the ASN uniquely identifies each network on the Internet.
+
+ Border Gateway Protocol (BGP) is a standardized exterior gateway protocol designed to exchange routing and reachability information among autonomous systems (AS) on the 
+ internet.
+
+ CIDR is the short for Classless Inter-Domain Routing, an IP addressing scheme that replaces the older system based on classes A, B, and C. A single IP address can be used to
+ designate many unique IP addresses with CIDR. A CIDR IP address looks like a normal IP address except that is ends with a slash followed by a number, called the IP network
+ prefix. CIDR addresses reduce the size of routing tables and make more IP addresses available within organizations.
+
+ IETF
+
+ RFC 791

@@ -1,0 +1,22 @@
+
+ Program flow:
+
+ 	Handling -c option. Option should followed by vars file name.
+
+	Handling -p option. Option should followed by proxy address.
+
+	Source vars file.
+
+	Reset logs file location.
+	LOG_DIR specifies a directory where logs are stored.
+	INSTALL_LOG holds stdout output.
+	ERROR_LOG holds a stderr output.
+
+	Searches for any VAR=VAL pair found on command line. VAR will be set to value and used in
+	program in addition to variables found in vars file.
+
+	Install and enable ntp server.
+
+	Purges log files if any data was found.
+
+	

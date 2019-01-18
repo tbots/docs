@@ -1,0 +1,34 @@
+
+ date <format> -s <value>
+ dpkg-reconfigure tzdata
+
+ timedatectl list-timezone|set-timezone|status  // will display system clock.
+
+ Unix system has two clocks. A hardware clock/real time clock (RTC) and a system clock.
+
+ The hardware clock is physically present and continues to run from battery power if the system is not plugged into power source. When system boots it will read time from the hardware 
+ clock, this initial time is then passed to the system clock.
+
+ The system clock runs in the kernel and synchronize with an NTP server to become up to date.
+
+ 	hwclock	--hctosys
+
+ 
+ chrony(1)
+
+ 	chrony sources
+
+		M (mode) 
+							^		server
+							=		peer
+							#		locally connected reference clock
+
+		S (status)
+							*		sync source
+							+		acceptable sources which are combined with the selected source
+							-		acceptable sources that are excluded by the combining algorithm
+							?		connectivity was lost or packet tests didn't pass; condition is also show at startup, until at least 3 samples was not gathered from the server
+							x		source with the wrong time (falseticker)
+							~		source whose time appears to have too much variablitiy
+
+ 		/etc/chrony/chrony.keys			# admin password

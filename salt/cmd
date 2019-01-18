@@ -1,0 +1,7 @@
+
+ salt-call sys.list_modules
+ salt-call sys.list_functions
+ salt-call sys.doc <module.function>
+ salt --version
+ salt --versions-report
+ salt state.sls <name>

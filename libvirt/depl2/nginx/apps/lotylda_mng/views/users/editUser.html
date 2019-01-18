@@ -1,0 +1,49 @@
+          			<div id="relations">
+          				<form id="userForm" >
+          				<table class="table table-condensed">
+          					<tr>
+								<th>First name</th>
+								<td>
+									<input type="text" id="first_name" name="first_name" class="form-control input-medium" style="display:inline" value="{{if user:}}{{=user[1]}}{{pass}}"/>
+								</td>
+							</tr>														
+          				
+							<tr>
+								<th>Last name</th>
+								<td>
+									<input type="text" id="last_name" name="last_name" class="form-control input-medium" style="display:inline" value="{{if user:}}{{=user[2]}}{{pass}}"/>
+								</td>
+							</tr>
+							<tr>
+								<th>Email</th>
+								<td>
+									<input type="text" id="email" name="email" class="form-control input-medium" style="display:inline" value="{{if user:}}{{=user[3]}}{{pass}}"/>
+								</td>
+							</tr>
+							<tr>
+								<th>Login name</th>
+								<td>
+									<input type="text" id="username" name="username" class="form-control input-medium" style="display:inline" value="{{if user:}}{{=user[5]}}{{pass}}" {{if user:}}disabled{{pass}} />
+								</td>
+							</tr>																						
+							<tr>
+								<th>Set password</th>
+								<td>
+									{{if user:}}
+										<input type="checkbox" id="pass" name="pass" style="display:inline" value="t" />
+									{{else:}}
+										<input type="checkbox" id="pass" name="pass" style="display:inline" value="t" checked onclick="return false" />
+									{{pass}}
+								</td>
+							</tr>																				
+							<!--<tr>
+								<th>Confirm password</th>
+								<td>
+									<input type="text" id="cPass" name="cPass" class="form-control input-medium" style="display:inline" value=""/>
+								</td>
+							</tr> -->														
+						</table>
+						<input type="hidden"  id="userId" name="userId" value="{{if user:}}{{=user[4]}}{{else:}}0{{pass}}" />
+						<input type="hidden"  name="domainId" value="{{=domainId}}" />
+						</form>
+          			</div>  

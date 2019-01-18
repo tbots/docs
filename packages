@@ -1,0 +1,5 @@
+
+ dkms
+ sudo apt-get -y install gcc make linux-headers-$(uname -r) dkms
+
+

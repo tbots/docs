@@ -1,0 +1,48 @@
+{{extend 'layout.html'}}
+  <div class="page-content">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="portlet box blue">
+			    <div class="portlet-title">
+			    	<div class="caption">Users projects</div>
+			    </div>				    
+				<div class="portlet-body" >
+					<div class="table-toolbar">
+						{{if domains:}}
+						<select onchange="changeDomain(this.value)" class="form-control input-medium" id="selDomain" style="display:inline" >
+							{{for item in domains:}}	
+								<option value="{{=item[0]}}" {{if selectedDomain == item[0]:}}selected{{pass}}>{{=item[1]}}</option>
+							{{pass}}
+						</select>
+						{{pass}}
+						{{if auth.has_membership(6,auth.user_id): }}&nbsp;<a href="javascript:;" onclick="editGroup('0')" class="btn green" style="display:inline" >Add domain group</a>{{pass}}						
+					</div>
+					<table class="table table-condensed">
+						<tr>
+							<th>Name</th>
+							<th>Description</th>																	
+							<th>&nbsp;</th>
+						</tr>
+						{{if groups:}}
+						{{for item in groups:}}
+							<tr>
+								<td>{{=item[2]}}</td>
+								<td>{{=item[3]}}</td>
+								<td>
+									
+									{{if auth.has_membership(6,auth.user_id): }}
+										<button onclick="editGroup('{{=item[0]}}')" class="btn blue" style="display:inline" >Edit group</button>
+										&nbsp;<button onclick="editGroupUsers('{{=item[0]}}')" class="btn blue" style="display:inline" >Edit group users</button>
+										&nbsp;<button onclick="editGroupProjects('{{=item[0]}}')" class="btn blue" style="display:inline" >Edit group projects</button>
+										&nbsp;<button onclick="deleteGroup('{{=item[0]}}')" class="btn red" style="display:inline" >Delete group</button>
+									{{pass}}									
+								</td>
+							</tr>
+						{{pass}}
+						{{pass}}
+					</table>					
+				</div>
+			</div>
+		</div>		
+	</div>
+</div>

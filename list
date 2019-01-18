@@ -1,0 +1,16 @@
+
+ Fucking learn:
+	
+	1. apt-key 
+	2. fsck(8)
+	3. blkid(8)
+	4. lsblk(id)
+	5. mknode(1)
+	6. mount(8)
+	7. swapon(8)
+	8. start reading kernel documentation
+	9. dump(8)
+	10. comment each line in run_upgrader.sh
+
+ 1 hour for Ctags
+ 1 hour for C

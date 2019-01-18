@@ -1,0 +1,33 @@
+
+	qemu-img create
+ 	qemu-img create [-q] [--object objectdef] [-f fmt] [-b backing_file] [-F backing_fmt] [-u] [-o options] filename [size]
+
+
+	Examples:
+
+ 		qemu-img create -f qcow2 vdisk.img 10G
+
+
+	qemu-img info
+
+	qemu-img convert
+
+	qemu-img convert [-cpqfn] [-t <cache>] [-T <cache>] [-O <output_fmt>] [-o options] [-l <snapshot_param>] [-S <sparse_size>] filename [filename2 [...]] output_filename
+
+	 # -c    indicates that target image must be compressed (qcow format only)
+	 # -p	 show progress of command
+	 # -q    quite mode
+	 # -f	 first image format
+	 # -n 	 skips the target volume creation (useful if the volume is created prior to running qemu-img [?])
+	 # -t <cache>	is the cache mode used to write the output disk image, the valid options are: 'none', 'writeback' (default,
+	 #		except for convert), 'writethrough', 'directsync' and 'unsafe' (default to convert)
+	 # -T <cache> 	is the cache mode used to read input disk images, the valid options are the same as for the 'cache' option
+	 # -O <output_fmt>	is the destination format
+	 # -o <options>		is a comma separated list of format specific options in a name=value format. (qemu-img convert -o ?)
+	 # -s <snapshot_id_or_name>	depreceated (use -l)
+	 # -l <snapshot_param>		is parma used for internal snapshot, format is 'snapshot.id=[ID],snapshot.name=[NAME]'
+	 # -S <bytes>	indicates the consecutive number of bytes (default to 4k) that must contain only zeros for qemu-img to create a 
+			sparse image during conversion. If the number of bytes is 0, the source will not be scanned for unallocated or zero sectors,
+			and the destination image will always be fully allocated
+
+	qemu-img resize [+|-] size

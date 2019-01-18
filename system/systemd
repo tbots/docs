@@ -1,0 +1,85 @@
+ SYSTEMD 
+  
+ 	This is an initialization system for bootstrapping the user space and managing all processes subsequent to system start. It was developed to
+	replace the sysvinit system and address some of the shortcomings of it. Currenlty, systemd is the default initialization and service management
+	process of almost all modern Linux distributions.
+
+	Systemd is generally considered to be more efficient, allows parallel operations, has fewer dependencies, allows for service prioritization and
+	precedence, and reduces start up time.
+
+	Systemd provides a dependency system between various entities called "units" of 12 different types. 
+
+	Units are named as their configuration files. systemd knows various kinds of dependencies, including positive and negative requirment dependencies, as well as ordering dependencies. If no of the 
+	ordering dependencies are present units start in parallel. Processes systemd spawns are placed in individual Linux control groups named after the unit which they belong to in the private systemd
+	hierarchy. 
+
+	Boot flow:
+
+	 	BIOS load (EFI)
+		BIOS scans for the primary disk's boot sector
+		Boot sector provides an the MBR (Master Boot Record), within the first 512 bytes of the active drive
+		Boot loader is executed (alternative boot selection)
+		Linux kernel is read and executed
+		Device initialization, module loading, and the initial RAM disk (initrd) is loaded
+		Root filesystem is mounted
+		Systemd runs
+		Default run target is executed along with dependencies
+		Modules are indicated within the runlevel target and its dependencies are executed
+		Root filesystem is checked
+		Remaining local filesystems are mounted
+		Network devices are started
+		Remote filesystems are mounted 
+		Systemd sets the runlevel as indicated in the default target
+		System login prompt is displayed
+
+	SYSTEMD Runlevels
+
+		0 - poweroff.target (Shutdown)
+		1 - rescue.target (Single User/Rescue Shell)
+		2 - multi-user.target (Non-Graphical, Full Network, Multi-User)
+		3 - multi-user.target (Non-Graphical, Full Network, Multi-User)
+		4 - multi-user.target (Non-Graphical, Full Network, Multi-User)
+		5 - graphical.target (Graphical Desktop, Multi-User)
+		6 - reboot.target	(Reboot)
+
+	Files:
+		
+		/etc/systemd/system.conf		// system instance
+		/etc/systemd/system.conf.d
+		
+		/etc/systemd/user.conf			// user instance
+		/etc/systemd/user.conf.d
+
+		/lib/systemd/system					// unit directory
+		/lib/systemd/system/default.target
+																// default target
+
+	Unit states:
+		
+		active|inactive|activated|deactivated|failed
+	
+	Unit types:
+		
+		service 			start the control daemons and the processes they consist of
+		socket				encapsulate local IPC or network sockets in the system, useful for socket-based activation
+		target				used to group units, or provide well-known synchronization points during boot up
+		device				expose kernel devices in systemd and may be used to implement device-based activation
+		mount					control mount points in the file system 
+		automount			automount capabilities, for on-demand mounting of the file system as well as parallelized boot up
+		timer					usefull for triggering activation of other units based on timers
+		swap					encapsulate memory swap partitions or files of the operating system
+		path					used to activate other services when file system objects change or modified
+		slice 				used to group units which manage system processes
+		scope					manage foreign processes instead of starting them
+
+	Help files:
+
+		systemd-system.conf(5),systemd.unit(5),systemd.service(5),systemd.sockets(5),daemon(7),systemd.target(5),systemd.device(5),systemd.mount(5),
+		systemd.automount(5),systemd.timer(5),systemd.swap(5),systemd.path(5),systemd.slice(5),systemd.scope(5),systemd.special(7),
+		systemd.generator(7)
+
+
+ Utilities:
+
+ 	systemctl list-unit-files --type= --state=
+	systemctl is-enabled <service>; echo $?

@@ -1,0 +1,9 @@
+#
+# dir():	any directory path found in file
+#
+function dir() {
+	for L in `grep -Eo '/[^ ]+' $MON_DIR/*.ini`
+	do
+		test -e $L && echo -e "\e[32m$L\e[0m" || echo -e "\e[31m$L\e[0m"
+	done
+}

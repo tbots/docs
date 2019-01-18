@@ -1,0 +1,5 @@
+#!/bin/bash
+#
+# LAMP appliance installation procedure.
+# 
+# Required packages:		apache2

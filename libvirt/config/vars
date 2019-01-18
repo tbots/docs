@@ -1,0 +1,15 @@
+DEPLNM=depl
+DEPL=$BASE/$DEPLNM
+INSTNM=installers
+INST=$DEPL/$INSTNM
+INSTSNM=install.sh
+INSTS=$BASE/$INSTSNM
+SRCINM=src
+SRCI=$INST/$SRCINM
+PGDGRNM=pgdg.list
+PGDGR=$CONF_DIR/$PGDGRNM
+DEP_NAME=dependencies
+DEP=$DEPL/$DEP_NAME
+
+REPO_DIR=/etc/apt/sources.list.d
+LOG_DIR=/var/log

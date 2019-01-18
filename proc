@@ -1,0 +1,35 @@
+
+ thread
+						smallest unit of processing that a scheduler works on
+
+ A process can have multiple threads of execution which are executed asynchronously. 
+ 
+ This asynchronous execution brings in the capability of each thread handling a particular work or service independently. Hence multiple threads 
+ running in a process handle their services which overall constitutes the complete capability of the process.
+
+ Difference between threads and processes
+ ----------------------------------------
+
+  Process do not share their address space while threads executing under same process share the address space.
+
+  Synchronization between processes is taken by kernel only, while on the other hand the thread synchronization has to be taken care by the process
+	under which the threads are executing.
+
+  Context switching between threads is fast as compared to context switching between process. 
+
+  The interaction between two processes is achieved only through the standard inter process communication while threads executing under the same process 
+	can communicate easily as they share most of the resources like memory, text segment etc.
+
+
+ User Threads VS Kernel Threads
+ ------------------------------
+
+  Threads can exist in user space as well as in kernel space.
+
+	A user space threads are created, controlled and destroyed using user space threads libraries. These threads are not known to kernel and hence is nowhere involved in their
+	processing. There threads follow co-operative multitasking where-in a thread releases CPU on its own wish ie the scheduler cannot preempt the thread. The advantage of user space threads
+	is that switching between two threads does not involve much overhead and is generally very fast while on the negative side since these threads follow co-operative multitasking
+	so if one thread gets block the whole process gets blocked.
+
+	A kernel space thread is created, controlled and destroyed by the kernel. For every thread that exists in user space there is a corresponding kernel thread. Since these threads are
+	managed by kernel so they follow preemptive multitasking 

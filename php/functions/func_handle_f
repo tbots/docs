@@ -1,0 +1,42 @@
+ func_num_args();
+ func_get_args();
+ function_exists();
+
+ int count ( mixed $array_or_countable [, int $mode = COUNT_NORMAL] )
+
+ array str_split( string $string [, int $split_length = 1] )	- converts a string into array
+
+ array preg_split( string $pattern, string $subject [, int $limit = -1 [, int $flags = 0 ]] )
+ 								split the given string by a regular expression
+
+								limit  if specified, the only substring up to limit are returned with the rest of the string being placed in the
+								last substring. A limit of -1 or 0 means "no limit" and, as is standard across PHP, NULL can be used to skip to the
+								flags  parameter.
+
+ array explode( string $delimiter, string $string [, int $limit = PHP_INT_MAX ] )
+
+ 								returnes an array of strings, each of which is a substring of string formed by splitting it on boundaries formed by the string
+								delimiter
+
+ 		
+	call_user_func();
+	create_function();
+
+ int count ( mixed $array_or_countable [, int $mode = COUNT_NORMAL] )
+
+ array str_split( string $string [, int $split_length = 1] )	- converts a string into array
+
+ array preg_split( string $pattern, string $subject [, int $limit = -1 [, int $flags = 0 ]] )
+ 								split the given string by a regular expression
+
+								limit  if specified, the only substring up to limit are returned with the rest of the string being placed in the
+								last substring. A limit of -1 or 0 means "no limit" and, as is standard across PHP, NULL can be used to skip to the
+								flags  parameter.
+
+ array explode( string $delimiter, string $string [, int $limit = PHP_INT_MAX ] )
+
+ 								returnes an array of strings, each of which is a substring of string formed by splitting it on boundaries formed by the string
+								delimiter
+
+ 		
+	create_function();

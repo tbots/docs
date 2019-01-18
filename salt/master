@@ -1,0 +1,5 @@
+
+Master hostname is 'salt' by default, change in the master directive in the /etc/salt/minion for the each minion. Master is a minion by itself.
+
+ 	salt-key --finger=master.pub
+								print master public key fingerprint

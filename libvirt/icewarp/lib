@@ -1,0 +1,28 @@
+#!/bin/bash
+#
+
+source /etc/icewarp/icewarp.conf
+TOOL=$IWS_INSTALL_DIR/tool.sh
+
+#$TOOL --filter="(U_Admin='1')" get account "*@*" U_Password | sed '/^$/d'
+
+function allow_export(){
+	test $1 ||
+ 	{ 
+		echo 'missing parameter for the function';
+		exit 1;
+	}
+ 
+	$TOOL set system C_Accounts_Policies_Pass_AllowAdminPass $1 > /dev/null
+}
+
+function get_admin_pass(){
+	allow_export 1
+	$TOOL --filter="(U_Admin='1')" get account "*@*" U_Password | awk '/^U_/ {print $2}'
+	allow_export 0
+}
+
+function ch_pol(){
+	test $1 -eq 1 && 	status=enabled || status=disabled
+	$TOOL set system C_Accounts_Policies_Pass_Enable $1 &> /dev/null && echo "Password policy $status" || { echo "Cann't change password policy"; exit 1; }
+}

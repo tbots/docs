@@ -1,0 +1,8 @@
+
+ [raspberry]
+
+	unable to install 
+  	gcc-c++		
+		mysql-devel
+		postgresql-devel
+		python-devel

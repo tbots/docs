@@ -1,0 +1,96 @@
+<div id="relations">
+	<label>Project name: {{=project}}</label>
+	<ul class="nav nav-tabs">
+		<li class="active">
+			<a href="#tab_1_1" data-toggle="tab" onclick="resetUsers()">Users</a>
+		</li>
+		<li>
+			<a href="#tab_1_2" data-toggle="tab" onclick="resetGroups()">Groups</a>
+		</li>
+		<li>
+			<a href="#tab_1_3" data-toggle="tab" onclick="readProjectUsers()">Administrators</a>
+		</li>
+	</ul>
+	<div class="tab-content">
+		<div class="tab-pane fade active in" id="tab_1_1">		
+          	<form id="projectUserForm" >
+          		<table class="table table-condensed">
+          			<tr>
+          			    <td width="20%">
+          			    	<select name="userPrivileges" multiple onchange="usersPrivileges()" id="userPrivileges" class="form-control"  style="height:120px">
+          					{{for item in privileges:}}
+          						<option value="{{=item[0]}}">{{=item[1]}}</option>
+          					{{pass}}
+          					</select>          			          			    
+          				</td>
+          				<td id="projectUsersWrapper">
+          					<select name="projectUsers" id="projectUsers" multiple rows="10">
+          					{{if users:}}
+          					{{for item in users:}}
+          						<option value="{{=item[0]}}" privilege="{{=item[2]}}" {{if item[2] != '0':}}disabled{{pass}}>{{=item[1]}}</option>
+          					{{pass}}
+          					{{pass}}
+          					</select>          						          				
+          				</td>
+          				</tr>
+				</table>
+				<div style="float:right"><a href="javascript:;" onclick="saveUserPrivileges(0)" class="btn green">Save</a>
+				<a href="javascript:;" onclick="bootbox.hideAll()" class="btn blue">Cancel</a></div>
+				<input type="hidden" name="domainId" id="domainId" value="{{=domainId}}"/>
+				<input type="hidden" name="projectId" id="projectId" value="{{=projectId}}"/>
+				
+			</form>
+		</div>
+		<div class="tab-pane fade" id="tab_1_2">
+		   	<form id="projectGroupsForm" >
+          		<table class="table table-condensed">
+          			<tr>
+          			    <td width="20%">
+          			    	<select name="groupPrivileges" multiple onchange="groupPrivilegesf()" id="groupPrivileges" class="form-control"  style="height:120px">
+          					{{for item in privileges:}}
+          						<option value="{{=item[0]}}">{{=item[1]}}</option>
+          					{{pass}}
+          					</select>          			          			    
+          				</td>
+          				<td id="projectGroupsWrapper">
+          					<select name="projectGroups" id="projectGroups" multiple rows="10">
+          					{{if groups:}}
+          					{{for item in groups:}}
+          						<option value="{{=item[0]}}">{{=item[1]}}</option>
+          					{{pass}}
+          					{{pass}}
+          					</select>          						          				
+          				</td>
+          				</tr>
+				</table>
+				<div style="float:right"><a href="javascript:;" onclick="saveGroupPrivileges(0)" class="btn green" >Save</a>
+				<a href="javascript:;" onclick="bootbox.hideAll()" class="btn blue">Cancel</a></div>
+				<input type="hidden" name="domainId" id="domainId" value="{{=domainId}}"/>
+				<input type="hidden" name="projectId" id="projectId" value="{{=projectId}}"/>				
+			</form>		
+		</div>
+		<div class="tab-pane fade" id="tab_1_3">
+			<form id="projectGroupsForm" >
+          		<table class="table table-condensed">
+          			<tr>
+          				<td id="projectAdminsWrappers">
+          					<select name="projectAdmins" id="projectAdmins" multiple rows="10">
+          						{{if users:}}
+          						{{for item in users:}}
+          							<option value="{{=item[0]}}" {{if item[2] == True:}}selected{{pass}}>{{=item[1]}}</option>
+          						{{pass}}
+          						{{pass}}
+          					</select>          						          				
+          				</td>          				
+          			</tr>
+          		</table>
+          		<div style="float:right"><a href="javascript:;" onclick="saveProjectAdmins()" class="btn green">Save</a>
+          		<a href="javascript:;" onclick="bootbox.hideAll()" class="btn blue">Cancel</a></div>
+				<input type="hidden" name="domainId" id="domainId" value="{{=domainId}}"/>
+				<input type="hidden" name="projectId" id="projectId" value="{{=projectId}}"/>
+          	</form>
+          	
+		</div>
+	</div>
+	<br style="clear:both" />
+</div>  

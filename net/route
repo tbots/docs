@@ -1,0 +1,11 @@
+
+ On Linux and Unix systems, information on how packets are to be forwarded is stored in a kernel structure called a routing table. The routing table can be used for both, static and dynamic routing.
+ Dynamic routing consists of the kernel making decisions as to which route, out of multiple present routes, a packet should take.
+
+ Commands:
+ 	
+	netstat -r
+
+ Add a route:
+
+ 	route add -net 192.168.122.0 netmask 255.255.255.0 gw 192.168.122.1

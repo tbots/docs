@@ -1,0 +1,1 @@
+yum install --assumeyes ntp ntpdate ntp-doc 1> /dev/null

@@ -1,0 +1,6 @@
+
+ nagios installaion
+
+ cp -R nagios-4.1.1/contrib/eventhandlers /usr/local/nagios/libexec/
+ chown -R nagios: /usr/local/nagios/libexec/eventhandlers
+ htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin

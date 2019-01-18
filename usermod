@@ -1,0 +1,9 @@
+
+ -c, --comment
+ 			new value of the GECOS field
+
+ -G, --groups
+ 			new list of supplimentary GROUPS
+
+ -a, --append
+ 			append the user to the supplemental GROUPS mentioned by the -G option without removing him from the other groups

@@ -1,0 +1,20 @@
+          			<div id="relations">
+          				<label>Group name: {{=group}}</label>
+          				<form id="domainForm" >
+          				<table class="table table-condensed">
+							<tr>
+							<select name="userGroup" multiple id="userGroup" class="form-control"  style="height:120px">
+          					{{for item in users:}}
+          						<option value="{{=item[4]}}">{{=item[1]}} {{=item[2]}}</option>
+          					{{pass}}
+          					</select>
+							</tr>
+							<tr>
+								<input type="hidden" id="domainId" name="domainId" value="{{=domainId}}" />
+							</tr>
+						</table>
+						</form>
+          			</div>  
+          			<script type="text/javascript">          				
+						var usersInGroup = "{{=selUsers}}";
+					</script>

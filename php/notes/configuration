@@ -1,0 +1,10 @@
+
+ Run `php -i` to get more information about php installed.
+ Enable mysqli extension:
+
+ 	Modify php.ini
+
+ 
+ Notable configuration directives:
+ 	
+	allow_url_fopen

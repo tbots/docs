@@ -1,0 +1,4 @@
+
+ Set a harddrive as bootable device?
+ 	
+	Modify an os-boot section with the <boot dev='hd' />.

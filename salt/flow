@@ -1,0 +1,9 @@
+
+ When a minion first first comes online and connects to the master, the minion will receive a master public key and then send its public key to the master.
+
+ Setting the file roots
+
+ 	Common configuration directories:
+		
+		/etc/salt/master
+		/etc/salt/master.d/*.salt

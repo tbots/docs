@@ -1,0 +1,39 @@
+{{extend 'layout.html'}}
+  <div class="page-content">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="portlet box blue">			
+			    <div class="portlet-title">
+			    	<div class="caption">Available projects</div>
+			    </div>
+			    <div class="portlet-body" >			
+				    <div class="table-toolbar">
+							{{if auth.has_membership(6,auth.user_id): }}<a href="/{{=request.application}}/default/indexAdmin/" class="btn blue">Administration</a>{{pass}}						
+					</div>	    				
+					<label>Domains: </label>
+					{{if domains:}}
+					<select class="form-control input-medium" id="domainId" name="domainId" onchange="selProjects()">					
+						{{for item in domains:}}
+							<option {{if selDomain == item[0]:}}selected{{pass}} value="{{=item[0]}}">{{=item[1]}}</option>
+						{{pass}}
+					</select>
+					{{pass}}
+					<br />
+					{{if projects:}}
+					<label>Projects: </label>
+					<select id="projectId" name="projectId"  class="form-control input-medium">
+						{{for item in projects:}}
+							<option value="{{=item[0]}}">{{=item[1]}}</option>
+						{{pass}}
+					</select>
+					<br />
+					<button class="btn blue" onclick="projectGo()">Go</button>
+					{{else:}}
+						<label>You have no project for this domain!</label>
+					{{pass}}
+					 
+				</div>
+			</div>
+		</div>		
+	</div>
+</div>

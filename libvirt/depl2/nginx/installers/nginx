@@ -1,0 +1,51 @@
+#!/bin/bash
+#
+# Install nginx from source.
+#
+# Get rid from hardcoded values.
+#
+
+cd /tmp
+
+# remember directory
+OLD=$OLDPWD
+
+#
+# NGINX
+
+wget http://nginx.org/download/nginx-1.10.1.tar.gz 1>> $OLD/$INSTALL_LOG 2>> $OLD/$ERROR_LOG || { echo "Failed."; exit 1; }
+tar -zxf nginx-1.10.1.tar.gz 1>> $OLD/$INSTALL_LOG 2>> $OLD/$ERROR_LOG || { echo "Failed."; exit 1; }
+
+#
+# PCRE
+#
+
+wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.37.tar.gz 1>> $OLD/$INSTALL_LOG 2>> $OLD/$ERROR_LOG || { echo "Failed."; exit 1; }
+tar -zxf pcre-8.37.tar.gz 1>> $OLD/$INSTALL_LOG 2>> $OLD/$ERROR_LOG || { echo "Failed."; exit 1; }
+
+#
+# ZLIB
+#
+wget http://zlib.net/zlib-1.2.8.tar.gz 1>> $OLD/$INSTALL_LOG 2>> $OLD/$ERROR_LOG || { echo "Failed."; exit 1; }
+tar -zxf zlib-1.2.8.tar.gz 1>> $OLD/$INSTALL_LOG 2>> $OLD/$ERROR_LOG || { echo "Failed."; exit 1; }
+
+# Delete tar archives.
+rm -rf *.tar.gz 1>> $OLD/$INSTALL_LOG 2>> $OLD/$ERROR_LOG || { echo "Failed."; exit 1; }
+
+
+###	Installing NGINX	###
+cd nginx-1.10.1
+./configure --with-debug \
+	    --prefix=/etc/nginx \
+	    --sbin-path=/usr/bin \
+	    --pid-path=/var/run/nginx.pid \
+	    --error-log-path=/var/log/nginx \
+	    --http-log-path=/var/log/nginx \
+	    --user=nginx \
+	    --user=nginx \
+	    --with-http_ssl_module \
+	    --with-pcre=/tmp/pcre-8.37 \
+	    --with-zlib=/tmp/zlib-1.2.8 1>> $OLD/$INSTALL_LOG 2>> $OLD/$ERROR_LOG || { echo "Failed."; exit 1; }
+
+make	     	 1>> $OLD/$INSTALL_LOG 2>> $OLD/$ERROR_LOG || { echo "Failed."; exit 1; }
+make install 1>> $OLD/$INSTALL_LOG 2>> $OLD/$ERROR_LOG || { echo "Failed."; exit 1; }

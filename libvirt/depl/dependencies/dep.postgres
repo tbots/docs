@@ -1,0 +1,4 @@
+postgresql-9.5				[BLD_DEP]
+postgresql-common			[BLD_DEP]
+postgresql-client-common		[BLD_DEP]
+pgdg-keyring				[BLD_DEP]

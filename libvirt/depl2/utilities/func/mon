@@ -1,0 +1,25 @@
+#
+# mon():	learn emperor monitoring directories
+#
+function mon() {
+	
+	for L in $EMP_ARGS
+	do
+		if [[ $L =~ .ini ]]			# ini
+		then
+		
+			if test -e $L 
+			### emp ini present on the system
+			then
+
+				if [ ! -e ${MON_DIR=`sed -n 's/^ *emperor *= *\([^; ]\+\).*/\1/p' $L`} ]
+				then
+					echo -e "\e[47m$MON_DIR\e[0m:\t \e[31missing\e[0m"
+					exit 1
+				fi
+			fi
+		else 
+			MON_DIR=$MON_DIR" $L"
+		fi
+	done
+}

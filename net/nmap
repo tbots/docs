@@ -1,0 +1,31 @@
+
+  -sL: List Scan - simply	list targets to scan
+	-sn: Ping Scan - disable port scan
+	-Pn: Treat all hosts as online - skip hosts discovery
+  -n:	 Never do DNS resolution
+	-R:	 Always resolve
+	-sS: TCP SYN scan type
+	-p <port ranges>: Only scan specified ports
+	-PS: TCP SYN discovery to a given port
+	-PA: ACK discovery to a given port
+	-PU: UPD discovery to a given port
+	-PY: SCTP discovery to a given port
+	-PE: ICMP echo discovery probe
+	-A:  Enable OS detection, version detection, script scanning and traceroute
+	-T<0-5>: Set timing template (higher is faster)
+
+
+
+ Examples:
+
+	Diplay all the resolved hostnames:
+
+ 		nmap -sL 172.16.201.0/24 | sed -n 's/.* \(\w\+\.\S\+\) ([0-9].*/\1/p'
+
+	Will be useful if we want check that we gonna scan correct domain.
+
+	Print number of hosts that is up:
+
+		nmap -n -sP 172.16.201.0/24 | sed -n '/^.*(\([0-9]\+\) hosts up.*$/s//\1/p'
+
+	When using -sP or -sL, no port scanning is performed. Can not be used in conjunction with -p or -O.

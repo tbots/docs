@@ -1,0 +1,38 @@
+
+ 
+ <ip>
+ 	<address></address>
+	<netmask></netmask>
+	<prefix></prefix>
+	<family>ipv4|ipv6</family>		// default is ipv4; more than one address of each family can be defined for a network
+	<localPtr></localPtr>			// do not forward any reverse DNS request for IP address from the network configured by address and netmask/prefix
+ 	<dhcp>
+		<range>
+			<start></start>
+			<end></end>
+			<host>
+				<ip></ip>
+				<prefix></prefix>
+				<mac></mac>
+				<name></name>
+			</host>
+			<bootp>
+				<file></file>
+				<server></server>
+			</bootp>
+		</range>
+ </ip>
+
+
+ Examples:
+
+	virsh net-update [domain] [action] [section] --xml [file|</>]
+										update live network configuration
+
+										xml string or file: <host mac='52:54:00:aa:8d:6b' ip='192.168.122.2' name='uxx-1' />
+										section: ip-dhcp-host
+										
+										if used with --config changes will take effect on the next net-destroy/net-start
+
+	net-dhcp-leases	
+										see dhcp leases

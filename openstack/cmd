@@ -1,0 +1,47 @@
+
+ keystone user-list
+ keystone user-create --help
+ keystone user-create --email --pass --name
+ keystone-manage db_sync
+ keystone-manage fernet_setup --keystone-user keystone --keystone-group keystone
+
+ openstack endpoint list 
+ openstack endpoint list --long
+ openstack user create --email <email> --password <password> 
+ openstack user list
+ openstack keypair --help
+ openstack keypair create --public-key <key.pub> <key>
+ openstack keypair show --public-key <key.pub>
+ openstack project --help
+ openstack project create --description "Top 100"
+ openstack role add --user --project ROLE_NAME
+ openstack role list
+
+ openstack server create --image <name> --flavor m1.tiny --key-name <demo-key> <server_name>
+ openstack server list
+ openstack security group rule create --proto tcp --dst-port 22 default
+
+ nova help | grep keypair
+ nova keypair-add --pub-key <key.pub> <key>
+ nova keypair-show
+ nova keypair-list
+
+ rabbitmqctl add_user openstack RABBIT_PASS
+ rabbitmqctl set_permissions openstack ".*" ".*" ".*" 
+
+ ubuntu-support-status
+
+
+ Install OpenStack
+
+	 sudo apt install software-properties-common
+	 sudo add-apt-repository cloud-archive:mitaka
+	 sudo apt install python-openstackclient
+	 sudo apt install mariadb-server python-pymysql
+	 sudo apt install keystone
+
+	
+ Files:
+ 	
+	/etc/mysql/my.cnf
+	/etc/keystone/keystone.conf

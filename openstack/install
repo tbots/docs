@@ -1,0 +1,5 @@
+
+ sudo apt install software-properties-common
+ sudo add-apt-repository cloud-archive:mitaka
+ sudo apt install python-openstackclient
+ sudo apt install mariadb-server python-pymysql

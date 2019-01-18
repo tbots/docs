@@ -1,0 +1,20 @@
+          			<div id="relations">
+          				<form id="domainForm" >
+          				<table class="table table-condensed">
+							<tr>
+								<th>Domain name</th>
+								<td>
+									<input type="text" id="domain_name" name="domain_name" class="form-control input-medium" style="display:inline" value="{{if domain != None: }}{{=domain[1]}}{{pass}}"/>
+								</td>
+							</tr>
+							<tr>
+								<th>Domain description</th>
+								<td>
+									<textarea id="domain_descr" name="domain_descr" class="form-control input-medium" >{{if domain != None: }}{{=domain[2]}}{{pass}}</textarea>
+								</td>
+							</tr>							
+														
+						</table>
+						<input type="hidden" name="domainId" id="domainId" value="{{=domainId}}"/>
+						</form>
+          			</div>  

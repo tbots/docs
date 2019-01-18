@@ -1,0 +1,6 @@
+
+ Form variables can be accessed with:
+ 	
+	$_REQUEST
+	$_GET
+	$_POST

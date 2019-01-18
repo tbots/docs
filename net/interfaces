@@ -1,0 +1,26 @@
+
+ [CentOS]
+ 	
+	/etc/sysconfig/network-scripts/ifcfg-*		# /usr/share-doc/initscripts-*/sysconfig.txt [section /etc/sysconfig/network-scripts/ifcfg-<interface-name>]
+
+	 #Configuation directives and accepted values
+  	BOOTPROTO={static|dhcp}
+		NETMASK={mask}
+		GATEWAY={addr}
+
+	 #restart network service
+	 	service network restart
+	
+
+
+
+ [Debian]
+ /etc/network/intefaces contains network interfaces configuration information for the ifup(8) and ifdown(8) commands.
+ iface
+ mapping
+ auto
+ allow-
+ source
+ source-directory
+
+ Lines beginning with the word "auto" are used to identify the physical intefaces to be brought up when ifup is run with the -a option.

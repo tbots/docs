@@ -1,0 +1,11 @@
+
+ /etc/ssh/ssh_config
+ ~/.ssh/config
+
+ Command line options take precedens over configuration file. The first obtained value for the configuration parameter will be used.
+
+ [ssh]
+ 	
+	-q			quite; suppress most of the error messages
+	-W host:port
+					Requests that standard input and output on the client be forwarded to host on port over the secure channel. Implies -N, -T, ExitOnForwardFailure and ClearAllForwardings.

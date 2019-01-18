@@ -1,0 +1,18 @@
+
+ salt-key -l|--list {pre|un|unaccepted}|{acc|accepted}|{rej|rejected}|{den|denied}|all
+ salt-key -L|--list-all
+
+ salt-key -a|--accept <key>... [--include-all] # to accept rejected keys
+ salt-key -A|--accept-all
+
+ salt-key --delete-all
+	salt-key --print 
+	salt-key --finger [minion_id]
+								print finger print for the public key for the specific minion
+ Examples:
+
+	salt-key --finger *
+								print finger print for all the keys 
+
+	salt-key --finger-all
+								print finger print for all the keys 

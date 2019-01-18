@@ -1,0 +1,69 @@
+
+ Security-Enhanced Linux (SELinux) is a mandatory access control mechanism implemented in the kernel. SELinux follows the model of least-privelege more closely.
+ By default under a strict enforcing setting, everything is denied and than a series of exception policies are written that give each element of the system ( a service,
+ program or user) only the access required to function. If a service, program or user subsequently tries to access or modify a file or resource not necessary for it
+ to function, then access is denied, the action is logged. 
+
+ SELinux has three basic installation modes of operation:
+ 	
+	1. Enforcing  - the default mode which will enable and enforce the SELinux security policy on the system, denying access and logging actions.
+	2. Permissive - security policy is not enforced, only warns and log actions
+	3. Disabled   - SELinux is disabled
+
+ An additional qualifier of targeted, minimum or mls which control how pervasive SELinux rules are applied.
+
+ sestatus(1) tool is available for the managing of the SELinux status. The changes do not persist untill the system reboot. 
+
+ SELinux allows different policies to be written that are interchangable. The default policy is the targeted policy which targets and confines system processes.
+ All other system processes and all remaining userspace programs runs in unconfined domain and is not covered by the SELinux protection model.
+
+ SELinux provides a combination of Role-Based Access Control (RBAC), Type Enforcment (TE), and (optionally) a Multi-Level Security (MLS).
+
+ To view a SELinux policy context on a file run commands with -Z switch. semanage(1) is the tool used to configure certain elements of SELinux policy context without
+ requiring modification or recompilation from policy source. Contexts follow the SELinux user:role:type:level syntax.
+
+ SELinux user
+  
+	The SELinux user identity is an identity known to the policy that is authorized for a specific set of roles, and for a specific MLS/MCS range. Each Linux user is 
+	mapped to an SELinux user via SELinux policy. This allows Linux users to inherit the restrictions placed on SELinux users. The mapped SELinux user identity is used 
+	in the SELinux context to define what levels and roles they can enter. To view a list of mappings between Linux and SELinux users run `semanage login -l`.
+	
+
+	Login Name           SELinux User         MLS/MCS Range        Service
+	
+	__default__          unconfined_u         s0-s0:c0.c1023       *
+	root                 unconfined_u         s0-s0:c0.c1023       *
+	system_u             system_u             s0-s0:c0.c1023       *
+
+	Output might differ slightly from system to system. For processes, the SELinux user limits which roles and levels are accessible. The MLS/MCS column is the level
+	used by Multi Level Security (MLS) and Multi Category Security (MCS).
+
+
+	Role
+
+	 Part of SELinux is the Role-Based Access Control (RBAC) security model. The role field is the attribute of the of RBAC. SELinux users are authorized for roles and
+	 roles are authorized for domains. The role serves as an intermediate between domains and SELinux users. The roles that can be entered determine which domain can be
+	 entered; ultimarely, this controls which object types can be accessed. 
+
+	Type
+
+	 The type is an attribute of Type Enforcment. The type defines a domain for processes and a type for files. SELinux policy defines how types can access each other,
+	 whether it be a domain accessing a type, or a domain accessing another domain. Access is only allowed if a specific SELinux policy rule exists that allows it.  
+
+	Level
+
+	 The level is an attribute of MLS and MCS. An MLS range is a pair of levels, written as lowlevel-highlevel if the levels differ, or lowlevel if the levels are
+	 identical (s0-s0 is the same as s0). Each level is a sensitivity category pair, with categories been optional. If there are categories, the level is written
+	 as sensitivity:category-set or sensitivity otherwise.
+
+	 If the category set is the contiguous series, it can be abbreviated. For example, c0.c3 is the same as c0,c1,c2,c3. 
+
+  
+	
+
+	/etc/selinux/targeted/setrans.config     maps levels to more meaningful form
+
+ ps(1), id(1) and ls(1) allows to see appropriate SELinux context
+
+ Booleans allow part of SELinux policy to be changed at runtime. semanage(1) allows to configure certain elements of SELinux policy without required modification or
+ recompilation from policy source.

@@ -1,0 +1,39 @@
+
+	disk.percent
+
+[state]
+	state.sls				    execute a set list of state files from an enviornment
+	state.show_sls	    display the state data from a specific sls or list of sls files on the master
+  state.single_sls    
+
+	sys.list_modules
+	sys.list_functions
+	sys.doc					expose the docstrings in each function
+	sys.argspec
+	sys.state_doc
+  sys.list_state_modules
+  sys.list_state_functions
+
+	pkg.list_pkgs
+	pkg.available_version <pkg>
+	pkg.info_installed <pkg>
+	pkg.install version= <pkg>
+	pkg.version <pkg>
+	user.add
+	user.info
+	saltutil.running
+	saltutil.refresh_pillar
+	saltutil.sync_all
+
+	state.show_sls
+	state.single			// execute state function for all the states?
+	user.present
+
+ states.cmd:
+	cmd.run
+			
+			by default command is executed in the /root; use cwd
+			runas=user
+
+ Runner modules:
+	manage.up

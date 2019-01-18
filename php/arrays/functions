@@ -1,0 +1,12 @@
+
+ array array( [ mixed $...] )
+
+ 	Creates an array.
+
+ 
+ int array_push ( array &$array [, mixed $... ] )
+
+  Push...
+
+
+ unset()

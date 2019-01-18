@@ -1,0 +1,32 @@
+
+  resource fopen( string $filename, string $mode [, bool $use_include_path = FALSE [, resource $context ]] )
+
+		Modes:
+			
+			r			open for reading only; place the file pointer at the beginning of the file
+			r+		open for reading and writing; place the file pointer at the beginning of the file
+			w			open for writing only; place the file pointer at the beginning of the file and truncate the file to
+						zero length. If the file does not exist, attempt to create it
+			w+		open for reading and writing; place the file pointer at the beginning of the file and truncate the file to
+						zero length. If the file does not exist, attempt to create it
+			a			Open for writing only; place the file pointer at the end of the file. If the file does not exist, attempt to create it. In this mode,
+						fseek() has no effect, writes are always appended.
+			a+		Open for reading and writing; place the file pointer at the end of the file. If the file does not exist, attempt to create it. 
+			x			Create and open file for writing only; place the file pointer at the beginning of the file. If the file already exists, the fopen()
+						call will fail by returning and generating an error of level E_WARNING. 
+			x+		Create and open for reading and writing; otherwise has the same behavious as with 'x'.
+			c			Open the file for writing only; If the file does not exist, it is created. If it exists, it is neither truncated, nor the call to this function
+						fails. The file pointer is positioned on the beginning of the file. 
+			c+		Open the file for reading and writing; otherwise it has the same behavior as 'c'.
+			e			Set close-on-exec flag on the opened file descriptor.
+
+
+	resource fwrite(
+
+	fget
+
+
+	what? substr(
+	bool chmod( string $filename, int $mode)
+
+		Octal. Prefix with zero (0). File owner can change the mod by default.

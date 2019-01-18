@@ -1,0 +1,11 @@
+	/etc/libvirt/qemu
+							host and domain configuration
+
+	/etc/libvirt/qemu/networks/autostart
+							autostart directory
+
+	/var/lib/libvirt/image
+							image directory
+
+	/var/lib/libvirt/qemu/snapshots
+							snapshots directory

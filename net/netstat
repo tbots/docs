@@ -1,0 +1,34 @@
+
+ netstat -r 			show routing table
+
+			U		routing table is up
+			G		use gateway
+			D		dynamically installed
+			M		modified
+			R		reinstalled
+			!		rejecting route
+
+			MSS (Maximum Segment Size)
+			Window (Default window size)
+			irtt (Initial Round Trip Time)
+
+			*	no default gateway
+			0.0.0.0	any address that is not yet defined
+
+	
+	-a 		
+			display active tcp/udp connections in listen state
+
+  -l	
+			listening sockets
+
+  -n
+			numeric; do not resolve
+
+			 --numeric-users
+
+	-e
+			extended
+
+	-o
+			display process identifier

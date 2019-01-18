@@ -1,0 +1,14 @@
+
+ Read group(5)
+ Reading sources.list(5)...
+ Read apt-key(8), apt-secure(8), and add-apt-repository(8)
+ Read gpg(1)
+ Read sysctl.conf(5) sysctl.conf.d(5)
+ Continue on termios(4).
+
+ Continue on docs/net/intefaces
+ For git(1), try --separate_git_dir.
+ Explore /usr/share/git-core.
+ githooks(5)
+
+ Good question, is it possible to create a new session from existent tmux window?

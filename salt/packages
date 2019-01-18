@@ -1,0 +1,9 @@
+
+ salt-api
+ salt-cloud
+ salt-common	[installed]		// shared libraries
+ salt-doc	[installed]
+ salt-master	[installed]		// controller
+ salt-minion	[installed]		// worker agent
+ salt-proxy
+ salt-syndic								// master of masters

@@ -1,0 +1,8 @@
+
+ Deployment scripts
+ ------------------
+
+ 	- nginx_src.sh				install and compile NGINX binaries
+	- pcre.sh							install and compile pcre binaries
+	- ntp.sh							install NTP server
+	- openssl.sh					install and compile openssl binaries

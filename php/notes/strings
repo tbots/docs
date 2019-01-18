@@ -1,0 +1,16 @@
+
+ 
+ Functions:
+ 	
+	trim()
+	ltrim()
+	rtrim()
+	printf()
+	print()
+	strtolower()
+	strtoupper()
+	strlen()
+	var_dump()
+	ucfirst()
+	ucwords()
+	substr() ?

@@ -1,0 +1,8 @@
+
+ salt-call work only on localhost
+
+ Common options:
+ 	
+	-l LOG_LEVEL, --log-level=LOG_LEVEL
+	--local	
+						do not return data to the master

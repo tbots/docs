@@ -1,0 +1,100 @@
+
+ Installing apache2 from source.
+
+  ./configure --enable-so
+
+			--enable-so 			DSO capability. This module will automatically enabled
+												unless you build all modules statically.
+
+ 	--prefix=/usr/local/apache2      default prefix
+
+ Files:
+ 	
+	/etc/apache2/envvars
+
+ Configuration.
+ 	
+	Edit a conf/httpd.conf file
+		LoadModule php7_module modules/libphp7.so
+		LoadModule php5_module modules/libphp5.so
+
+		<FilesMatches \.php$>
+			SestHandler application/x-httpd-php
+		</FilesMatches>
+
+ Usage.
+
+ 	PREFIX/bin/httpd -l 							list compiled in modules
+
+ Installing php from source.
+
+ 	./configure --with-apxs2=/usr/local/apache2/bin/apxs
+
+	--with-config-file-path=PATH			Set the path in which to look for php.ini [PREFIX/lib]
+
+ 
+ Addresses on the Web are expressed with URLs - Uniform Resourse Locators - which specify a protocol (e.g. http), a servername (e.g. www.apache.org), a URL-path
+ (e.g. /docs/current/getting-started.html), and possibly a query string (e.g. ?arg=value) used to pass additional arguments to the server.
+
+ A client (e.g., a web browser) connects to a server (e.g., Apache HTTP Server), with the specified protocol, and makes a request for a resource using the URL-path.
+ 
+ The URL-path may represent any number of contents on the server. It may be a file (like getting-setarted.html) a handler (like server-status) or some kind of
+ program file (like index.php).
+
+ The server will send a response consisting of a status code and, optionally, a response body. The status code indicates whether the request was successful, and if
+ not, what kind of error was encountered. Client can instructed how it should process the response.
+
+ Details of the transaction, and any error conditions, are written to log files.
+
+ In order to connect to a server, the client will first have to resolve the server name to an IP address - the location on the Internet where the server resides.
+ Thus, in order for web server to be reachable, it is necessary that the servername be in DNS list.
+
+ More than one hostname may point to the same IP address, and more than one IP address can be attached to the same physical server. Thus, it is possible to run more
+ than one web site on the same physical server using a feature called virtual hosts.
+
+ The Apache HTTP server is configured via simple text files. Their localtion are varies depending on the way server was installed.
+ 
+ The configuration is frequently broken into multiple smaller files for ease of management. These files are loaded via Include directive.
+
+ The server is configured by placing cofiguration directives in these configuration files. A directive is a keyword followed by one or more arguments that set its
+ value. 
+
+ Configuation directives are placed under configuration sections depends on where the directives should be effective.
+
+ In addtition to the main configuration files, certain directives may go in .htaccess files located in the content directories .htaccess files are primarily for
+ people who do not have access to the main server configuration file(s).
+
+ Web site content can take many different forms, but may be broadly divided into static and dynamic content.
+
+ Static content is things like HTML files, image files, CSS files, etc. This files are resides on the file system. The DocumentRoot directive specifies where the
+ files should reside. This directive is either set globally, or per virtual host.
+
+ Typically, a document called index.html will be served when a directory is requested without a filename being specified. For example, if DocumentRoot is set to
+ /var/www/html and a request is made for http://www.example.com/work/, the file /var/www/html/work/index.html will be served to the client.
+
+ Dynamic content is anything that is generated at request time, and may change from one request to another. There are numerous ways that dynamic content may be
+ generated. Various handlers are available to generate content. 
+
+ Third party modules like mod_php may be used to write code that does a variety of things.
+
+ The location of the error log is defined by the ErrorLog directive, which may be set globally, or per virtual host. Each error log message contains an error code,
+ which can be searched online for more detailed description of how to address the problem. 
+
+ Direcoties.
+ -----------
+
+ /etc/apache2/sites-enabled/
+ /var/www/html
+
+ Configuration directives.
+ ------------------------
+
+ 	Include
+	DocumentRoot
+
+ <Directory "/var/www/html/localhost">
+ 	Options Indexes FollowSymlinks
+	AllowOverride All
+	Order Allow,Deny
+ 	Allow from All				# controls which hosts can access an area of the server
+	Require all granted

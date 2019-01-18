@@ -1,0 +1,64 @@
+{{extend 'layout.html'}}
+  <div class="page-content">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="portlet box blue">
+			
+			    <div class="portlet-title">
+			    	<div class="caption">Available projects</div>
+			    </div>				    
+				<div class="portlet-body" >
+					<div class="table-toolbar">
+						{{if auth.has_membership(6,auth.user_id): }}<a href="javascript:;" onclick="editDomain('0')" class="btn green">Add domain</a>{{pass}}						
+					</div>
+					<table class="table table-condensed">
+						<tr>
+							<th colspan="2">Name</th>
+							<th>Description</th>										
+							<th>Created</th>
+							<th>&nbsp;</th>
+						</tr>
+						{{if projects != None:}}
+						{{ j = None }}
+						{{for item in projects:}}							
+    						{{ if item[0] != j:}}
+    						{{if item[3] != None or item[8] == True: }}
+    							<tr>
+    								<th colspan="2"><label>{{=item[1]}}</label></th>    					    															
+    								<td>{{=item[2]}}</td>
+    								<td>{{=item[10].strftime('%d.%m.%Y %H:%M')}}</td>
+    								{{ j = item[0] }}    								
+    								<td colspan="2">
+    									{{if item[8]:}}
+    										<button onclick="editProject('{{=item[0]}}','0')" class="btn green" style="width:120px">Add project</button> &nbsp;
+    										<button onclick="editDomain('{{=item[0]}}')" class="btn blue" style="width:120px">Edit domain</button> &nbsp;
+    										<button onclick="deleteDomain('{{=item[0]}}')" class="btn red" style="width:120px">Delete domain</button>
+    									{{pass}}
+    								</td>
+    							</tr>    								
+    						{{pass}}
+    						{{pass}}
+    						{{if item[3] != None:}}
+								<tr>
+									<td>&nbsp;</td>
+									<td><label><a href="/{{=item[3]}}" {{if item[8]:}}target="_blank"{{pass}}]>{{=item[4]}}</a></label></td>
+									<td>{{=item[5]}}</td>								
+									<td>{{if item[7] != None:}}{{=item[7].strftime('%d.%m.%Y %H:%M')}}{{pass}}</td>								
+									<td>
+										{{if item[8]:}}
+											<button onclick="groupsUserPrivileges('{{=item[0]}}','{{=item[3]}}')" class="btn blue" style="width:120px">Privileges</button> &nbsp;
+											<button onclick="editProject('{{=item[0]}}','{{=item[3]}}')" class="btn blue" style="width:120px">Edit project</button> &nbsp;
+											<button onclick="deleteProject('{{=item[0]}}','{{=item[3]}}')" class="btn red" style="width:120px">Delete project</button>
+										{{pass}}
+									</td>
+								</tr>
+							{{pass}}
+						{{pass}}
+						{{pass}}
+					</table>
+					
+				</div>
+			</div>
+		</div>		
+	</div>
+</div>

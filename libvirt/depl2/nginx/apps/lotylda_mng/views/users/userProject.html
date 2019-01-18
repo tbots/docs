@@ -1,0 +1,22 @@
+          			<div id="relations">
+          				<label>User name: {{=username}}</label>
+          				<form id="projectForm" >
+							<table class="table table-condensed">
+							{{for item in projects:}}
+								<tr>			
+									<th>{{=item[1]}}</th>
+									<td>
+										<select name="projectPrivileges" class="form-control input-medium">
+											{{for priv in privileges:}}
+												{{ pom = str(item[0])+'|sep|'+str(priv[0]) }}
+												<option {{if pom in selProjects:}}selected{{pass}} value="{{=item[0]}}|sep|{{=priv[0]}}">{{=priv[1]}}</option>
+											{{pass}} 
+										</select>
+									</td>
+								</tr>
+							{{pass}}
+							</table>
+						<input type="hidden" name="userId" id="userId" value="{{=userId}}"/>
+						<input type="hidden" name="domainId" id="domainId" value="{{=domainId}}"/>
+						</form>
+          			</div>  

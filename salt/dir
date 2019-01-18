@@ -1,0 +1,5 @@
+
+ /etc/salt
+
+ /srv/salt/reclass/classes/cluster/<cluster-name>/infra/init.yml
+ /srv/salt/reclass/classes/system/openssh/server/team/members/osergiyuk.yml

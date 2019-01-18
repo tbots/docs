@@ -1,0 +1,50 @@
+
+ virt-install --name [machine_name] --connect [uri] --memory [MiB]
+
+  -n, --name 	name of the new guest virtual machine instance. This must be unique among all guests known to the hypervisor on the connection,
+	 	including those not currently active
+
+  -c, --connect URI 	Connect to a non-default hypervisor. If this isn't specified, libvirt will try and choose the most suitable default.
+  -m, --memory 	memory to allocate for the guest, in MiB
+  --vcpus=VCPUS[,maxcpus=MAX][,sockets=#][,core=#][,threads=#]
+		number of virtual cpus to configure for the guest. If 'maxvcpus' is specified, the guest will be able to hotplug up to MAX vcpus while the guest is running, but will startup with VCPUS.
+		CPU topology can additionaly be specified with sockets, cores, and threads. If values are omitted the rest will be autofilled preferring sockets over cores over threads.
+
+		'cpuset' sets which physical cpus the guest can use. "CPUSET" is a comma separated list of numbers, which can also be specified in ranges or cpus to exclude. Example:
+
+  			0,2,3,5     : Use processors 0,2,3 and 5
+		        1-5,^3,8    : Use processors 1,2,4,5 and 8
+
+			if the value 'auto' is passed, virt-install attempts to automatically determine an optimal cpu pinning using NUMA data, if available
+								 
+  --disk OPTION	 specifies media to use as storage for the guest, with various options (--disk=?). First argument will be treated as path to the image location by default.
+		 
+		 [disk option]:
+		  path		(complete)
+
+ --network 	 connect the guest to the host network. The value for "NETWORK" can take one of the following formats:
+
+	          bridge=BRIDGE					connect to a bridge device in the host called "BRIDGE"
+	 
+ --location
+
+ --extra-args ""
+
+
+ --cdrom
+
+ --os-variant OS_VARIANT  	optimize the guest configuration for a specific operating system (osquery-info os)
+
+ --graphics TYPE, opt1=arg1, opt2=arg2
+	 			specifies the graphical display configuration. This does not configure any virtual hardware, just how the guest's graphical display can be accessed.
+				typically the user does not need to specify this option, virt-install will try and choose a useful default, and launch suitable connection.
+							
+				 --graphics vnc,listen=0.0.0.0 --noautoconsole	
+
+ --import 			skip the OS installation process, and build a guest around an existing disk image. The device used for booting is the first device specified via "--disk" or
+				"--filesystem"
+
+
+ Examples:
+ 	
+	virt-install --name uxx-1 --memory 1024 --vcpus=1 --disk /var/lib/libvirt/images/uxx-1.img --cdrom /home/oleg/Downloads/ubuntu-16.04.3-server-i386.iso --graphics vnc,listen=0.0.0.0 --noautoconsole

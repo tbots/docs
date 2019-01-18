@@ -1,0 +1,7 @@
+
+ /usr/bin/salt
+ /usr/bin/salt-key
+ /usr/bin/salt-run
+ /usr/bin/salt-call
+ /usr/bin/salt-master
+ /usr/bin/salt-minion

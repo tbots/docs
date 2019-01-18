@@ -1,0 +1,5 @@
+PRJ=trw
+DEP_HOST=
+PRJ_PTH=/root/lotylda/depl/trw
+SCRIPT=last.sh
+VARS=vars

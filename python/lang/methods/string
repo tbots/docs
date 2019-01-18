@@ -1,0 +1,8 @@
+
+ title()
+ upper()
+ lower()
+ rstrip()
+ lstrip()
+ strip()
+

@@ -1,0 +1,16 @@
+          			<div id="relations">
+          				<form id="domainForm" >
+          				<table class="table table-condensed">
+							<tr>
+								<th>Name</th>
+								<th>Description</th>
+							</tr>
+							<tr>
+								<td><input type="text" id="domaingroup_name" name="domaingroup_name" class="form-control input-medium" style="display:inline" value="{{if group:}}{{=group[1]}}{{pass}}" /></td>
+								<td><input type="text" id="domaingroup_descr" name="domaingroup_descr" class="form-control input-medium" style="display:inline" value="{{if group:}}{{=group[2]}}{{pass}}" /></td>
+								<input type="hidden" id="domaingroup_id" name="domaingroup_id" value="{{if group:}}{{=group[0]}}{{else:}}0{{pass}}" />
+								<input type="hidden" id="domainId" name="domainId" value="{{=domainId}}" />
+							</tr>
+						</table>
+						</form>
+          			</div>  

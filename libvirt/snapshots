@@ -1,0 +1,6 @@
+
+ snapshot-create-as domain --name snapshotname
+ snapshot-current [--name] --domain
+ 															Get or set name of the current snapshot
+ snapshot-revert
+

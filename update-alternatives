@@ -1,0 +1,9 @@
+
+ update-alternatives
+
+ 	/etc/alternatives
+	 
+	 editor->/usr/bin/vim
+
+	
+	* didn't searched /usr/bin directory
