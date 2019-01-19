@@ -23,4 +23,7 @@
 
 
  Examples:
+	git add . [-A
+	git branch <branch>
+	git checkout [-b] branch
  	git config --list			# git help config
