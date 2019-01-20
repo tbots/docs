@@ -1,0 +1,56 @@
+#
+# Functions and definitions used by parsers.
+# 
+
+VAR_IND=40
+COM_IND=50
+
+#
+# Set variable specified by $1 to the apache configuation file path.
+#
+function set_cf(){
+
+	test $1 || 	{
+	echo "in set_cf(): missing variable name to be set to the configuration file path"
+	exit 1
+							}
+
+	eval $1=`apachectl -V | sed -n '/HTTPD_ROOT\|SERVER_CONFIG_FILE/ s/.*"\(.*\)".*/\1/p' | tr '\n' '/' | sed 's/\/$//'` 
+}
+
+#
+# Print $1 (variable) following by $2 - ${#1} spaces. New line is not printed.
+# 
+function indent(){
+	spaces=$(($2 - ${#1}))
+	f="$1"
+	while [ $((spaces--)) -gt 0 ]; do
+		f="$f "
+	done
+	echo -n "$f"
+}
+
+# 
+# Print configuration file variables.
+# 
+function conf_vars() {
+	
+	# Default expression.
+	test $2 || exp='^\s*\w\+'
+
+	echo in conf_vars
+	echo "\$1: $1"
+	echo "exp: $exp"
+	grep $exp $1 | while read -a line
+	do 		indent "${line[0]}" "$VAR_IND"; echo "${line[@]:1}"		
+	done
+}
+
+#
+# Get apache configuraion file accepted directives list.
+#
+function get_directive_list(){
+	url=curl\ https://httpd.apache.org/docs/2.4/mod/directives.html
+	eval $1="'$(echo `curl $url 2> /dev/null | sed  -n '/<div.*directive-list/,/<\/dir/ {/a/ s/.*>\(\w\+\)<.*/\1/p}'`)'"
+l
+

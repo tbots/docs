@@ -1,0 +1,7 @@
+
+ date - print or set the system date and time
+
+ date [OPTION]... [+FORMAT]
+ date [-u|--utc|--universal] [MMDDhhmm[[CC]YY][.ss]]
+
+ Display the current time in the given FORMAT, or set the system date. 

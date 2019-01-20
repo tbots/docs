@@ -1,0 +1,128 @@
+
+	
+  BONDING_OPTS=<parameters>
+
+	sets the configuration parameters for the bonding device, and
+	is used in /etc/sysconfig/network-scripts/ifcfg-bond<N>. This 
+	parameters are identical to those used for bonding devices in 
+	/sys/class/net/<bonding device>/bonding, and the module parameters
+	for the bonding driver.
+
+	This configuration method is used so multiple bonding devices can have 
+	different configurations. If BONDING_OPTS is used do not use
+	/etc/modprobe.conf to specify options for the bonding device.
+
+  BOOTPROTO=<protocol>
+	
+	Where <protocol> one of the following:
+
+	• none - no boot-time protocol should be used
+	• bootp - the BOOTP protocol should be used
+	• dhcp  - the DHCP protocol should be used
+
+   BROADCAST=<address>
+	
+	Where <address> is the broadcast address. The value is depreciated,
+	as the value is calculated automatically with ifcalc.
+
+  DEVICE=<name>
+
+	Where <name> is the name of the physical device (except for dynamically-
+	allocated PPP devices where it is the logical name).
+
+  DHCP_HOSTNAME
+
+	Use this option only if DHCP server requires the client to specify a 
+	hostname before receiving an IP address.
+
+  DNS{1,2}=<address>
+	
+	Where address is a name server address to be placed in /etc/resolv.conf
+	if the PEERDNS directive is set to yes.
+
+  ETHTOOL_OPTS=<options>
+
+	Where <options> are any device specific options supported by ethtool.
+
+	Instead of a custom init script, use ETHTOOL_OPTS to set interface speed and
+	duplex settings.
+
+  GATEWAY=<address>
+	
+	Where <address> is the IP address of the network router or gateway device (if any).
+
+  HWADDR=<MAC-address>
+
+	Where <MAC-address> is the hardware address of the Ethernet device in the from of
+	AA:BB:CC:DD:EE:FF. This directive is useful for machines with multiple NIC's to
+	ensure that the interfaces are assigned the correct device names regardless of the
+	configured load order for each NICs module. This directive should not be used in
+	conjuction with MACADDR.
+
+  IPADDR=<address>
+
+	Where <address> is the IP address.
+
+  MACADDR=<MAC-address>
+
+	Where <MAC-address> is the hardware address of the Ethernet device in the form
+	of AA:BB:CC:DD:EE:FF. This directive is used to assign a MAC address to the 
+	interface, overriding the one assigned to the physical NIC. This directive should
+	not be used in conjuction with HWADDR.
+
+  MASTER=<bond-interface>
+
+	Where <bond-interface> is the channel bonding interface to which the Ethernet 
+	interface is linked.
+
+	This directive is used in conjuction with the SLAVE directive.
+
+  NETMASK=<mask>
+	
+	Where <mask> is the netmask value.
+
+  NETWORK=<address>
+
+	Where <address> is the network address. This directive is deprecated, as the
+	value is calculated automatically with ifcalc.
+
+  ONBOOT=<answer>
+
+	Where <answer> is one of the following:
+	
+	  • yes  - this device should be activated at boot-time.
+	  • no   - this device should not be activated at boot-time.
+
+  PEERDNS=<answer>
+
+	Where <answer> is one of the following:
+	
+	  • yes  - Modify /etc/resolv.conf if the DNS directive is set. When using 
+		   DHCP, then yes is the default.
+
+	  • no   - Do not modify /etc/resolv.conf.
+
+  SLAVE=<bond-interface>
+
+	Where <bond-interface> is one of the following:
+
+	  • yes  - This device is controlled by the channel bonding interface specified 
+                   in the MASTER directive.
+                   
+	  • no  -  This device is not controlled by the channel bonding interface specified 
+                   in the MASTER directive. 
+	  
+	This directive is used in conjuction with the MASTER directive.
+
+  SRCADDR=<address>
+
+	Where <address> is the specified source IP address for outgoing packets.
+
+  USERCTL=<answer>
+
+	Where <answer> is one of the following:
+	
+	  • yes  - Non-root users are allowed to control this device.
+
+	  • no   - Non-root users are not allowed to control this device.
+

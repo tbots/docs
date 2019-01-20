@@ -1,0 +1,5 @@
+
+ Functions of interest:
+
+ 	nl - write new line with ed(1); expects line number on input
+	get_arg - get an option argument

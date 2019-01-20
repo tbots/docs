@@ -1,0 +1,33 @@
+
+ PKI
+ 						separate certificate (public key) and a private key for the server and each client
+						Certificate Authority (CA) certificate and key which used to sign each of the server and client certificates
+
+ bidirectional (both directions) authentication is based on certificates. Client must authenticate the server certificate
+ and the server must authenticate the client certificate before mutual trust is established
+
+ both server and client will authenticate the other by first verifying that the presented certificate was signed by the master
+ certificate authority (CA), and then by testing information in the now-authenticated certificate header, such as the certificate 
+ common name or certificate type(client or server).
+
+ Generate the master Certificate Authority(CA) certificate & key
+
+ Establishin PKI
+
+ ./vars
+ ./clean-all				???
+ ./build-ca
+
+ ./build-key-server server
+ ./build-key-client
+
+ * if you would like to password-protect your client keys, substitute the build-key-pass script
+
+ ./build-dh
+
+ sample-config-files
+
+ man 1 pkcs12
+
+  -in filename
+								filename of the PKCS#12 file to be parsed. Standard input is used by default.

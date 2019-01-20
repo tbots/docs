@@ -1,0 +1,77 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+_dec	c.sh	/^function _dec() {$/;"	f
+_dfile	c.sh	/^function _dfile()$/;"	f
+_inc	c.sh	/^function _inc() {$/;"	f
+_lhdr	c.sh	/^function _lhdr() {$/;"	f
+a	0.1D.c	/^struct atoms a		= {0};$/;"	v	typeref:struct:atoms
+ai	0.1D.c	/^	int ai;						\/* atom index *\/$/;"	m	struct:mtchfl	file:
+anch	0.1D.c	/^	char anch;				\/* one of the '>' or '$' *\/$/;"	m	struct:mtchfl	file:
+anch	0.1D.c	/^int anch() {$/;"	f
+arr_d	arrays.sh	/^function arr_d() {$/;"	f
+arr_d	c.sh	/^function arr_d() {$/;"	f
+atom_complete	0.1D.c	/^	int atom_complete;$/;"	m	struct:atoms	file:
+atom_index	0.1D.c	/^	int atom_index;$/;"	m	struct:atoms	file:
+atom_new	0.1D.c	/^	int atom_new;$/;"	m	struct:atoms	file:
+atom_print	atom_print.c	/^void atom_print(char **atom) {$/;"	f
+atom_wr	atom_wr.c	/^int atom_wr(char **atom) {$/;"	f
+atoms	0.1D.c	/^struct atoms {$/;"	s	file:
+brackets	0.1D.c	/^	int  brackets;$/;"	m	struct:scheme	file:
+c	0.1D.c	/^	char 	c;		\/* current *\/$/;"	m	struct:char_st	file:
+char_st	0.1D.c	/^struct char_st { $/;"	s	file:
+create_hdr	c.sh	/^function create_hdr() {$/;"	f
+crstat	crstat.c	/^int crstat(int fd,int start,int end,int np,int idx) {$/;"	f
+cs	0.1D.c	/^struct char_st cs = {0};$/;"	v	typeref:struct:char_st
+debug	0.1D.c	/^int debug					=  0;$/;"	v
+dup	arrays.sh	/^function dup() {$/;"	f
+dup	c.sh	/^function dup() {$/;"	f
+ec_malloc	ec_malloc.c	/^void *ec_malloc(unsigned int size) {$/;"	f
+editc	c.sh	/^function editc() {$/;"	f
+eof	lst.c	/^int eof(int fd) {$/;"	f
+eol	eol.c	/^int eol(int fd) {$/;"	f
+f	0.1D.c	/^	char 	f;		\/* following *\/$/;"	m	struct:char_st	file:
+fiw	0.1D.c	/^int fiw() {$/;"	f
+fl	0.1D.c	/^struct mtchfl fl 	= {0};				\/* fl structure created here *\/$/;"	v	typeref:struct:mtchfl
+fnc	c.sh	/^function fnc() {$/;"	f
+ftl	ftl.c	/^void ftl(char *msg) {$/;"	f
+get_arg	opt.sh	/^function get_arg() {$/;"	f
+get_lhdr	c.sh	/^function get_lhdr() {$/;"	f
+get_man	c.sh	/^function get_man() {$/;"	f
+header_wr	c.sh	/^function header_wr() {$/;"	f
+inc_wr	c.sh	/^function inc_wr() $/;"	f
+li	0.1D.c	/^	int li;									\/* last index in wi *\/$/;"	m	struct:atoms	file:
+liw	0.1D.c	/^int liw() {$/;"	f
+lst	lst.c	/^int lst(int fd) {$/;"	f
+lst_o	lst_o.c	/^int lst_o(int fd) { return lseek(fd,0,SEEK_CUR) - lst(fd); }$/;"	f
+lst_or	lst_or.c	/^int lst_or(int fd,int ro) {			\/* line start offset relative *\/$/;"	f
+main	0.1D.c	/^int main(int argc,char *argv[]) {$/;"	f
+main	color.c	/^int main() {$/;"	f
+main	print.c	/^int main() {$/;"	f
+match	0.1D.c	/^int match(char *exp,int ps)$/;"	f
+mtchfl	0.1D.c	/^struct mtchfl {$/;"	s	file:
+non_printable	0.1D.c	/^	int  non_printable;$/;"	m	struct:scheme	file:
+np	0.1D.c	/^	int np;						\/* next pattern *\/$/;"	m	struct:mtchfl	file:
+p	0.1D.c	/^	char 	p;		\/* previous *\/$/;"	m	struct:char_st	file:
+partial	0.1D.c	/^	int  partial;$/;"	m	struct:scheme	file:
+print_word	0.1D.c	/^void print_word(int fd,char *word,struct scheme fmt) {$/;"	f
+printable_e	printable_e.c	/^void printable_e(char c,int np) {$/;"	f
+r_ch	0.1D.c	/^	char r_ch;				\/* repeatition character *\/$/;"	m	struct:mtchfl	file:
+rcs	0.1D.c	/^int rcs(int fd) {$/;"	f
+re_fdb	0.1D.c	/^int re_fdb(int fd,char *pattern,struct scheme fmt,int ms) {$/;"	f
+recurse_file	c.sh	/^function recurse_file() {$/;"	f
+repeat_p	0.1D.c	/^	int repeat_p;			\/* repeat pattern  *\/$/;"	m	struct:mtchfl	file:
+replace_char	repace_char.c	/^int replace_char(char *atoms[],int fd,int st) {$/;"	f
+scheme	0.1D.c	/^struct scheme {$/;"	s	file:
+sstr_h	sstr_h.c	/^int sstr_h(char *s,char t,int n,int ind) {$/;"	f
+step	0.1D.c	/^void step(int fd,char *word,struct scheme fmt,int match) {$/;"	f
+usage	0.1D.c	/^void usage(FILE* stream,int exit_code) {$/;"	f
+usage	fn.sh	/^function usage() {$/;"	f
+usage	hdr.sh	/^function usage() {$/;"	f
+vscs	0.1D.c	/^void vscs(struct char_st cs) {$/;"	f
+vsexp	0.1D.c	/^void vsexp(char *exp,int ps,int t,char *msg) {$/;"	f
+vsps	0.1D.c	/^void vsps(char *e,int ps,int t) {$/;"	f
+wi	0.1D.c	/^	int wi[100];						\/* write indexies *\/$/;"	m	struct:atoms	file:

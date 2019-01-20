@@ -1,0 +1,4 @@
+while IFS='\n' read -r line;
+do
+	declarations+=( "$line" )
+done < <(sed -n 's/^\s*\(\w\+\>\)\s*\(\**\)\s*\([a-zA-Z_]\+\)\s*\((.*)\)\s*{\?\s*$/\1 \2\3\4;/p' $1)

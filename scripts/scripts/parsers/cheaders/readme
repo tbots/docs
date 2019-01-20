@@ -1,0 +1,6 @@
+
+ When parsing C file for the function calls consider the following:
+
+	# define AT_FDCWD		-100	/* Special value used to indicate
+														   the *at functions should use the
+					   									 current working directory. */

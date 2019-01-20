@@ -1,0 +1,4 @@
+
+ Terminal customization notes.
+
+ 	setterm -cursor off

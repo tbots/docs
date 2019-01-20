@@ -1,0 +1,169 @@
+./hdr.sh: line 73: get_arg: command not found
+running with ' --verbose' flag for the commands
+action: editc
+header: 
+
+*** in hdr() ***
+processing file 'atom_print.c'
+in fnc()
+elements of 'functions[@]' array:
+fprintf
+printf
+
+in editc()
+processing function: fprintf
+In _inc():
+fn: fprintf
+In get_man(), searching for man page for the function 'fprintf'
+found man page at "/usr/share/man/man3/fprintf.3.gz"
+‘/usr/share/man/man3/fprintf.3.gz’ -> ‘./fprintf.3.gz’
+linked function name: printf
+In get_man(), searching for man page for the function 'printf'
+found man page at "/usr/share/man/man3/printf.3.gz"
+‘/usr/share/man/man3/printf.3.gz’ -> ‘./printf.3.gz’
+function found at: 43
+function definition: .BI "int fprintf(FILE *" stream ", const char *" format ", ...);"
+include statements preceding the function:
+39:.B #include <stdio.h>
+index in the end of loop: 1 -> 39
+include statement: '#include <stdio.h>'
+include statement '#include <stdio.h>' was not written yet
+elements of 'headers[@]' array:
+#include <stdio.h>
+
+removed ‘printf.3’
+***
+in editc()
+processing function: printf
+In _inc():
+fn: printf
+In get_man(), searching for man page for the function 'printf'
+found man page at "/usr/share/man/man3/printf.3.gz"
+‘/usr/share/man/man3/printf.3.gz’ -> ‘./printf.3.gz’
+function found at: 41
+function definition: .BI "int printf(const char *" format ", ...);"
+include statements preceding the function:
+39:.B #include <stdio.h>
+index in the end of loop: 1 -> 39
+include statement: '#include <stdio.h>'
+include statement '#include <stdio.h>' was already stored to be written.
+elements of 'headers[@]' array:
+#include <stdio.h>
+
+removed ‘printf.3’
+***
+in editc()
+all the function in file 'atom_print.c' are processed
+elements of 'headers[@]' array:
+#include <stdio.h>
+
+
+in inc_wr()
+include directive found; inserting on the line '4'
+in inc_wr()
+elements of 'headers[@]' array:
+#include <stdio.h>
+
+in inc_wr()
+processing header '#include <stdio.h>'
+header "#include <stdio.h>" was already included
+***
+
+in header_wr()
+in _dec()
+searching declarations in atom_print.c
+declarations found: 
+void atom_print(char **atom);
+elements of 'declarations[@]' array:
+void atom_print(char **atom);
+
+processing declaration: 'void atom_print(char **atom);' for the function 'atom_print'
+in get_lhdr()
+header file for the 'atom_print' function was not found
+*** in hdr() ***
+processing file 'header.h'
+sed: can't read header.h: No such file or directory
+in fnc()
+elements of 'functions[@]' array:
+fprintf
+printf
+
+in editc()
+processing function: fprintf
+In _inc():
+fn: fprintf
+In get_man(), searching for man page for the function 'fprintf'
+found man page at "/usr/share/man/man3/fprintf.3.gz"
+‘/usr/share/man/man3/fprintf.3.gz’ -> ‘./fprintf.3.gz’
+linked function name: printf
+In get_man(), searching for man page for the function 'printf'
+found man page at "/usr/share/man/man3/printf.3.gz"
+‘/usr/share/man/man3/printf.3.gz’ -> ‘./printf.3.gz’
+function found at: 43
+function definition: .BI "int fprintf(FILE *" stream ", const char *" format ", ...);"
+include statements preceding the function:
+39:.B #include <stdio.h>
+index in the end of loop: 1 -> 39
+include statement: '#include <stdio.h>'
+include statement '#include <stdio.h>' was already stored to be written.
+elements of 'headers[@]' array:
+#include <stdio.h>
+
+removed ‘printf.3’
+***
+in editc()
+processing function: printf
+In _inc():
+fn: printf
+In get_man(), searching for man page for the function 'printf'
+found man page at "/usr/share/man/man3/printf.3.gz"
+‘/usr/share/man/man3/printf.3.gz’ -> ‘./printf.3.gz’
+function found at: 41
+function definition: .BI "int printf(const char *" format ", ...);"
+include statements preceding the function:
+39:.B #include <stdio.h>
+index in the end of loop: 1 -> 39
+include statement: '#include <stdio.h>'
+include statement '#include <stdio.h>' was already stored to be written.
+elements of 'headers[@]' array:
+#include <stdio.h>
+
+removed ‘printf.3’
+***
+in editc()
+all the function in file 'header.h' are processed
+elements of 'headers[@]' array:
+#include <stdio.h>
+
+
+in inc_wr()
+cat: header.h: No such file or directory
+include statement was not found; searching for the define directive
+cat: header.h: No such file or directory
+define directive was not found, searching for the first commented part: */
+cat: header.h: No such file or directory
+first uncommented part was not found; writing at line '1'
+in inc_wr()
+elements of 'headers[@]' array:
+#include <stdio.h>
+
+in inc_wr()
+processing header '#include <stdio.h>'
+grep: header.h: No such file or directory
+inserting new header: "#include <stdio.h>"
+sed: can't read header.h: No such file or directory
+sed: can't read header.h: No such file or directory
+***
+
+in header_wr()
+in _dec()
+searching declarations in header.h
+declarations found: 
+sed: can't read header.h: No such file or directory
+sed: can't read header.h: No such file or directory
+elements of 'declarations[@]' array:
+void atom_print(char **atom);
+
+processing declaration: 'void atom_print(char **atom);' for the function 'atom_print'
+in get_lhdr()
+header file for the 'atom_print' function was not found

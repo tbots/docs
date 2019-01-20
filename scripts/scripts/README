@@ -1,0 +1,15 @@
+
+ Functions listed within library (lib):
+
+ 	if_not_root						exit if UID is not equal to 0 (root)
+	err 									print error message; prepended by 'error: '
+	find_disks 						need to be tested
+	create_log_files 			need to be tested
+	apt 									mistery
+	conf_vars							display all the variable definition strings within configuration file
+	show_char							show character on position (|char|
+	char_pos							find position of the character within string
+	include_optional_prompt	
+												run prompt to choose directory specified by the IncludeOptional directive
+												can raise further to the script that allows specification of the directive name
+	set_vars							set variable to value

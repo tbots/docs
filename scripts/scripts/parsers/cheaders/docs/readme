@@ -1,0 +1,225 @@
+
+ Document describes function calls and execution flow of the hdr.sh script.
+
+ Script allows:
+
+ 	writing an include statements into C source files
+	creating and modifying header files
+	listing function calls
+
+ Several actions are supported:
+
+ 	1. Write required include statements into a C source file (-i/--write-include).
+
+ As the very first step each C source file specified on the command line will be searched for either system, local or all the function calls found in a file.
+ The core program that allows a search through the source files is fn.sh.
+
+ Script makes use of five function routines:
+ 
+ 	1. c.sh
+	2. edit.sh
+	3. arrays.sh
+	4. line.sh
+	5. opt.sh
+	
+ c.sh routine describes functions needed to determining needed headers by the function
+ calls found in the source file. The resulting is two global arrays:
+ 
+  1. headers[]
+	2. files[]
+
+ headers[] array will hold all the include statement strings. 
+ 
+ files[] will hold all the source files found recursively according to the function calls
+ For example, if a.c calls to function defined in b.c and b.c in turn calls to the
+ function defined in c.c all the three files will be learned. To achieve recursive
+ behaviour '-r/--recursive option should be specified.
+
+ Command line parsing functions:
+
+ get_sec_arg
+ get_arg
+
+
+ Functions related to finding files and directives.
+
+
+	headers[] stores all the header names to be included within the source file.
+
+	find_lhdr FUNCTION
+
+			Find a header file name that declares the local function call. 
+			Search performed in current, /usr/include, /usr/local/include, and C_INCLUDE_PATH
+			directories. The last header file displayed is picked up. 
+
+			If header file was not found the default value of the $HEADER variable is
+			used.
+
+			variables:
+
+				fn          function name
+				header			header file name
+				headers[]   header names array 
+
+
+			function calls:
+
+				chck_lhdr
+
+
+			resulting:				 new header in headers[].
+
+
+
+	chck_lhdr HEADER HEADERS[@]						
+
+			Check if local header found is already stored.
+
+
+
+	find_df FUNCTION
+
+			find function source file
+
+			variables:		fn			function name
+										dfile[]	source file name(s)
+
+			calls:				chck_df
+										
+			success:			adds new source file name to the files[]
+
+			failure:			file was not found
+										multiple files found
+
+
+	chck_df DFILE[@] FILES[@]
+		
+			Check the file that holds function source code.
+
+			variables:
+
+				dfile[]		source files array
+
+
+			success:		adds source file to the files[]
+
+			failure:		file was not found
+									multiple files found
+
+
+	find_hdr [recursive] FUNCTION headers[@] files[@]
+			
+			sets headers[] with the header file names to be included and populates
+			files[] with the source file names to be processed (optionally)
+			
+			if the function call is a system call required include statements will be
+			searched with the find_inc()
+			
+			if the function call is local library call the header file that declares 
+			the function will be searched with the find_lhdr()
+
+			if recursive option was set (source file that describes function call 
+			should be recompiled in order to be included with the main program, thus it
+			should be also processed and checked for all the required header files (include
+			statements).
+
+
+			variables:			fn						function name
+											recursive			search for the source file of the function flag
+											headers[]			header names to be included
+											files[]				function source file goes here for the
+																		further parsing
+
+	find_inc
+
+			The function searches for the include statements required by the function call
+			in its man page. First the man page is retrieved then parsed as follows:
+				
+				1. line number of the first function declaration is found
+				2. line array is populated with line numbers where include statements 
+					 were found before the actual function declaration 
+				3. line numbers passed to get_inc() where each include statement found
+					 on the lines gets stored in the headers[].
+
+			When include statements are searched, the following condition should be 
+			considered:
+
+				#include <1.h>
+
+				int not_my_declaration();
+
+				#include <2.h>
+				#include <3.h>
+
+				void my_declaration();
+
+			The "1.h" header does not belongs to my_declaration, thus the ranges in between
+			each of the includes are examined and if another function declaration is found
+			range cycling stops. lines array is then set only to the lines where needed
+			include statements were found.
+
+			Line numbers are passed to get_inc() in order to initialize headers[] array.
+
+			
+
+
+			variables:				lines[]			line numbers where include statements were found
+
+	
+	Wrapper functions to finding headers and perform write operations.
+
+		editc [recursive] HEADERS[@] FILES[@]
+			
+			Function expects files[] array with source file names to be processed.
+
+			Each function call found in the source file will be passed to the find_hdr(),
+			the resulting is a headers[] array with the required include statement needed
+			by each function.
+			
+			To find an appropriate header file find_hdr() function is used.
+			
+			success:				include statements are written within file
+
+
+
+	Functions to edit files.
+	
+
+		inc_wr FILE HEADERS[@]
+
+			write include statements into file
+
+			at the beginning first write line in file where include statements will be written
+			is found
+
+			The search flow is as follows:
+
+				1. last #include directive (write on the next line)
+				2. first #define directive (write on the line above)
+
+		nl LINE FILE
+
+			append new line on the LINE in FILE
+
+
+
+ 	dup ELEMENT ARRAY
+
+			Check for the duplication of the element within array.
+
+	line_num PATTERN FILE
+
+			Sets $line for the line number where pattern was found
+			
+			
+
+
+ Debugging functions:
+
+  arr_d
+
+
+ To do:
+
+  it should be possible to wrap ed calls
+	// is not handled

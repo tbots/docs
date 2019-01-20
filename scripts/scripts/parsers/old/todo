@@ -1,0 +1,3 @@
+
+ for each directive name that was found
+ 	examine variable string length with commented string lenght; if equal print it out.
