@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<body>
+	<form action="edit_membership.php" method="POST">
+		<table
+			bgcolor="#cccccc"
+			border=0
+			frame="hsides"
+			cellpadding=5 />
+	
+			<tr>
+				<td>Customer</td>
+				<td>Membership</td>
+				<td>Note</td>
+			</tr>
+	
+			<tr>
+				<td>Oleg Sergiyuk</td>
+				<td><select name="membership">
+					<option value = "guest" >Guest</option>
+					<option value = "member" >Member</option>
+					<option value = "gold" >Gold</option>
+				 </select>
+				</td>
+				<td>
+					<textarea 
+						name="note"
+						style="witdh=200px; height=600px"></textarea>
+				</td>
+			</tr>
+		</table>
+		<button type="submit">Submit</button>
+	</form>
+</body>

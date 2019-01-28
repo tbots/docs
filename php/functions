@@ -9,6 +9,7 @@
 
  	string implode(string $string, array $array);
  	
+	is_null();
 	trim()
 	ltrim()
 	rtrim()

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			table.srv-usr {
+				text-align: left;
+			}
+			
+			.srv-usr th {
+				border-bottom: 1px solid black;
+			}
+
+			#usr {
+				width:150px;
+			}
+
+		</style>
+	</head>
+	<body>
+		<form action="show_acl.php" method="post">
+			<table class=srv-usr>
+				<tr>
+					<th width='200'>Server</th>
+					<th width='100'>User</th>
+				</tr>
+				<tr>
+					<td>
+						<select name="server">
+							<option value="core-01">core-01</option>
+							<option value="core-02">core-02</option>
+						</select>
+					</td>
+					<td>
+						<select name="user" id='usr' >
+							<option value="v.caponi">Valerio Caponi</option>
+							<option value="a.mikulic">Adam Mikulic</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2"  align="right">
+						<input type="submit" value="Show ACL">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</body>
+</html>

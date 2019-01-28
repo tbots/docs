@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html>
+	<body>
+		<form action="processorder.php" mehod="get">
+
+		<!-- table definition -->
+		<table
+			align="left" 
+			rules="all"
+			frame="below" 
+			border="1">
+	
+			<tr bgcolor="#cccccc">
+				<td width="150">Item</td>
+				<td width="150">Quantity</td>
+			</tr>
+	
+			<tr>
+				<td>Tires</td>
+				<td align="right">
+					<input 
+						type="text"
+						name="tireqty" 
+						size="3" 
+						width="15" 
+						maxlength="5"
+						min="4"
+						max="20"
+						autofocus="autofocus"
+						/>
+				</td>
+			</tr>
+	
+			<tr>
+				<td>
+					Oil
+				</td>
+				<td 
+					align="right">
+	
+					<input 
+						type="text" 
+						name="oilqty" 
+						size="3" 
+						maxlength="3" 
+						/>
+					
+				</td>
+			</tr>
+	
+			<tr>
+				<td>
+					Spark Plugs
+				</td>
+				<td 
+					align="right">
+					<input 
+					type="text" 
+					name="sparkqty" 
+					size="3"
+					maxlength="3" />
+				</td>
+			</tr>
+		
+			<tr>
+				<td>
+					Shipping address
+				</td>
+				<td align="right">
+					<input type="text" name="address" size="10"/> 
+				</td>
+			</tr>
+				
+			<tr>		<!-- submit button -->
+				<td colspan="2" align="right">		<!-- span for a two columns -->
+					<input
+						type="submit" 
+						value="Submit Order" 
+						formtarget="_self"
+						formaction="fuck.php"/>  <!-- form method -->
+				</td>
+			</tr>
+	</table>
+	</form>
+	
+	</html>
+	</body>
