@@ -1,0 +1,26 @@
+
+ Model    |	SQL/DBMS	 |	Files
+----------+-------------+----------
+ Relation |	 Table		 |	File
+ Attribute|	 Column		 |  Field
+ Tuple		|	 Row			 |  Record
+
+ From the user's point of view, a database is a collection of one or more tables (and nothing but tables). 
+ A table: 
+ 					 * Is the database structure that holds data
+					 * Contains data about a specific entity type. An entity type is a class of distinguishable real-world objects, events or concepts
+					 	 with common properties.
+					 * It is two-dimensional grid characterzed by rows and columns
+					 * Holds a data item called a value at each row-column intesection
+					 * Has at least one column and zero or more rows. A table with no rows is an empty table.
+					 * Has a unique name within a database/schema.
+
+ A DBMS (Database Management System) uses two types of tables: user tables and system tables. User tables store user-defined data. System tables
+ contain metadata - data about database - such as structural information, physical details, performance statistics, and security settings. System
+ tables collectively are called the system catalog; the DBMS creates and manages this tables silently and continually. This scheme conforms with the
+ relational model's rule that all data be stored in tables.
+
+ Tables have the attractive property of closure, which ensures that any operation performed on a table yields another table. Closure guarantees that 
+ you'll get another table as a result no matter how you split or merge tables. This property lets you chain any number of table operations or nest them
+ to any depth. Unary (or monadic) table operations operate on one table ro produce result table. Binary (or dyadic) table operations operate on two tables 
+ to produce a result table.

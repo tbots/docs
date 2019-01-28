@@ -1,3 +1,10 @@
+ 
+ In tmux, a session is displayed on screen by a client and all sessions are managed by a single server. The server and each client are separate processes which communicate through a 
+ socket in /tmp. 
+
+ Usage: 	tmux [-2CluvV] [-c shell-command] [-f file] [-L socket-name] [-S socket-path] [command [flags]]
+
+	-2			Force tmux to assume the terminal supports 256 colours. [PLEASE EXPLORE]
 
  Commands:
 
@@ -25,9 +32,12 @@
 	 new-session [-AdDEP] [-c start-directory] [-F format] [-n window-name] [-s session-name] [-t target-session] [-x width] [-y height] [shell-command]
 	 	(alias: new)
 
-	 Create a new session with name session-name.
+	 	Create a new session with name session-name. The new session is attached to the current terminal unless -d is given. window-name and shell-command are the name of and shell
+	 	command to execute in the initial window. If -d is used, -x and -y specify the size of the initial window (80 by 24 if not given). <<< ???
 
-	 The new session is attached to the current terminal unless -d is given. window-name and 
+		If run from a terminal, any termios(4) special characters are saved and used for new windows in the new session. <<< ???
+
+		The -A flag makes new-session behave like attach-session if session-name already exists.
  	 new-window [-adkP] [-c start-directory] [-F format] [-n window-name] [-t target-window] [command]
 		DESCRIBE_ME
 

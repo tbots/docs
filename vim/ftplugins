@@ -1,5 +1,0 @@
-[!] Plugins:
-
-$VIMRUNTIME/ftplugin		// file type plugins
-$VIMRUNTIME/plugin			// global plugins
-

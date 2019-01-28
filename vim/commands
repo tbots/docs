@@ -1,3 +1,4 @@
+
 Command line command:
 --------------------
 packadd
@@ -29,7 +30,7 @@ Normal mode:
 	;				repeat latest f, t, F or T [count] times
 	,				repeat latest f, t, F or T in opposite direction
 	
-	*/#  		search for the word
+	*/#  		search for the word (exact match)
 	g*/g#		search for the word (partial match)
 	
 	Ctrl-I	jump to the previous position in a file
@@ -41,25 +42,59 @@ Normal mode:
   Ctrl-R "						insert in contents of the last delete or yank
 
 
-Marks:
-------
+ [MARKS]
 
-'M			jump to the beginning of the marked line
-`M			jump to the marked character
+	'M			jump to the beginning of the marked line
+	`M			jump to the marked character
 
-[!] Splitting windows:
+
+ [HELP TOPICS]
+ 	
+	helptags
+
+	Colors: 
+
+		$VIMRUNTIME/colors
+
+		:runtime syntax/colortest.vim
+
+	Marks:
+
+		" 	last position in a file
+		.		last edit in a file
+
+
+ [SPLITTING WINDOWS]
    
-:help split
-:help vsplit
-:help splitbelow
-:help splitright
+  split
+  vsplit
+  splitbelow
+  splitright
 
-CTRL-W w   jump to the next split
-CTRL-W H|J|K|L   move split
+
+	CTRL-W w   jump to the next split
+	CTRL-W H|J|K|L   move split
 
 
 Using tabs:
 
+-p FILE...		open files in tabs on invocation
 :tabedit <filename>			add a new tab
 gt		go to the next tab
 gT		go to the previous tab
+
+
+ [PLUGINS]
+
+	$VIMRUNTIME/ftplugin		// file type plugins
+	$VIMRUNTIME/plugin			// global plugins
+
+	Accepted file name representation when adding file type plugin:
+		ext.vim
+		ext_name.vim
+		ext/name.vim
+	
+ [FILES]
+
+ 	/etc/vim/vimrc		
+

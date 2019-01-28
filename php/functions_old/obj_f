@@ -10,12 +10,6 @@
 								last substring. A limit of -1 or 0 means "no limit" and, as is standard across PHP, NULL can be used to skip to the
 								flags  parameter.
 
- array explode( string $delimiter, string $string [, int $limit = PHP_INT_MAX ] )
-
- 								returnes an array of strings, each of which is a substring of string formed by splitting it on boundaries formed by the string
-								delimiter
-
- 		
  get_class();
 
  Variable type functions:

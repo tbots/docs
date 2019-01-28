@@ -122,3 +122,6 @@
 
  	UPDATE tbl_name SET col_name = 'value' WHERE ....;                i
 							// update column value
+
+	
+	SELECT * FROM information_schema.tables WHERE table_name LIKE "project%"

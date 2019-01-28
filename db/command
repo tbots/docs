@@ -1,12 +1,22 @@
+
+	CREATE TABLE tbl_name (definition [NOT NULL] [AUTO_INCREMENT] [, ...] [, PRIMARY KEY(col)]);
+	CREATE TABLE [AS] SELECT (column [AS column][,...]) FROM tbl_name
+		[WHERE condition [...]]
 	
 	ALTER TABLE tbl_name 
 		MODIFY col_name DATA_TYPE
 		CHANGE col_name col_name DATATYPE			- rename?
 		#RENAME COLUMN col_name col_name
-  ALTER TABLE tbl_name ADD [COLUMN] col1_name col1_definition [FIRST|AFTER col_name];     
 
+  ALTER TABLE table ADD [COLUMN] 
+		column definition 
+		[FIRST|AFTER column];     
+
+	INSERT INTO tbl_name VALUES (value[,...]);
 	UPDATE tbl_name SET field = value [, field = value] ...
 		[WHERE clause]
+
+	DROP [DATABASE|SCHEMA] [IF EXISTS] db_name
 
 	DROP [TEMPORARY] TABLE [IF EXISTS]
 		tbl_name [, tbl_name] ...
@@ -18,6 +28,7 @@
 		 if the server was started with the --skip-show-database option, statement can not be used unless
 		 SHOW DATABASES privelege is set
 
+	TRUNCATE ?
 
 	SELECT 
 		[ALL | DISTINCT | DISTINCTROW]
@@ -58,9 +69,6 @@
 
   SELECT table_name,engine FROM information_schema.TABLES WHERE table_schema = 'database_name';   
 																					// check database engine (MySQL)
-
- 	SELECT * FROM sqlite_master;   
-							// SQLite equivalent of SHOW TABLES;
 
   SELECT * FROM table HAVING COUNT condition;     
 							// check for a duplicates example

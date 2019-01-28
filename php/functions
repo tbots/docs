@@ -1,0 +1,23 @@
+
+ Function reference:
+
+	array explode ( string $delimiter, string $string [, int $limit = PHP_INT_MAX] )
+
+		Returns an array of strings, each of which is a substring of string formed by splitting it on boundaries formed by
+		the string delimiter. 
+
+
+ 	string implode(string $string, array $array);
+ 	
+	trim()
+	ltrim()
+	rtrim()
+	printf()
+	print()
+	strtolower()
+	strtoupper()
+	strlen()
+	var_dump()
+	ucfirst()
+	ucwords()
+	substr() ?

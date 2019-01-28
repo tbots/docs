@@ -1,4 +1,8 @@
 
+ Global arrays and values:
+
+ $_SERVER 
+
  Form variables can be accessed with:
  	
 	$_REQUEST

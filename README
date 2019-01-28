@@ -1,11 +1,17 @@
 
+ Started to read apt.conf(5) --> continue... . Part of hacking of the ansible scripts.
+ Continue on loops! and debug!
+
  Read group(5)
  Read newgrp(1)
  Reading sources.list(5)...
  Read apt-key(8), apt-secure(8), and add-apt-repository(8)
+ Read apt(5) !
  Read gpg(1)
  Read sysctl.conf(5) sysctl.conf.d(5)
  Continue on termios(4).
+ Explore tty and pts, and pty
+ Read chattr(1)
 
  Continue on docs/net/intefaces
  For git(1), try --separate_git_dir.

@@ -13,5 +13,13 @@
  # reset password
  sudo systemctl stop mysql
  mysqld_safe --skip-grant-tables &
+
+ mysql -u root
  use mysql
  update user set password=PASSWORD('pass') WHERE user='root';
+
+ # access denied for root@localhost
+ UPDATE mysql.user SET plugin = 'mysql_native_password', password = PASSWORD('pass') WHERE user='root';
+
+ \P [less|more]
+ \G format output

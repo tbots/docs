@@ -21,12 +21,18 @@
 			e			Set close-on-exec flag on the opened file descriptor.
 
 
-	resource fwrite(
+	int fwrite( resource $handle , string $string [, int $length] )
+
+	fwrite() writes the contents of string to the file stream pointed by handle.
+
 
 	fget
 
+	string substr( string $string, int $start [, int $length ] ) 
 
-	what? substr(
+	returns the portion of string specified by the start and length parameters
+
+
 	bool chmod( string $filename, int $mode)
 
 		Octal. Prefix with zero (0). File owner can change the mod by default.

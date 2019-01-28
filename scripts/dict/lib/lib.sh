@@ -9,7 +9,7 @@ source game.sh
 
 shopt -s extglob
 
-DIR=$HOME/admin/scripts/dict		# working directory
+DIR=$HOME/docs/scripts/dict		# working directory
 LIBRARY=$DIR/library						# dictionaries stored here
 
 dict=$LIBRARY/en # full path to the dictionary file

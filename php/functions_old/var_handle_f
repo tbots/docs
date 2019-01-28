@@ -1,6 +1,17 @@
- func_num_args();
- func_get_args();
- function_exists();
+ string gettype(mixed $var);
+ settype();
+ mixed print_r ( mixed $expression [, bool $return = FALSE ] )
+	is_array();
+	is_float(),is_double(),is_real()
+	is_long(),is_int(),is_integer()
+	is_string();
+	is_bool();
+	is_object();
+	is_resource();
+	is_null();
+	is_scalar();		// integer/boolean/string/float
+	is_numeric();
+	is_callable();	// checks for the validity of function name
 
  int count ( mixed $array_or_countable [, int $mode = COUNT_NORMAL] )
 
@@ -13,12 +24,10 @@
 								last substring. A limit of -1 or 0 means "no limit" and, as is standard across PHP, NULL can be used to skip to the
 								flags  parameter.
 
- array explode( string $delimiter, string $string [, int $limit = PHP_INT_MAX ] )
+	isset();
 
- 								returnes an array of strings, each of which is a substring of string formed by splitting it on boundaries formed by the string
-								delimiter
 
- 		
+	intval();
 	call_user_func();
 	create_function();
 
@@ -33,10 +42,6 @@
 								last substring. A limit of -1 or 0 means "no limit" and, as is standard across PHP, NULL can be used to skip to the
 								flags  parameter.
 
- array explode( string $delimiter, string $string [, int $limit = PHP_INT_MAX ] )
-
- 								returnes an array of strings, each of which is a substring of string formed by splitting it on boundaries formed by the string
-								delimiter
-
- 		
+	intval();
+	call_user_func();
 	create_function();

@@ -1,4 +1,6 @@
 
+ -L,	[?]
+
  -c, --comment
  			new value of the GECOS field
 
