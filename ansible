@@ -1,16 +1,4 @@
 
- [MODULES]
-		
-		yum
-		apt
-		user
-		file
-		git
-		ping
-		vars
-		service
-		webservers
-
  [ROLES]
 
   ansible-galaxy init base-line
@@ -74,16 +62,13 @@
  [INVOCATION]
 
 	Ansible by default assumes that SSH keys are used for authentication. Use --ask-pass for the password prompt and --ask-become-pass for the sudo(1).
-	/etc/ansible/hosts		Inventory file (can be specified manually with -i,--inventory or --inventory-file (deprecated) options as a single file or a
-	comma-separated list)
+	/etc/ansible/hosts		Inventory file (can be specified manually with -i,--inventory or --inventory-file (deprecated) options as a single file or a comma-separated list)
  	
 	Command exmaples:
 		
 		ansible all -m command -u user -b --become-user user
 		ansible localhost -m ping -e 'ansyble-python-interpreter=/usr/bin/python'
-
 		ansible --list-hosts <pattern>
-			# display hosts listed in inventory
 
 		-m,--module-name		module name
 		-a,--args						module arguments
@@ -98,29 +83,6 @@
 
 		HOST can be a group name, individual host or all keyword.
 
- [PLAYBOOKS]
-
-	For each play in playbook, you get to choose which machines in the infrastructure to target and what remote user to complete the steps (tasks) as.
-	The hosts line is a list of one or more groups or host patterns, separated by colons. The remote user is just the name of the user account. It can
-	be defined per task as well as per a playbook. ([!] test once set globally and remotely).
-
-
-
-
- 	-name:	<playbook_name>
-	 hosts: <hosts_pattern>   # can be seen with ansible list-hosts <hosts_pattern>
-	 remote_user:		# can be omitted
-	 	
-
-
- [ROLES]
- 	-name: <task_name>
-	 include: <task.yml>
-	 vars:
-	 	<variable>: <value>
-
-
- [INVENTORY]
 
 	/etc/ansible/hosts file syntax examples
 
@@ -173,17 +135,33 @@
 
 	state			directory	//create directory
 
-	Limited background operations
-
-	ansible-galaxy 
-
-	Playbooks:
+	[PLAYBOOKS]
 		
 		Hosts and Users
 			
 			hosts		a list of one or more groups or host patterns, separated by colons
 			remote_user			name of the user account
 			order		
+			gather_facts: 
+			tasks:
+
+	[MODULES]
+		
+		yum
+		apt
+		debug
+		user
+		file
+		git
+		ping
+		service
+		webservers
+
+	Limited background operations
+
+	ansible-galaxy 
+
+			
 
 		The things listed in the notify section of a task are called handlers. Note 'listen' attribute.
 
