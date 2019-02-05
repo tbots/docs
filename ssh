@@ -49,15 +49,21 @@
   
   ssh-keygen -y -f id_rsa > id_rsa.pub		# generate public key from the existent one
 
-	# to convert from putty
-	ssh-keygon -i -f <file> > id_rsa.pub
+	# convert putty public key
+	ssh-keygon -e -f <file> > id_rsa.pub
+
+	[!] to get a private key readable on the Linux system use "Conversions" -> "Export OpenSSH key (force new file format)";
+			if ssh(1) cannot parse the file it will prompt for a passphrase forever!
 
 	# genereate password hash
 	openssl passwd -1 -salt xyz <pass>
 
 	# remove host from the hosts file 
 	ssh-keygen -R hostname|address [-f known_hosts]
+
+
+ [FILES]
  /etc/ssh/ssh_config
  ~/.ssh/config
-
- Command line options take precedens over configuration file. The first obtained value for the configuration parameter will be used.
+	
+	Command line options take precedens over configuration file. The first obtained value for the configuration parameter will be used.

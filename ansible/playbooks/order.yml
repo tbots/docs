@@ -1,0 +1,6 @@
+- hosts: all
+  order: inventory
+  gather_facts: False
+  tasks:
+    - debug:
+        var: inventory_hostname

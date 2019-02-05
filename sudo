@@ -1,0 +1,2 @@
+
+ All the actions performed by sudo(1) are logged in /var/log/messages.

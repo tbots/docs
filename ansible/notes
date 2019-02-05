@@ -1,4 +1,47 @@
 
+	[PLAYBOOKS]
+		
+		Hosts and Users
+			
+		For each play in a playbook, you get to choose which machines in your infrastructure to target and what remote user to complete the steps (tasks) as.
+		You can become another user, different from the user that is logged into the machine (remote_user). This is done using existing privilege escalation
+		tools.
+		The generic form of playbook is as follows:
+
+			hosts		a list of one or more groups or host patterns, separated by colons
+			remote_user			name of the user account
+			order		inventory|reverse_inventory|
+			gather_facts: 
+			tasks:
+				- <task>:
+					<variable>: <value>
+
+	[VAR]
+
+		inventory_hostname
+
+    ansible -m setup <host>
+	 
+	 Examples:
+
+	 	- hosts: all
+			gather_facts: False
+			tasks:
+				- debug:
+					var: inventory_hostname
+
+	[MODULES]
+		
+		yum
+		apt
+		debug
+		user
+		file
+		git
+		ping
+		service
+		webservers
+
  [ROLES]
 
   ansible-galaxy init base-line
@@ -68,6 +111,7 @@
 		
 		ansible all -m command -u user -b --become-user user
 		ansible localhost -m ping -e 'ansyble-python-interpreter=/usr/bin/python'
+
 		ansible --list-hosts <pattern>
 
 		-m,--module-name		module name
@@ -134,28 +178,6 @@
 	-m file -a 'dest=/dir state=absent'
 
 	state			directory	//create directory
-
-	[PLAYBOOKS]
-		
-		Hosts and Users
-			
-			hosts		a list of one or more groups or host patterns, separated by colons
-			remote_user			name of the user account
-			order		
-			gather_facts: 
-			tasks:
-
-	[MODULES]
-		
-		yum
-		apt
-		debug
-		user
-		file
-		git
-		ping
-		service
-		webservers
 
 	Limited background operations
 

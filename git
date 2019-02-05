@@ -22,6 +22,9 @@
 	.git/config
 
 
+ [CONFIG]
+ name = 
+ email = 
  Examples:
 	git add . [-A
 	git branch <branch>

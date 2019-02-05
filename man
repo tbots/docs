@@ -1,0 +1,10 @@
+
+ man [OPTION...] [SECTION] PAGE
+
+ [EXAMPLES]
+ 	
+	-w, --where, --path, --location
+												print physical location of man page(s)
+
+	-K, --global-apropos
+												search for text in all man page

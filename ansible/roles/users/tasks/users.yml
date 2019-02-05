@@ -1,0 +1,34 @@
+- name: add users
+    user:
+      name = {{ item.name }}
+      comment = {{ item.comment }}
+    loop: {{ names }}
+  #append:
+  #comment:
+  #create_home:
+  #expires:
+  #force:
+  #generate_ssh_key:
+  #group:
+  #groups:
+  #home:
+  #move_home:   interesting...
+  #name:      !required
+  #non_unique:
+  #password:
+  #password_lock:
+  #remove:
+  #suser:
+  #shell: same used by useradd
+  #skeleton:
+  #ssh_key_bits:  [defaults to ssh-keygen]
+  #ssh_key_comment:       [$HOSTNAME]
+  #ssh_key_file:          [.ssh/id_rsa] 
+  #ssh_key_passphrase:   
+  #ssh_key_type: [rsa]
+  #state: absent|present
+  #system:
+  #uid:
+  #update_password:
+  #debug:
+  #  msg: "Hi This Is {{ user }}"

@@ -1,7 +1,11 @@
 
- The Linux kernel's network subsystem called Netfilter, and iptables(1) is the command used to configure it. The iptables architecture groups network packet processing rules
- into tables by function, each of which have chains (sequences) of processing rules. Rules consists of matches, used to determine which packets rule will apply to,
- and targets (policies) that determine what will be done with the matching packet.
+ The Linux kernel's network subsystem called Netfilter. iptables(8), and ip6tables(8) tools provide an interface to configure, maintain, and inspet the tables of IPv4 and
+ IPv6 packet filter rules in the Linux kernel. The iptables architecture groups network packet processing rules into tables by function. Each table contains a number of built-in chains, sequences
+ of processing rules, and may also contain user-defined chains. Rules consist of matches and targets that specify what to do with the packet that matched; target may be also a jump to a
+ user-defined chain in the same table. 
+
+ A firewall rule specifies criteria for a packet and a target. If the packet does not match, the next rule in the chain is examined; if it does match, then the next rule is specified by
+ the value of the target, one of the targets described in iptables-extensions(8), or one of the special values ACCEPT, DROP or RETURN.
 
 	Table		Function												Chain
 	-----		--------												-----
@@ -32,12 +36,25 @@
  --list -L [chain [rulenum]]		list the rules in the chain or all chains
  --list-rules -S [chain [rulenum]]
  											  Print the rules in a chain or all chains
- --match  -m match			Extended match (may load extension)
+ --match  -m match			Extended match (see iptables-extensions(8)
  --numeric, -n					Numeric output of addresses and ports
  --table  -t table			table to manipulate (default: 'filter')
  --delete-chain  -X [chain]
  												Delete a user-defined chain
  -jump -j target				target for rule (may load target extension)
+
+ --in-interafce, -i <input_interface> 
+                        network interface name ([+] for wildcard)
+
+ --out-interface -o <output_interface>
+                        network interface name ([+] for wildcard)
+
+ --protocol, -p <protocol>
+                        protocol by number or name
+
+ [MODULES]
+  tcp
+  state
 
 
  Examples:
@@ -45,8 +62,14 @@
 	iptables -P INPUT DROP
  	iptables --append CHAIN --in-interface <ifname> --jump ACCEPT
  	# lo - loopback interface
+  iptables -A INPUT -i + -j ACCEPT  # + - accept on all the interfaces
+  iptables --append INPUT --protocol tcp --match tcp --destination-port 22 --in-interface eth0 --jump ACCEPT
  	iptables-save > /etc/iptables.save
  	iptables-restore <filename>
 
+  # Get help on the module:
+  iptables -m tcp -h 
+  # Allow ssh connection:
+   
  Tools:
  	firewalld (controls iptabes)

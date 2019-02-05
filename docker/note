@@ -8,7 +8,7 @@
 	docker image ls
 	docker images
 	docker container
-	docker build --tag=<lowercase
+	docker build --tag=<tag>
 
 	docker-compose exec -it container shell
 	docker-compose up -d service
