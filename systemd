@@ -1,4 +1,7 @@
 
+ [DIRECTORIES]
+
+
  service unit			.service			system service
  target unit			.target				group of systemd units
  automount unit			.automount			filesystem automount point

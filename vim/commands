@@ -98,3 +98,8 @@ gT		go to the previous tab
 
  	/etc/vim/vimrc		
 
+	Marks:
+
+		" 	last position in a file
+		.		last edit in a file
+

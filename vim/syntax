@@ -1,9 +1,0 @@
-
- Default syntax files location:
- 	
-	$VIMRUNTIME/syntax
-
-
- To list all the syntax items:
- 	
-	:sy[ntax] [list]

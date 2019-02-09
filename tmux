@@ -77,7 +77,12 @@
  ?				help
 
  
- When new tmux session has been created it can be listed with `(Ctrl+B)+s' command. 
+ [PROCEDURES]
+
+ *If it is a gap >1 between numbers in the two tmux windows, run `move-window -r' to get them resorted in the proper order and closing the gap.
+
+
+ *When new tmux session has been created it can be listed with `(Ctrl+B)+s' command. 
 
  	(0) + 25: 1 windows (attached)
        /

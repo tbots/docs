@@ -1,4 +1,9 @@
 
+ Docker is a command-line client, a background daemon and a set of remote services. It utilizes Linux technology called containers, or Unix "jail" concept. Unlike virtual machines, Docker
+ containers don't use hardware virtualisation. Programs running inside Docker contrainers interface directly with the host's Linux kernel. Because there is no additional layer between the
+ program running inside the container and the operating system, no resources are wasted by running redundant software or simulating virtual hardware - Docker is not a virtualisation technology,
+ instead, it assists in utilising the container technology already built in operating system.
+
  Images are defined by a Dockerfile. Dockerfile defines an environment inside a container.
  Commands:
 

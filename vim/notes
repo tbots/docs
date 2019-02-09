@@ -1,15 +1,16 @@
-Run helptags to add documentation.
 
-Accepted file name representation when adding file type plugin: ext.vim, ext_name.vim, ext/name.vim.
-	
-	Colors: 
+ [SYNTAX]
 
-		$VIMRUNTIME/colors
+ Accepted file name representation when adding file type plugin: ext.vim, ext_name.vim, ext/name.vim.
+ Default syntax files location is "$VIMRUNTIME/syntax".  To list all the syntax items use ":sy[ntax] [list]" commmand.
+ To clear out old syntax definitions ":syntax clear".
 
-		:runtime syntax/colortest.vim
 
-	Marks:
+ [FILES]
 
-		" 	last position in a file
-		.		last edit in a file
+ $VIMRUNTIME/syntax.vim
+ $VIMRUNTIME/filetype.vim
+ $VIMRUNTIME/syntax/synload.vim
 
+See defined colors in "$VIMRUNTIME/colors" directory. Test colors by running a ":runtime syntax/colortest.vim" command
+Run :helptags to add documentation.
