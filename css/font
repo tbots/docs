@@ -1,0 +1,12 @@
+
+ The CSS font properties define the font family, boldness, size, and the style of a text. There are two types of font family names: 
+
+ 	* generic family			- a group of font families with a similar look (like "Serif" or "Monospace")
+	* font family					- a specific font family (like "Times New Roman" or "Arial")
+
+
+ The font family of a text is set with the font-family propery. The font-family property should hold several font names sa a "fallback" system. If the browser does
+ not support the first font, it tries the next font, and so on. Start with the specific font and end with a generic family, to let browser to pick a similiar font in
+ the generic family, if no other fonts are available. Font name that is comprised from more than one word must be enclosed in quotes.
+
+ The font-style property is mostly used to specify italic text. The property has three values: normal, italic, oblique (like italic but less supported).

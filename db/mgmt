@@ -21,5 +21,5 @@
  # access denied for root@localhost
  UPDATE mysql.user SET plugin = 'mysql_native_password', password = PASSWORD('pass') WHERE user='root';
 
- \P [less|more]
+ \P <less|more>
  \G format output

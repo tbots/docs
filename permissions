@@ -1,0 +1,14 @@
+
+ dr-xr-xr--  root www-data        html/
+ -rw-r--r--  www-data www-data    html/test.txt     [!] Can be written even if the parent read flag is not set, but executable
+                                                        flag has to be set on the parent directory; need to check upper level directories
+
+ dr-xr-xr--   root      www-data  html/
+ -r--rw-r--   www-data  www-data  html/test.txt     [!] Can not be written because only first group of permissions was checked, not the group once
+
+ dr-xr-xr--   root      www-data  html/
+ -r--rw-r--   root      www-data  html/test.txt     [!] Now writable again
+
+
+ All the top directories should be granted a read and execute permissions in order to see current directory content.
+ File can be created under directory on which executable flag is set otherwise permission denied. 

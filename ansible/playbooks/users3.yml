@@ -1,0 +1,33 @@
+- name: Configuring users
+  hosts: ph-debian-all
+  remote_user: root
+  vars:
+    osergiyuk:
+      name:     osergiyuk
+      password: $6$nvPayKKCi4K.1$ke0xHGLCGTTFJgwJF2Rq.FhoKsBbWaD/wYyEk2h1g.cGK.YoAGUnFitiaTzTl9Wkgr.R05N43eSBTospYP11n/
+      group:    admin
+      shell:    /bin/bash
+
+    names:
+      - "{{ osergiyuk }}"
+
+  tasks:
+    - name: Creating user accounts
+      user:
+        name      : "{{ item.name }}"
+        password  : "{{ item.password }}"
+        group     : "{{ item.group }}"
+        shell     : "{{ item.shell }}"
+        state     : present
+        update_password:  always
+        remove    : yes
+        force     : yes
+      loop: "{{ names }}"
+
+    - name: Copying public keys
+      authorized_key:
+        user: "{{ item.name }}"
+        exclusive: yes
+        state: present
+        key: "{{ lookup( 'pipe', 'cat /home/{{item.name}}/.ssh/*.pub' ) }}"
+      loop: "{{ names }}"

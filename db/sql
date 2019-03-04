@@ -1,4 +1,9 @@
 
+ Examples:
+
+  mysql -u root -p -h <host> <database>
+
+
  Useful command line options:
 
  	--print-defaults		Print the program argument and exit

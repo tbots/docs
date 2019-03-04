@@ -1,0 +1,9 @@
+
+ maxconn 
+ log
+ user
+ group
+ stats socket
+ nbproc
+ nbthread
+

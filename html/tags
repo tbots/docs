@@ -1,0 +1,199 @@
+
+ Element comprising an opening tag and closing tag an any content that lies between them. Attributes provide additional information about the contents of
+ an element and are made up of two parts: a name and a value, separated by an equal sign. HTML markup can be divided into two types: structural - the elements that
+ can be used to describe both heading and paragraphs, and semantic - which provides extra information, the meaning of the marked content. The elements that do 
+ not have any words between an opening and closing tags known as empty elements and are written differently. An empty element usually has only one tag.
+
+ <body>
+  
+	Everything inside this element is shown inside the main browser window. 
+
+
+ <head>
+
+  Comes before body element. Contains information about the page.
+
+
+ <title>
+ 	
+	Page title. Seen on the title bar.
+
+
+ <h1>,<h2>,<h3>,<h4>,<h5>,<h6>
+ 
+  HTML has six levels of headings: <h1> is used for main headings and others used for additional subdivision respectively.
+
+
+ <p>
+
+  Paragraph
+ 
+ 
+ <b>
+
+  Bold
+
+
+ <i>
+
+  Italic
+
+
+ </br>, <br/>
+
+	Line break
+
+
+ </hr>, <hr />
+
+  Horizontal rule
+
+
+ </em>
+
+  Emphasis. Subtly changes the meaning of the sentense.
+
+
+ <blackquote>
+
+  Used for longer quotes that take up an entire paragraph 
+
+
+ <link />
+
+ Attributes:
+
+ 	rel						"stylesheet"
+  type					"text/css"
+  href					"css/c01.css"
+
+
+ <textarea></textarea>
+
+
+ <form> </form>
+
+ The most important <form> element is the <input> element. The <input> element specifies an input field where the user can enter data. It can be displayed in several ways
+ depending on the type attribute. If the type attribute is omitted, the input field gets the value default type: "text".
+
+ Attributes:
+
+	accept				file_extension				Specifies the types of the files that the server accepts (only for type="file")
+								audio/*
+								video/*
+								image/*
+								media_type
+
+  align					left									Specifies the alignment of an image input (only for type="image")
+ 								right
+								top
+								middle
+								bottom
+
+  alt						text									Specifies an alternate text for images (only for type="image")
+
+ autocomplete		on										Does not work :(
+ 								off
+
+ autofocus			autofocus							Specifies that an <input> element should automatically get 
+ 																			focus when the page loads
+
+ checked				checked 							Specifies that an input element should be pre-selected when
+ 																			the page loads (for type="checkbox" or type="radio")
+
+ size						number								Specifies the width, in characters, of an <input> element
+
+ dirname				inputname.dir					Specifies that the text direction will be submitted
+
+ disabled				disabled							Specifies that the <input> element should be disabled
+
+ form						form_id								Specifies one or more forms the <input> element belongs to
+
+ formaction			URL										Specifies the URL of the file that will process the input
+ 																			control when the form is submitted (for type="submit" and 
+																			type="image")
+
+ formenctype		application/x-www-form-		Specifies how the form data should be encoded when 
+ 								urlencoded/multipart/			submitting it to the server (for type="submit" and 
+								form-data/text/plain			type="image")
+
+ formmethod			get										Defines the HTTP method for sending data to the action URL
+								post									(for type="submit" and type="image")
+
+ formnovalidate formnovalidate				Defines that form elements should not be validated
+ 																			when submitted
+
+ formatarget		_blank								Specifies where to display the response that is received
+ 								_self									after submitting the form (for type="submit" and type="image")
+								_parent
+								_top
+								framename
+
+ height					pixels								Specifies the height of an <input> element (only
+ 																			for type="image")
+
+ list						datalist_id						Refers to a <datalist> element that contains pre-
+ 																			defined options for an <input> element
+
+ max						number								Specifies the maximum value for an <input> element
+ 								date
+
+ maxlength			number								Specifies the maximum number of characters allowed
+																			in an <input> element
+
+ min						number								Specifies a minimum value of the input element
+
+
+
+ <textarea> element
+ 	
+ <button> element
+ The <input> tag specifies an input field where the user can enter data. It is used within a <form> element to declare input controls that allow
+ users to input data.
+
+ <label>
+ 
+
+ How browser process a web page?
+  
+	After browser receives a html page it creates a model of the page and stores it in memory. Beneath a document object each element seen as  a new node that is another object.
+	If there is no CSS, the rendering engine will apply default styles to html elements. When the browser receives CSS rules the rendering engine processes them and applies each
+	rule to it's corresponding elements. Javascript code is processed using an interpreter or scripting engine. 
+
+	Web page can be divided into a three layers: content, presentation, and a behavior. These three layers form the basis of a popular approach to building web pages called 
+	progressive enhancment. 
+
+
+ CSS
+
+	@import	
+
+	background
+	background-color
+
+	border
+	border-bottom-width
+	border-bottom-style
+	border-bottom-color
+
+	color
+
+	font-family
+
+  margin
+	margin-top
+	margin-right
+	margin-bottom
+	margin-left
+
+	padding
+
+	text-align
+
+	-web-kit-background-size			cover
+
+ Javascript
+
+  document.getElementById(element-id)
+	this.innerHTML = Date()
+	Date()

@@ -8,6 +8,19 @@
  become commands themselves. These new commands have the same status as system commands in directories sush as /bin, allowing users or group to
  establish custom environments to automate their common tasks.
 
+ Interactive or login shell, startup files:
+
+ 	/etc/profile			# include /etc/bash.bashrc and /etc/profile.d
+	~/.bash_profile, ~/.bash_login, ~/.profile 		# the first found is read
+	~/.bash_logout
+
+	/etc/bash.bashrc includes /etc/debian_chroot
+	~/.profile sources ~/.bashrc
+
+ 
+ Non-login shell startup files:
+
+ 	~/.bashrc
 
  ARRAYS 
 	Array declaration.

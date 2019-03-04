@@ -12,7 +12,8 @@
 		column definition 
 		[FIRST|AFTER column];     
 
-	INSERT INTO tbl_name VALUES (value[,...]);
+	INSERT INTO tbl_name [(COLUMN[, ...])] VALUES (value[,...]);
+
 	UPDATE tbl_name SET field = value [, field = value] ...
 		[WHERE clause]
 

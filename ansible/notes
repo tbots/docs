@@ -4,31 +4,113 @@
 		Hosts and Users
 			
 		For each play in a playbook, you get to choose which machines in your infrastructure to target and what remote user to complete the steps (tasks) as.
-		You can become another user, different from the user that is logged into the machine (remote_user). This is done using existing privilege escalation
+		you can become another user, different from the user that is logged into the machine (remote_user), this is done using existing privilege escalation
 		tools.
+
 		The generic form of playbook is as follows:
 
-			hosts		a list of one or more groups or host patterns, separated by colons
-			remote_user			name of the user account
-			order		inventory|reverse_inventory|
+			hosts:		  			a list of one or more groups or host patterns, separated by colons
+			remote_user:			name of the user account
+			order:						inventory|reverse_inventory|
 			gather_facts: 
+      vars:
+        <list>:
+          <item>: <value>
+
+        <list>:
+          - {{ list }}
+
 			tasks:
 				- <task>:
 					<variable>: <value>
 
-	[VAR]
+		
+	 Variables:
 
 		inventory_hostname
 
     ansible -m setup <host>
 	 
-	 Examples:
+
+	 examples:
 
 	 	- hosts: all
-			gather_facts: False
+			gather_facts: false
 			tasks:
 				- debug:
 					var: inventory_hostname
+
+	 looping constructs.
+
+		 	key: "{{ lookup( 'file', item ) }}"			# look like item is the default handler for the iterated item
+		loop:
+			- /path/to/file1
+			- /path/to/file2
+
+			key: "{{ item }}"
+		with_file:
+			- /path/to/file1
+			- /path/to/file2
+
+			key: "{{ lookup( 'pipe', 'cat /home/osergiyuk/.ssh/id_rsa*.pub' ) }}"
+
+		user:
+			name: "{{ item.name }}"
+		with_flattened: "[ {{ansible}}, {{admins}} ]" 
+
+		admins:
+			- "{{ osergiyuk }}"
+
+		osergiyuk:
+			name: "Oleg"
+
+	[!] how to achieve it all with debug module?
+
+ [INVOCATION]
+
+	Ansible by default assumes that SSH keys are used for authentication. Use --ask-pass for the password prompt and --ask-become-pass for the sudo(1).
+	Inventory file (can be specified manually with -i,--inventory or --inventory-file (deprecated) options as a single file or a comma-separated list)
+
+
+ 	Define and run a single task 'playbook' against a set of hosts.
+
+	 ansible HOST... [OPTIONS...]			
+
+	HOST can be a group name, individual host or one of the `all', `localhost' keywords. To see the list of the matching hosts:
+    
+    ansible -i file --list-hosts <pattern> 
+
+
+  Run a playbook executing defined tasks on the target hosts.
+
+   ansible-playbook [OPTIONS...] PLAYBOOK.YML...
+
+  Examples:
+
+   ansible-playbook --inventory=~/docs/ansible/hosts --list-hosts users.yml
+	Exmaples:
+		
+		ansible all -m command -u user -b --become-user user
+		ansible all -i localhost, -m debug -a "msg={{ 'password' | password_hash('sha512', 'salt') }}"
+		ansible localhost -m ping -e 'ansyble-python-interpreter=/usr/bin/python'
+		ansible --list-hosts '*' --limit='10.*'
+
+		-m,--module-name		module name
+		-a,--args						module arguments
+		-u,--user   				remote user
+		-b,--become					run operations with become (does not imply password prompting)
+		--become-user				run operations as this user (default=root)
+		-e,--extra-vars			set additional variables as key=value or YAML/JSON
+		-i,--inventory-file	specify inventory host path (default=/etc/ansible/hosts) or comma-separated host
+		-f,--forks FORKS		specify number of parallel processes to use (default=5)
+    --limit=SUBSET      further limit selected hosts to an additional pattern
+
+    --start-at-task
+
+    --step
+
+		--syntax-check
+				Perform a syntax check on the playbook but do not execute it
 
 	[MODULES]
 		
@@ -71,10 +153,12 @@
 
 	The 'vars' directory is where necessary valiables for your roles are defined. They are ment for internal use only.
 
-	*Variable Precedence*
+	 Variable precedence:
 
 	 /etc/ansible/host_vars/<host_name>
 	  > /etc/ansible/roles/<role_name>/vars/main.yml?
+
+
 	*task syntax*
 		copy:
 			src=./file/<filename> <-
@@ -101,31 +185,6 @@
 						ansible_distribution_majon_version == '7' AND
 					  ansible_fqdn [!]= 'fqdn' )
 
-
- [INVOCATION]
-
-	Ansible by default assumes that SSH keys are used for authentication. Use --ask-pass for the password prompt and --ask-become-pass for the sudo(1).
-	/etc/ansible/hosts		Inventory file (can be specified manually with -i,--inventory or --inventory-file (deprecated) options as a single file or a comma-separated list)
- 	
-	Command exmaples:
-		
-		ansible all -m command -u user -b --become-user user
-		ansible localhost -m ping -e 'ansyble-python-interpreter=/usr/bin/python'
-
-		ansible --list-hosts <pattern>
-
-		-m,--module-name		module name
-		-a,--args						module arguments
-		-u,--user   				remote user
-		-b,--become					run operations with become (does not imply password prompting)
-		--become-user				run operations as this user (default=root)
-		-e,--extra-vars			set additional variables as key=value or YAML/JSON
-		-i,--inventory-file	specify inventory host path (default=/etc/ansible/hosts) or comma-separated host
-		-f,--forks FORKS		specify number of parallel processes to use (default=5)
-
-		ansible [HOST]
-
-		HOST can be a group name, individual host or all keyword.
 
 
 	/etc/ansible/hosts file syntax examples
@@ -168,6 +227,8 @@
 	 self_destruct_countdown=60
 	 escape_pods=2
 
+
+ Examples:
 
  Copy files:
  	-m copy -a 'src=/src dest=/dest'

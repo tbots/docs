@@ -1,7 +1,9 @@
 <?php
 
 	$var = 5;
-	echo "Value of the variable is $var\n";		// new line is necessary
+
+  // Both of the stuctures require new line at the end.
+	echo "Value of the variable is $var\n";
 	print("Value of the variable is $var\n");
 
 ?>

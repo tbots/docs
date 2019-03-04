@@ -5,19 +5,32 @@
  by Dir::Etc::main and then finally apply the command-line options to override the configuration directives, possible loading
  even more config files.
 
- The configuration file is devided into a functional groups, see /usr/share/doc/apt/examples/apt.conf for an example.
+ The configuration file is organized in a tree with options organized into functional groups. Option specification is given with a
+ colon notation, for instance APT:Get:Assume-Yes is an option within the APT tool group, for the Get tool. Options do not inherit from
+ their parent groups. The configuration language is modeled after what the ISC tools such as bind and dhcp use. Lines starting with '//'
+ are comments. Each line is of the form: 
+ APT::Get::Assume-Yes "true"; 		// single configuration option; the traling semicolon is required and the quotes are optional
+ APT { Get { Assume-Yes "true"; Fix-Broken "true"; }; }; // will open a new functional group
+ RPM::Allow-Duplicates { "kernel"; "kernel-smp" };	// allows to include multiple entries
 
  Two special directives are allowed: 
  	#include   will include the given file, unless the filename ends in a slash, then the whole directory is included 
 	#clear		 used to erase a list of names
 
-
  All of the APT tools take -o option which allows an arbitrary configuration to be specified on the command line. The syntax is a 
  full option name (APT::Get::Assume-Yes for instance) followed by an equals sign (=) then the new value of the option. Lists can
  be appended too by adding a trailing :: to the list name.
 
+ 
+ Example files:
+	/usr/share/doc/apt/examples/apt.conf
+	/usr/share/doc/apt/examples/configure-index.gz			# list all apt configuration directives
 
  
+ The APT Group 
+
+ This group of options controls general APT behavior as well as holding the options for all of the tools.
+
  apt list --installed package_name
  								list installed packages
 

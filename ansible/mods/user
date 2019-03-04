@@ -1,0 +1,10 @@
+
+ Delete a user:
+  
+  state=absent
+  force=yes       # userdel --force
+  remove=yes      # userdel --remove
+
+ Generate a password:
+ 	
+	mkpasswd --method=sha-512

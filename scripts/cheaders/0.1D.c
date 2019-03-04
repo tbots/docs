@@ -2,62 +2,28 @@
  *
  * Visualise matching algorithm.
  */
+#include "foo.h"
+#include <stdlib.h>
 #include <strings.h>
 #include <unistd.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <getopt.h>
 #include <ctype.h>
+#include <sys/types.h>
 #include <time.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include <string.h>
-
 /*
- * STRUCT
- */
-
-/**********************************************************
-* struct mtchfl
-*																													*
-* Holds flags needed by the matching algorithm.						*
-**********************************************************/
-struct mtchfl {
-	int np;						/* next pattern */
-	int repeat_p;			/* repeat pattern  */
-	int ai;						/* atom index */
-	char anch;				/* one of the '>' or '$' */
-	char r_ch;				/* repeatition character */
-};
-
-/* stores previous current and following character read */
-struct char_st { 
-	char 	p;		/* previous */
-	char 	c;		/* current */
-	char 	f;		/* following */
-};
-
-/* holds values that specifies output formatting */
-struct scheme {
-	int  partial;
-	int  non_printable;
-	int  brackets;
-};
-
-/* Stores atomic parts of expression (backreferences). */
-struct atoms {
-	int atom_index;
-	int atom_new;
-	int atom_complete;
-	int wi[100];						/* write indexies */
-	int li;									/* last index in wi */
-};
-
-/*
- * GLOBALS
+ * GLOBALS - INITIALIZATION
 */
 struct mtchfl fl 	= {0};				/* fl structure created here */
-struct char_st cs = {0};
-struct atoms a		= {0};
+struct char_st cs = {0};				/* initialize with 0 */
+struct atoms   a	= {0};			/* atoms */
 int debug					=  0;
 
+/* Program name placeholder. */
+const char *program_name;
 
 /* Print usage to the stream and exit with exit_code. Does not 
 	 return. */
@@ -78,56 +44,20 @@ void usage(FILE* stream,int exit_code) {
 }
 
 /*
-		Highlight p and o positin_wrdns. o if set prints character index.
-*/
-void vsps(char *e,int ps,int t) {
-	
-	sstr_h(e,10,ps,1);
-	printf("[DEBUG]  pattern start (ps): %d\n",ps);
-
-	sstr_h(e,10,fl.np,1);
-	printf("[DEBUG] next pattern start (fl.np): %d\n",fl.np);
-
-	sstr_h(e,10,t,1);
-	printf("[DEBUG]   offset (t): %d\n",t);
-
-	printf("\n");
-}
-
-/*
-		Highlight characters within e on index of p and o.
-*/
-void vsexp(char *exp,int ps,int t,char *msg) {
-
-	printf("\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
-	printf("\n%s\n",msg);
-	vsps(exp,ps,t);		
-	printf("\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
-}
-
-/*
-		Print cs structure contents. 
-*/
-void vscs(struct char_st cs) {
-	printf("[DEBUG] cs.p:    '%c'\n",cs.p);
-	printf("[DEBUG] cs.c:    '%c'\n",cs.c);
-	printf("[DEBUG] cs.f:    '%c'\n",cs.f);
-}
-
-/*********************************************************************************************
- * int rcs(int fd);                                                                          *
- *                                                                                           *
- *	Populate char_st structure. Reading step 1.                                              *
- ********************************************************************************************/
+ * int rcs(int fd);                                                                          
+ *                                                                                          
+ *	Populate char_st structure. Reading step 1. 
+ *  Need to hack it properly.
+ */
 int rcs(int fd) {
 	int ret;
 	cs.p = cs.c;				/* store current character from the previous read; becomes a previous character */
-	if((ret = read(fd,&cs.c,2)) == -1) 
-		ftl("error");	/* read two characters in place of current */
+	if((ret = read(fd,&cs.c,2)) == -1) /* read two characters in place of current */
+		ftl("error");	
 
 	/* If read occured (one or two characters were read) return cursor one character back only in case of two characters
 	 * were read setting up the cursor to next character in file to be read, if only one character was read cursor will
-	 * be keep the position of the end of file and next call to rcs() will return 0 but character will be processed as ret
+	 * keep the position of the end of file and next call to rcs() will return 0 but character will be processed as ret
 	 * still holds the value of 1.
 	 */
 	if(ret) 
@@ -135,720 +65,493 @@ int rcs(int fd) {
 	return ret;
 }
 
-	
-/************************************************************************************************************
- * int match(char *e);																																											*
- *																																																					*
- * match() will apply all the necessary tests on the pattern in expression e on the index of ps, against		*
- * a character. ps is index in expression of the start position of pattern to be examined next. If 		*
- * character is matched pattern, ps will be set to the start index of the next pattern, otherwise DOES_NOT_MATCH *
- * constant(-1) will be returned and ps will be reset to the value of 0, thus search will be restarted from *
- * the beginning of the expression.
+/*
+ * int match(char *e);																																											
+ *																																																					
+ *  match() will apply all the necessary tests on the pattern in expression exp on the index of ps, against
+ * a currently read character. If examined character matched pattern, ps will be set to the next index within
+ * pattern to be examined. otherwise DOES_NOT_MATCH constant(-1) is returned and ps will be reset to the value of 0,
+ * thus search will be restarted from the beginning of the expression testing it against the same character.
+ *
+ * Return value is the index in expression to be examined next. 
+ *
+ * Uses matchfl structure
+ * Matching alghorithm phases:
+ *
+ *	
  ***********************************************************************************************************/
 int match(char *exp,int ps)
 {
-	int temp_t;							/* help offset */
-	int fiwc=0;							/* character requested to be first in word flag; default no (0) */
-	int be_at_the_end;			/* DOES_NOT_REQUESTED|REQUESTED_BUT_DOES_NOT_MATCH|DOES_NOT_REQUESTED */
-	int matched_in_word;
-	int repeat_c=0;	
+	//int temp_t;												/* help offset */
+	int matched_position;							/* DOES_NOT_REQUESTED|REQUESTED_BUT_DOES_NOT_MATCH|REQUESTED_AND_MATCHED */
+	int matched_in_word = DOES_NOT_MATCH;			/* -1 */
+	int repeat_character_match=0;			/* repeat match against the same character read */
+	char esc =0;											/* modifier of the escape sequence */
 
 	/* range */
-	int nb;									/* next bracket in range case offset */
-	char c;									/* holds character in range */
-	int negotiate_match;		/* if match return zero */
+	//int nb;									/* next bracket in range case offset */
+	//char c;									/* holds character in range */
+	//int negotiate_match;		/* if match return zero */
 
-	do {
+	do {			// while repeat_character_match is set
 
-		if(ps < 0) 	/* reset pattern start */
+		if(ps < 0) 	/* reset pattern start; was set in re_fdb() */
 			 ps = 0;		/* when it will be -1 */
 
 		matched_in_word	= 0;	/* set match flag to 0 */
-		negotiate_match = 0;
-		anchor        	= 0;	/* does not anchored by default */
-		be_at_the_end	= DOES_NOT_REQUESTED;			// -1
-		temp_t	= 0;
+		//negotiate_match = 0;
+		//matched_position  	=  DOES_NOT_REQUESTED;			// -2
+		//temp_t	= 0;		/* vsexp() is called with it? */
 
-		/* Debug */
 		if(debug)
-		{
-			vsexp(exp,ps,fl.np,"at the beginning of algorithm\n");
-			if(fl.repeat_p)
-				fprintf(stdout,"[DEBUG] repeating same pattern\n");
-			else if(repeat_c)
+			vsexp(exp,ps,"[DEBUG] at the beginning of algorithm\n");
+
+		if(fl.repeat_pattern_match)
+			fprintf(stdout,"[DEBUG] repeating same pattern\n");
+		else
+		if(repeat_character_match)
 				fprintf(stdout,"[DEBUG] repeating match against same character, as previous match on failed repetition \n");
-		}
+		/* ENDDEBUG */
 
-		repeat_c 				= 0;
-
+		repeat_character_match 				= 0;		/* reest before new match */
 		/* 
+			 At the following code fl.np and ps designed to track index in expression. ps tends to track index at which 
+			 recurring match should start. fl.np tries to be set to the index in expression for the next match step.
+
 			 Information collected in the following block is unique for the current pattern. If 
 			 repetition is the case match will be performed against the same pattern the information
 			 will not be learned twice.
 
+			 Information that is learned in this block:
 		*/
-		if(!fl.repeat_p) 
+		if ( ! fl.repeat_pattern_match ) 	/* information about pattern learned first time */
 		{
-			/* 
-			 * Debug 
-			 */
-			if(debug)
-				fprintf(stdout,"[DEBUG] learning new pattern\n");
-
-			/*
-			 * Zero fl structure.
-			 */
+			/* Zero fl structure from previous data - learning new pattern properties */
 			bzero(&fl,sizeof(fl));
 
-			fl.np=ps
+			fl.np=ps;
 
 			/*
 			 * Test 1.
 			 *
-			 * Handle all the possible cases at the pattern start.
-			 */
-
-			/*
-			 *  Search for the '^' character.
-			 */
-
-			if((exp[ps]) == '^' )
-			{
-				/* previous character is empty or a new line */
-				if(cs.p == '' || cs.p == '\n')
-					fl.np = ++ps;
-				else
-					return DOES_NOT_MATCH;
-			}
-			
-			/*
-			 * Handle all the cases where pattern start points to '\'.
-			 */
-
-			if(exp[fl.np] == '\\') 
-			{
-				do 
-				{
-					switch (exp[++fl.np]) 
-					{
-						case '(':
-	
-							a.atom_new++;		/* new atom will be written */
-						break;
-						
-	
-						case '<':
-	
-							if(anch(exp[fl.np] == REQUESTED_BUT_DOES_NOT_MATCH))
-							{		
-								if(debug) 
-									fprintf(stdout,"[DEBUG] character requested to be first in word but does not match\n");
-	
-								return DOES_NOT_MATCH;			// -1
-							}
-						break;
-	
-						default:
-	
-							switch(exp[fl.np]) 
-							{
-								case 'w': 	;		break;
-								case 'W': 	;		break;
-								case 'd': 	;		break;
-								case 'D': 	;		break;
-								case 's': 	;		break;
-								case 'S': 	;		break;
-								case '\\':  ; 	break;
-								default: fprintf(stderr,"unknown escape sequence `\\%c'\n",exp[fl.np]);
-												 exit(EXIT_FAILURE);
-							}
-
-							fl.np++;
-						
-						break;
-					}
-
-					if((fl.np-1) > ps)
-						break;
-
-					ps = ++fl.np;
-				}
-				while(exp[fl.np] == '\\');
-			}
-			else
-			 fl.np++;
-
-			if(debug)
-				vsexp(exp,ps,temp_t,"TEST 1 FINISHED\n");
-
-			/*
-			 * TEST 2: PATTERN END
+			 * Handle all the possible cases at the pattern start. The goal is that after check
+			 * examined index in expression will be set to the actual character to be matched.
 			 *
+			 * Special cases to be considered:
+			 *	->		^
+			 *	->		
 			 */
 
-			temp_t = fl.np;
-			while(1)
+			if(exp[ps] == '^')
 			{
-				switch(exp[temp_t]) 
-				{
-					/*
-					 * Handle \+ and \> cases 
-					 */
-					case '\\':			
-						
-						temp_t++;
-
-						if(exp[temp_t] == '+' || exp[temp_t] == '?') 
-							fl.r_ch = exp[temp_t];			/* store repetition character */
-
-						else if(exp[temp_t] == '>' ) 
-							fl.anch = exp[temp_t];
-
-						else if(exp[temp_t] == ')')
-							a.atom_complete++;
-
-						else
-							temp_t = DOES_NOT_MATCH;
-
-					break;
-
-					case '$':
-
-					  fl.anch = exp[temp_t];
-	
-					case '*':
-
-						fl.r_ch = exp[temp_t];
-
-					break;
-
-					default:
-						temp_t = DOES_NOT_MATCH;
-
-				}
-
-				if(temp_t != DOES_NOT_MATCH)
-					fl.np = ++temp_t;
-				else
-					break;
-			}
-
-			fl.np = temp_t;		// point to the next pattern
-		}
-
-		/* Debug */
-		if(debug)
-		{
-			vsexp(exp,ps,temp_t,"TEST 2 FINISHED\n");
-			printf("[DEBUG] Testing anchors...\n");
-		}
-
-		/* Handle anchor cases \> or $. */
-		if(fl.anch) 
-		{	
-			/* Debug */
-			if(debug)
-				fprintf(stdout,"[DEBUG] anchor case of '%c' found.\n", fl.anch);
-
-			if((be_at_the_end  = anch()) == REQUESTED_BUT_DOES_NOT_MATCH) 
-			{			
-			/*
-			 * abb$     <-->   b*
-			 * [a]a b   <-->   [a]*\>
-			 * a[ ]b		<-->	 b*\>   check if previous character is last in word
-			 */
-																																								
-				if(!fl.r_ch) 
-					return DOES_NOT_MATCH;
-			}
-			/* Debug */
-			if(debug)
-			//  DOES_NOT_REQUESTED							 -1
-			//	REQUESTED_BUT_DOES_NOT_MATCH			0
-			//	REQUESTED_AND_MATCHED							1
-				fprintf(stdout,"[DEBUG] be_at_the_end: %d\n",be_at_the_end);
-
-		}
-
-		/* 
-		 * TEST 3: examining character on position
-		 */
-
-		switch(exp[(temp_t = ps)]) 
-		{			
-			case '.':	
-
-				matched_in_word++;
-			break;
-
-
-			case '\\':
-			 
-			 switch(exp[++temp_t]) 
-			 {			
-				case 'd':
-				
-					if( 	isdigit(cs.c) )	
-						matched_in_word++;
-				break;
-
-				case 'D':
-				
-					if( ! isdigit(cs.c) ) 
-						matched_in_word++;
-				break;
-
-				case 'w':
-				
-					if(   isalpha(cs.c) )	
-						matched_in_word++;
-				break;
-
-				case 'W':
-				
-					if( ! isalnum(cs.c) )
-						matched_in_word++;
-				break;
-
-				case 's':
-				
-					if(		isspace(cs.c) ) 
-						matched_in_word++;
-				break;
-
-				case 'S':
-				
-					if( ! isspace(cs.c) ) 
-						matched_in_word++;
-				break;
-
-				default:
-					
-					fprintf(stderr,"invalid escape sequence: '\\%c'\n",exp[temp_t]);
-					exit(EXIT_FAILURE);
-			 }
-		  break;
-  
-
-			case '[':	
-	
-
-				if(exp[++temp_t] == '^') 
-					negotiate_match = ++temp_t;
-
-				nb = temp_t + 1;	/* next bracket pointer */
-					
-				do {
+				if(debug)
+					fprintf(stdout,"[DEBUG] processing '^'\n");
 			
-					if(exp[nb] 	 == '-') {		/* range */
-						nb++;		/* next character in range */
-						if(exp[nb] == ']') {		/* '[abcd-]' */
-								fprintf(stderr, "Incompleted range specification in `%s'\n", exp);
+				if(anch(exp[ps],cs) == REQUESTED_BUT_DOES_NOT_MATCH) {
+					if(debug)
+						fprintf(stdout,"[DEBUG] character read is not first in the word\n");
+
+				return DOES_NOT_MATCH;
+				}
+				else
+					fl.np = ++ps;			/* advance ps and fl.np to one character in expression
+						 									 jump over '^' */
+			}
+			
+			/*
+			 * Handle all the cases where pattern start points to '\' in loop.
+			 *
+			 * Cases:
+			 *	\<		Calls to anch(), 1 if position matched
+			 *	\(
+			 *	\)
+			 *	\wW
+			 */
+
+			while( exp[fl.np] == '\\' )	
+			{
+				switch( exp[++fl.np] ) 	/* examine following metacharacter */
+				{
+					case '(':
+						if(debug)
+							vsexp(exp,ps,"[DEBUG] Opening bracket found\n");
+
+						a.atom_new++;			/* new backreference will be learned */		
+						break;
+						
+					case '<':			/* word start; fail immediately */
+						if(debug) 
+						{
+							vsexp(exp,ps,"[DEBUG] '<' found; testing for positional match\n");
+							fprintf(stdout,"[DEBUG] returned: %d\n",anch(exp[fl.np],cs));
+						}
+						if(anch(exp[fl.np],cs) != REQUESTED_AND_MATCHED)
+							return DOES_NOT_MATCH;			// -1
+						break;
+
+					case ')':		/* close atom */
+						fprintf(stderr,"[FATAL ERROR]	UNMATCHED BRACKET\n");
+						exit(1);		/* Handle error codes */
+						break;
+
+					default:			/* escape sequence */
+						switch(esc = exp[++fl.np]) 
+						{
+							case 'w':
+							case 'W':
+							case 'd':
+							case 'D':
+							case 's':
+							case 'S':
+							case '.':
+							case '\\':
+								if(debug)
+									fprintf(stdout,"[DEBUG] escape sequence found: `%c\'\n",esc);
+								break;
+
+							default:
+								fprintf(stdout,"[DEBUG] unknown escape sequence `%c\'\n",esc);
 								exit(EXIT_FAILURE);
 						}
-			
-						c = exp[temp_t];
-						if(c == cs.c)
-							matched_in_word++;		
-						else {
-							do { 
-								if(++c == cs.c) {	
-									matched_in_word++;
-									break;
-								}
-							} while(c != exp[nb]);	
-						}
-						
-						temp_t = ++nb; ++nb;
-					}
-					else 
-					if(exp[temp_t] == cs.c)	/* exact match */
-						matched_in_word++; 	
-
-					temp_t = nb++;
-						
-					if(matched_in_word) {
-						if(negotiate_match)  	matched_in_word = 0;
 						break;
+				}
+
+				if(esc) 	/* fl.np points to the end of the pattern */
+					break;
+				ps = ++fl.np;	// next pattern start
+			}
+			fl.np++;
+
+			if(debug)
+				vsexp(exp,ps,"[DEBUG] after processing all the special cases at the beginning of the pattern\n");
+
+			while(exp[fl.np] != '\0') 
+			{
+				if(debug)
+					vsexp(exp,ps,"processing end of the pattern\n");		// no need for temp_t
+
+				if(exp[fl.np]=='\\')
+				{
+					// BE CAREFUL HERE WHERE REPETITION REPEATS
+					++fl.np;
+
+					if(exp[fl.np] == '+' || exp[fl.np] == '?') 
+						fl.repetition_modifier = exp[fl.np];			/* store repetition character */
+	
+					else 
+					if(exp[fl.np] == '>' ) 
+						fl.anchor = exp[fl.np];
+	
+					else
+					if(exp[fl.np] == ')')
+						a.atom_complete++;		// do not complete on pattern repetition
+					else
+					{		/* HERE new escape character of the next pattern */
+						--fl.np;
+						break;		/* out of infinite loop */
 					}
 				}
-				while(exp[temp_t] != ']');
+												/* $ and > accepted in one expression */
+				else if('$') 
+			  	fl.anchor = exp[fl.np];		
 
-			/* Exact match */
-			default:
-				if(cs.c == exp[ps]) 
-					matched_in_word = MATCHED;
-		}		
+				else if('*')
+					fl.repetition_modifier = exp[fl.np];
 
+				else 
+					break;		/* no special character; break before advancing */
+
+
+				fl.np++;
+				fprintf(stdout,"[DEBUG] fl.np: '%c' %d\n",exp[fl.np],exp[fl.np]);
+		}
+	}
+	/* end of the first time pattern learning */
+
+	/* Handle anchor cases \> or $. Decided to match position before literal match. */
+	if(fl.anchor) 
+	{	
 		/* Debug */
-		if(debug) {
-			fprintf(stdout,"[DEBUG] TEST 3 finished\n");
-			vsexp(exp,ps,temp_t,"after matching character on position");
+		if(debug)
+			fprintf(stdout,"[DEBUG] anchor case of '%c' found.\n", fl.anchor);
+
+		/* Positional match requested. */
+		if((matched_position  = anch(fl.anchor,cs)) == REQUESTED_BUT_DOES_NOT_MATCH) 
+		{
+				/* Current character read does not match position. If repetion charactcer found we
+					 can continue with the algorithm and consider that following character can be on the
+					 requested position. Otherwise match fails.
+				*/
+				if ( ! fl.repetition_modifier ) 
+					return DOES_NOT_MATCH;
+		}
+	}
+
+	/* 
+	 * TEST 3: Literal match
+	 */
+
+		
+	if(esc)
+	{ 
+		switch(esc)
+		{
+			case 'd':
+				if( 	isdigit(cs.c) )	matched_in_word++;
+																			 break;
+			case 'D':
+				if( ! isdigit(cs.c) ) matched_in_word++;
+	  																	 break;
+			case 'w':
+				if(   isalpha(cs.c) )	matched_in_word++;
+																			 break;
+			case 'W':
+				if( ! isalnum(cs.c) ) matched_in_word++;
+																			 break;
+			case 's':
+				if(		isspace(cs.c) ) matched_in_word++;
+				 															 break;
+			case 'S': 
+				if( ! isspace(cs.c) ) matched_in_word++;
+																			 break;
+			case '.' :		/* Literal match */
+			case '\\':
+				if(cs.c == exp[ps]) 
+					matched_in_word = MATCH;
+				 break; 
+		}
+	}
+	else 
+	{	// not a metacharacter
+		if((exp[ps] == '.') || (cs.c == exp[ps]))
+				matched_in_word = MATCH;
+
+		/* DEBUG */
+		if(debug)
+		{
+			vsexp(exp,ps,"after matching character on position");
 			if(matched_in_word)
 				fprintf(stdout,"[DEBUG] character matched\n");
 			else
 				fprintf(stdout,"[DEBUG] character does not match\n");
 		}
+	}
 
-		/* 
-		 * TEST 4: Handle match result and repetition case
-		 */
-		if(matched_in_word) {	
+	/* 
+	 * Handle match result and repetition case
+	 */
+	if(matched_in_word) 
+	{	
+		if(fl.repetition_modifier) 				
+		/* Pattern requested to be repeated, set fl.repeat_pattern_match flag. Pattern in expression will be
+			   repeated */
+			fl.repeat_pattern_match = 1;	/* substitute to constants */
 
-			/* Character read matched. */
+		 /* Character matches positional match even though it is requested to be repeated set next pattern index 
+		    in expression. 'a\> \<b' 'aa b' */
+		if(matched_position == REQUESTED_AND_MATCHED) 
+			fl.repeat_pattern_match = 0;	/* constant please */
+	}
+	else 
+	{ /* Character read doesn't match pattern in expression  */
 
-			if(fl.r_ch) 				/* Repetition character was found */
-			{	
-				/* Debug */
-				if(debug) {
-					fprintf(stdout,"[DEBUG] found repetition character\n");
-				}
+		/* When repetition modifier was found and match didn't occur, next match should run from the next pattern section in expression 
+			 	against the same character. To achieve that repeat_character_match variable will be set.  */
+		if(fl.repetition_modifier) 
+		{
 
-				if(be_at_the_end != REQUESTED_AND_MATCHED) {
-					/* Debug */
-					if(debug) {
-						fprintf(stdout,"[DEBUG] repeating same pattern\n");
-					}
-					fl.repeat_p = 1;
-				}
-				else {
-					/* Debug */
-					if(debug) {
-						fprintf(stdout,"[DEBUG] character requested to be last in word and it is last,\n"
-												"[DEBUG] no need to perform the repetition, proceed to the next pattern\n");
-					}
+			if(debug)
+				fprintf(stderr,"[DEBUG] Repetition modifier found: '%c'\n",
+								fl.repetition_modifier);
 
-					fl.repeat_p = 0;	/* do not repeat pattern; end of repetition case */
-				}
-			}
-			
-			if(fl.repeat_p == 0) /* go to the next pattern */
-				ps = fl.np;
-		}
-		else {
-			
-			/* Character read doesn't match. */
-			/* Debug */
-			if(debug) {
-				fprintf(stdout,"[DEBUG] character doesn't match\n");
-			}
+			repeat_character_match = 1;
 
-			if(fl.r_ch) {
+			/* Repetition modifier is '+', meaning match one or more times. If match was repeated at least once repeat_pattern_match flag should be set
+					 	previously, that means at least one repetition of the pattern occured, that satisfies condition. Fail otherwise. Next matching 
+					 	iteration should start from the next pattern.  */
+			if(fl.repetition_modifier == '+')
+				if( ! fl.repeat_pattern_match ) 			/* Pattern was not previously repeated and first attempt to match was not satisfied. */
+							return DOES_NOT_MATCH;
 
-				if(debug) 
-					fprintf(stdout,"[DEBUG] repetition character `%c' was found\n",fl.r_ch);	
+			/* Positional match was requested. Need to run test on the previous character as far current didn't match
+			 	and it is ok due to repetition character.
 
-				if(fl.r_ch == '+') 
-				{
-					if(!fl.repeat_p) {			/* Pattern was not previously repeated and first attempt to match was not satisfied. */
-						/* Debug */
-						if(debug)
-							fprintf(stdout,"[DEBUG] character doesn't match previously\n");
-						return DOES_NOT_MATCH;
-					}
+					 exp:  a[b*\>]
+					 word: a[]b
 
-				}
-				fl.repeat_p = 0;				/* current character read will be compared with the next pattern */
-
-				if(be_at_the_end != DOES_NOT_REQUESTED)
+					 space character didn't match but positional was requested, so try to match 'a' at the end of the word.
+			*/
+			if(
+			 	matched_position == REQUESTED_BUT_DOES_NOT_MATCH ||		// same to REQUESTED :)
+			 	matched_position == REQUESTED_AND_MATCHED		// DOES NOT
+				)
+			{
 					
-					// remember start matching offset */
-					/* a[ ]b -> a[b]*\>  */
-					if(!fiw()) {		/* check if previous character is last in word */
-
-						/* Debug */
-						if(debug)
-							fprintf(stdout,"[DEBUG] Previous character read is not the last in word\n.");
-
-						return DOES_NOT_MATCH;
-					}
-				
-				if(debug) 
-					fprintf(stdout,"[DEBUG] character read will be matched again against next pattern\n");
-
-				ps 			 = fl.np; 
-				fl.r_ch  = -1;
-				repeat_c =  1;
+				if(anch(fl.anchor,cs) == DOES_NOT_MATCH) 	/* check if previous character is last in word */
+				return DOES_NOT_MATCH;		/* apply anchor to the previous characater */
 			}
+			/* Pattern was not requsted to be repeated. Matching failed. */
 			else
 				return DOES_NOT_MATCH;
 		}	
+		
+		/* Pattern repetition was not requested. Advance to the next pattern in expression. */
+		if(fl.repeat_pattern_match == 0) 
+			ps = fl.np;
 			
-		if(debug) 
-			vsexp(exp,ps,temp_t,"at the end of the algorithm");
+		if(debug) {
+			vsexp(exp,ps,"at the end of the algorithm");
+			fprintf(stderr,"[DEBUG] fl.repeat_pattern_match: %d\n",fl.repeat_pattern_match);
+		}
 
-		/* End of expression == Full match */
+		/* End of expression == Full match. Hmm... */
 		if(exp[fl.np] == '\0')
 			break;
-
-	} while (repeat_c);			/* repeat match against the same character read */
-
-	return ps;
+	}
 }
+while(repeat_character_match);			/* repeat match against the same character read */
 
+	return ps;			/* ALWAYS RETURNED INDEX IN EXPRESSION TO BE EXAMINED NEXT */
+}
 
 
 /*
- *	Print word contents.
- */
-void print_word(int fd,char *word,struct scheme fmt) {
-	
-	printf("In print_word()\n");
-	exit(1);
-
-	int i= strlen(word);				/* i is the index of the last element in word */
-	int line_start_ot,cur;
-	
-	cur= lseek(fd,0,SEEK_CUR);		/* remember current cursor position */
-	if((line_start_ot= lst_o(fd)) == 1)	/* offset from the beginning of the printed line is one */
-		line_start_ot = lst_or(fd,cur-2);	/* have no idea */
-
-
-	/* Handle scheme. */
-
-	if(!(fmt.brackets == 0))		/* '{' and '}' should be deleted as well */
-		i++;
-
-	while(i > line_start_ot)  {		/* loop while length of i is greater than o from the */
-												/* beginning of the line */
-		printf("\033[1A");	/* delete current line of output */
-		i =  i - line_start_ot;		/* calculate space for the word */
-		cur = cur - line_start_ot - 1;	/* calculate the end of the previous line */
-		line_start_ot= lst_or(fd,cur);	/* calculate new line start offset */
-	}
-
-	printf("\033[%dD\033[K",i);		/* delete i characters */
-	for(i=0; word[i] != '\0'; i++)		/* print word contents */
-		printable_e(word[i],fmt.non_printable);
-}
-
-/* Visualise reading step.
+ * void step(int fd, struct scheme fmt, int match, char *part); 
  *
- * \033[4D		delete 4 character back
+ * Visualise reading step.
  */
-void step(int fd,char *word,struct scheme fmt,int match) {
+void step(int fd, struct scheme fmt, int match, char *part)
+{	
 
-	/* Debug */
-	if(debug) {
-		printf("[DEBUG] in step()\n");
-		vscs(cs);
-	}
-
-	/* 
-	 * Handle previous character.
-	 */
-	if(cs.p == '\n') {				
-		if(fmt.non_printable) {
-			printf("\033[4D");
-		}
-		else {
-			printf("\033[1D");
-		}
-	}
-	else if(cs.p == ' ') {
-		if(fmt.non_printable) {
-			printf("\033[3D");		
-		}
-		else {
-			printf("\033[1D");
-		}
-	}
-	else {		/* regular character; just delete it */
-		printf("\033[1D");
-	}
-
-	printf("\033[0m");		/* reset color */
-
-	/*
-	 * Handle brackets
-	 */
-	if(!(fmt.brackets == 0))
+	//clear(char *code);
+	/* Clear previous character. */
+	if(fmt.non_prt) 
 	{
-		if(match >= 0) { 	/* match found */
-			if(strlen(word) > 1 )			/* delete '}' only if it was already printed :) */
-				printf("\033[1D");		/* delete '}' */
-		}
-		else {	/* previn_wrdus character does not match */
-			if(strlen(word) > 0)		/* '}' already was printed */
-				printf("\033[1D");	/* delete '}' */
-		}
+		if(cs.p == '\n' || cs.p == '\t' ) 
+			printf("\033[2D");   // \n or \t	:		are they dispalyed this way?
 	}
+	else
+		printf("\033[1D");
 
+	printf("\033[K\033[0m");		/* reset color */
 
 	/* 
-	 * Decide color and print previous character.
+	   Decide color and print previous character.
+	   Previous character gonna be printed on red background if matched  
 	 */
 
-	/* 
-	 * Brackets enclosure was requested. 
+	/* String in file matched partially if full_match in fl structure is set. Controlled by the two constants:
+	 * PART_MATCH and FULL_MATCH
 	 */
-	if(!(fmt.brackets == 0)) {
-		if(match >= 0) {			/* matched */
-			printf("\033[0m\033[31m\033[1m");		/* set color */
-			if(strlen(word) == 1)		/* the first character matched */
-					printf("{");		/* open a bracket */
-		}
-		else {		/* not matched */
-			if(*word != 0) 		/* matched characters buffer */
-				print_word(fd,word,fmt);	/* restore word */
-		}
-	}
+	if(fmt.full_match)				// 0 by default (PART_MATCH)
+		if(*part) redraw(fd,part,fmt.non_prt);	// maybe zero part in redraw?
 
-	/*
-	 * Brackets enclosure was not requested.
-	 */
-	else 
-	{		
-		/* Debug */
-		if(debug) {
-			fprintf(stdout,"in step(): deciding on previous character color match: %d\n",match);
-			puts("AAA");
-		}
+	/* Previously examined character matched */
+	if(match) 	// strlen(atom[0])
+		printf("\033[41m\033[97m");		/* Set color before printing. Might be wrapped. */
 
-		if(match >= 0) {
-			printf("\033[41m\033[97m");		/* B: Red; F: White */
-		}
-		else {		/* no match; restore the word in case of full match */
-			if(*word != 0 && fmt.partial == FULL_MATCH)
-					print_word(fd,word,fmt);
-		}
-		/* othewise word is already empty; and character color is not set */
-	}
-
-	/* Print previous character here */
-	printable_e(cs.p,fmt.non_printable);
+	/* Print previous character here
+	  if non_prt flag was passed \n, \t, \0 will be visualized */
+	printable_e(cs.p,fmt.non_prt);
 	if(cs.p == '\n')
 		printf("\n");
 
-	/* reset color */
-	printf("\033[0m");		
-
-	if(cs.c) {			/* will be reset to '\0' in last iteration */
-		printf("\033[7m");		/* set color for the current character read */
-	
-		/* Print current character here */
-		//puts("BBB");
-		printable_e(cs.c,fmt.non_printable);
-	}
-	else 
-		printf("\n");
-
-	if(!(fmt.brackets == 0))
-		if(match >= 0)
-			printf("}");		/* print closing bracket */
-
+	// function print_c() print_p() 
+	printf("\033[0m\033[7m");		/* set color for the current character read */
+	printable_e(cs.c,fmt.non_prt);
+	printf("\033[0m");
 }
 
 
 /* 
-	int re_fdb(int fd,char*exp,struct scheme);
+ * int re_fdb(int fd,char*exp,struct scheme);
+ * 
+ * To track backreferences atom[] character pointers array is used.
+ * Expexted formatting scheme.
+ *
+ * Looks like re_fdb() and step() should be in the same block. Not really
+ * Describe...
 */
 int re_fdb(int fd,char *pattern,struct scheme fmt,int ms) {
-	int p;			/* pattern offset */
-	int o;			/* new/returned offset */
-	int ret;		/* read return value */
-	int st;	/* start read offset */
+	int index_in_expr;			/* index_in_expression on which examined pattern segment resides */
+	int ret;		/* read() return value */
 
-	char *atom[ATOM_MAX] = {0};			/* array of char pointers */
-	struct timespec req = {0};			/* timespec */
+	char *rw = ec_malloc(100);		/* rewrite part of the expression that is matched partially,
+																	 think how much to allocate; maybe to use atom[0] instead? */
+	char *atom[ATOM_MAX] = {0};			/* array of char pointers to store a backtricks */
+	struct timespec req  = {0};			/* timespec */
 
-	atom[a.li] = ec_malloc(1000);		/* all the matched goes to atom[0] */
+	/* Allocate memory for the first atom (atom[0] default). Last index in the atom[] is 1. */
+	atom[a.li++] = ec_malloc(1000);				
 
-	o = p = 0;		
-	ret = 0;
+	ret = 0;		/* read() return value */
+	index_in_expr = 0;
 
 	req.tv_sec = 0;
-	req.tv_nsec = ms;		/* default time wait - 10 ms */
+	req.tv_nsec = ms;				/* default time wait - 10 ms */
+													// ^^^ how it works 
 
-	printf("\033[?25l");		/* hide cursor */
+	printf("\033[?25l");				/* hide cursor; create a function! */
 
-	st=lseek(fd,0,SEEK_CUR);		/* remember cursor offset */
-	while((ret = rcs(fd)) > 1) {
+	/*
+		 Call to rcs will populate the cr (char_st) structure. 0 is returned when it is no characters were
+	 	 read. 
+	*/
+	while( (ret = rcs(fd)) ) {	// 0 will result in false
 
-		if(ret == -1) 
+		if(ret == -1) 	// die on read error, why is not checked in rsc() ?
 			ftl("error");
+
+		if (!debug) 	/* do not mess characters with debug */
+			step(fd,fmt,strlen(atom[0]),rw);
 			
-		//printf("ret: %d\n",ret);
+		/* Full match. Reset examined index. */
+		if(strlen(pattern) == index_in_expr)
+			index_in_expr = 0;
+	
+		/* Partial match was rewritten.	!! STOP HERE !! */
+		if(fmt.full_match)
+			if(*rw) rw[0] = '\0';		// maybe put it in redraw() itself?
 
-		/* CONTINUE HERE */
-		//exch(fd);		/* print line with the highlighted examined character */
-		//crstat(fd,LINE_START,LINE_END,1,1);
+		/* Run matching algorithm. */
+		index_in_expr = match(pattern,index_in_expr);	
 
-		step(fd,atom[0],fmt,o);				/* show step */
-
-		/* Run matching algorithm. 
-		 * p is the index in pattern to be examined
-		 * o is the match result
-		 */
-		o = match(pattern,p);	
-
-		/* Debug */
 		if(debug)
-			printf("[DEBUG] match returned: %d\n",o);
-
-		/* Possible return values:
-		 *
-		 * MATCH (1) 
-		 * DOES_NOT_MATCH (-1)
-		 */
-		if (o == DOES_NOT_MATCH) 
-		{
-			/* Debug */
-			if(debug)
-				printf("[DEBUG] character doesn't match!!!\n");
-
-			if(p > 0) {			/* pattern offset was advanced previously */
-
-				/* Restore word when full match is requested */
-				//print_word(fd,atom[0],fmt);
-				atom_z(atom);
-		 		o = match(pattern,p = 0);		
-			}
-		}
+			vsexp(pattern,index_in_expr,"[DEBUG] Returned from the match() call\n");
 		
+		exit(15);
 
-		/* Why 0 is accepted? */
-		if(o >= 0)
+		/* Match against current character read and index in expression failed. If index was advanced,
+			 try to match same character against the pattern on the first index. */
+		if (index_in_expr == DOES_NOT_MATCH) 
 		{
-			/* Debug */
-			if(debug) 
-				printf("[DEBUG] Match found\n");
-
-			p = o;	/* store next pattern offset */
-
-			if(fl.r_ch != -1) 
-				atom_wr(atom);
-			else 
+		
+			/* Copy part to be rewritten to rw. Dereference to true if not empty. Also
+				 do not run an algorithm if it was no characters stored previously, so index 
+				 was not advanced. */
+			if( *( (char*) strncpy(rw,atom[0],strlen(atom[0])) ) ) 	
 			{
-				o = -1;
-				/* Debug */
-				if(debug) 
-					fprintf(stdout,"[DEBUG] Repetition failed, do not store character read\n");
+				if(debug)
+					fprintf(stdout,"[DEBUG] Match failed; cursor was advanced - trying to rematch on index of 0\n");
+				index_in_expr = match(pattern,(index_in_expr=0)); /* NOTE: index_in_expr reset here, otherwise remains DOES_NOT_MATCH */
 			}
-
+			atom_clear(atom);	/* Prepare for the new match processing. Clear previous backreferences. */
+			
+			//fprintf(stdout,"[DEBUG] rw[%p]:\t'%s'\n",rw,rw);
 		}
 
-		if(strlen(pattern) == p) {
-			/* Debug */
-			if(debug) 
-				printf("[DEBUG] Full match; restart search\n");
-
-			//replace_char(char *atoms[], int fd, int st);
-
-			/* Clean atoms */
-			atom_z(atom);
-			p = 0;			/* repeat pattern from the beginning */
-		}
+		if(index_in_expr >= 0)
+			atom_wr(atom);
 	
 		fflush(stdout);		/* SLEEP */
 		nanosleep(&req, (struct timespec *)NULL);	
+
+		if(debug++ == 2)
+			break;
 	}
 
-	/* Debug */
-	if(debug) 
-		fprintf(stdout,"[DEBUG] Last call: o %d\n",o);
-	cs.c = 0;
-	step(fd,atom[0],fmt,o);
+	//cs.c = 0;
+	//step(fd,atom[0],fmt,o);
 
 	printf("\033[0m\033[?25h");			/* unhide cursor */
 	return lseek(fd,0,SEEK_CUR);		/* return current file offset */
@@ -860,47 +563,40 @@ int re_fdb(int fd,char *pattern,struct scheme fmt,int ms) {
  */
 
 int main(int argc,char *argv[]) {
-	int fd;				/* file descriptor */
-	int ms;				/* milli-seconds */
-	int next_option;
-	char *filename;	
-	char *e;			/* expression */
+
+	int   fd;						/* file descriptor */
+	char *filename;			/* file name */
+
+	int   next_option;		/* next option to be processed by getops_long() */
+	int ms;								/* milli-seconds */
+
+	char *e;							/* expression */
 
 	struct scheme fmt;				/* formatting structure */
 	program_name = argv[0];		/* program name */
 
-	/*
-		DEF(AULT)S
-	*/
 	e = ec_malloc(100);				/* initialize memory for the expression */
 	filename = ec_malloc(40);	/* initialize memory to store a filename */
 
-	/*
-	 * Output format
-	 */
-	fmt.brackets = 0;					/* no bracket enclosure */
-	fmt.non_printable = 0;		/* do not visualise non-printable characters */
-	fmt.partial = PARTIAL_MATCH;	/* highlight any character matched */
-	ms = 100;
+	/* Output formatting */
+	fmt.non_prt = 0;		/* do not visualise non-printable characters */
+	fmt.full_match = PART_MATCH;	/* highlight any character matched; 0 by default */
+	ms = 100;		/* milli-seconds */
 
-	const char *short_options = "hs:e:o:nD::bm:";
+	const char *short_options = "hs:e:o:nD::f";
 	const struct option long_options[] = {
 		{ "open",								required_argument, NULL, 'o' },
 		{ "expression",					required_argument, NULL, 'e' },
-		{ "brackets",						no_argument, NULL, 'b' },
-		{ "match",              required_argument, NULL, 'm' },
+		{ "full-match",					no_argument,			 NULL, 'f' },
 		{ "non-printable",			no_argument,			 NULL, 'n' },
-		{ "ms",									required_argument, NULL, 's' },
-		{ "debug",              optional_argument, NULL, 'D'},
-		{ "help",								no_argument, NULL, 'h'},
-		{ NULL,									no_argument, NULL, 0}
+		{ "ms",									required_argument, NULL, 's' }, { "debug",              optional_argument, NULL, 'D'},
+		{ "help",								no_argument,			 NULL, 'h'},
+		{ NULL,									no_argument,			 NULL, 0}
 	};
 
-	while(
-		(next_option = getopt_long(argc,argv,short_options,long_options,NULL)) != -1) {
-		
-		switch(next_option)
-		{
+	while((next_option = getopt_long(argc,argv,short_options,long_options,NULL)) != -1)
+	{
+		switch(next_option) 	{
 			case 'h':
 				usage(stdout,EXIT_SUCCESS);
 
@@ -909,36 +605,24 @@ int main(int argc,char *argv[]) {
 				strncpy(e,optarg,strlen(optarg));
 				break;
 
-			/* Specify in_wrdlliseconds value to wait between each read step. */
+			/* Specify milliseconds value to wait between each read step. */
 			case 's':
-				ms = atoi(optarg)*SUF;		/* calculate timeout (ms) */
+				ms = atoi(optarg)*1000000;		/* last try 100 */
 				break;
 
 			/* Show non-printable characters. */
 			case 'n':
-				fmt.non_printable++;
+				++fmt.non_prt;
+				break;
+
+			/* Display only full match. */
+			case 'f':
+				++fmt.full_match;
 				break;
 
 			/* Specify filename to read */
 			case 'o':
 				strncpy(filename,optarg,strlen(optarg));
-				break;
-
-			case 'b':
-					fmt.brackets++;
-				break;
-
-			/* Specify to highlight partial or only full match. */
-			case 'm':
-				fmt.brackets=0;		/* reset brackets; only the last optin_wrdn is in effect */
-				if(!(strcmp("full",optarg)) || !(strcmp("f",optarg)))		
-					fmt.partial=FULL_MATCH;		/* 1 display only full match */
-				else if(!(strcmp("partial",optarg)) || !(strcmp("part",optarg)) || !(strcmp("p",optarg)))		
-					fmt.partial=PARTIAL_MATCH;		/* 2 	display any matched character */
-				else {
-					fprintf(stderr,"invalid match specifier: `%s'\n",optarg);
-					exit(EXIT_FAILURE);
-				}
 				break;
 
 			case 'D':					/* turn on debug */
@@ -949,28 +633,25 @@ int main(int argc,char *argv[]) {
 				 break;
 
 			default:
-				printf("next_option: %d\n",next_option);
+				//printf("next_option: %d\n",next_option);
 				fprintf(stderr,"Try `%s --help' for more information.\n",program_name);
 				exit(EXIT_FAILURE);
 		}
 	}
 
-	if(*filename == 0)		/* filename was not specified */
+	if(*filename == 0)	/* filename was not specified */
 	{
-		fprintf(stderr,"no file name specified\n");
+		fprintf(stderr,"no file name specified\n");		// wrap to a function
 		usage(stderr,EXIT_FAILURE);
 	}
 	
 	if(*e == 0) { 			/* do not run without search pattern */
-		puts("falling here");
+		fprintf(stderr,"no expression specified\n");
 		usage(stderr,EXIT_FAILURE);
 	}
 
-	if((fd = open(filename,O_RDONLY)) == -1)
-		ftl("open");
-
-	/* magic here */
-	re_fdb(fd,e,fmt,ms);
+	if((fd = open(filename,O_RDONLY)) == -1) ftl("open");	/* open a filename */
+	re_fdb(fd,e,fmt,ms);		/* maybe pass a filename instead of descriptor? */
 
 	/* Debug */
 	//printf("Index after re_fdb(): %d\n", re_fdb(fd,e,fmt,ms));

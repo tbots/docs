@@ -1,0 +1,20 @@
+#!/usr/bin/env ansible-playbook
+---
+- name: root authorized key
+  hosts: 10.2.2.191
+  remote_user: root
+  tasks:
+    - name: Copyting an authorized_key for root..
+      authorized_key:
+        user: root
+        key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCwS7tpWvyR5OE94rowok3GswaoBD7GwV/I4Zfnhx0EQGYSBybB4JkZ/8DfGvGaJAGno7qq7rqDILH/Myz/pf0fnbC5p1qHjUfn6lMb+So/Wevqz3psyDZc8w1HGjSpPhRJCQ8MwthktboAZ6fP3fHrWMKxo6nkUMnK1Fskf+9qGIBrKFkKkvI33R3cRLxmFGC6OQd4XgO5Wc0z0CAZeqzpXWEoDyzG8QHE+n7ABGm/4EIFkDfGSAx2Q/O0GfIhZXqtt63QddiEKsUOhKTjYMBrQpwMIuig3jWGw9iR5BKr2M0ZK5CrDLudx/kwpmdZg1BYkVP5k9Lb+rFpi/L/RMPP
+
+    - name: Copying authorized_key for osergiyuk... 
+      authorized_key:
+        user: osergiyuk
+        exclusive: no
+        state: present
+        key: "{{ lookup('file', item  ) }}"
+      loop:
+        - /home/osergiyuk/.ssh/id_rsa.pub
+        - /home/osergiyuk/.ssh/id_rsa1.pub

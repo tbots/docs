@@ -1,0 +1,11 @@
+- name:   Loop through the users
+  hosts:  localhost
+  vars:
+    names:
+      - osergiyuk
+  tasks:
+    - name:   Looping now
+      debug:
+        msg: "{{  item }}"
+
+      loop: "{{ names }}"

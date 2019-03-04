@@ -1,7 +1,12 @@
 
+ Wokring with git history.. revert commit..
+ Start understanding diff(1).
  Started to read apt.conf(5) --> continue... . Part of hacking of the ansible scripts.
+ Get know chage(1) command
+ How to work with newgrp(1)
  Read apache2ctl(8)
- Continue on loops! and debug!
+ 
+ Organize colours treatment
 
  Read group(5)
  Read newgrp(1)
@@ -20,3 +25,12 @@
  githooks(5)
 
  Good question, is it possible to create a new session from existent tmux window?
+
+
+
+ Improvements:
+
+  - Ansible:
+      
+      + Add software: tmux, members
+      + Improve authorized_key module utilization

@@ -1,0 +1,14 @@
+- name: root authorized key
+  hosts: 10.2.2.191
+  remote_user: root
+  tasks:
+    - name: Copyting an authorized_key for root..
+      authorized_key:
+        user: root
+        key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCwS7tpWvyR5OE94rowok3GswaoBD7GwV/I4Zfnhx0EQGYSBybB4JkZ/8DfGvGaJAGno7qq7rqDILH/Myz/pf0fnbC5p1qHjUfn6lMb+So/Wevqz3psyDZc8w1HGjSpPhRJCQ8MwthktboAZ6fP3fHrWMKxo6nkUMnK1Fskf+9qGIBrKFkKkvI33R3cRLxmFGC6OQd4XgO5Wc0z0CAZeqzpXWEoDyzG8QHE+n7ABGm/4EIFkDfGSAx2Q/O0GfIhZXqtt63QddiEKsUOhKTjYMBrQpwMIuig3jWGw9iR5BKr2M0ZK5CrDLudx/kwpmdZg1BYkVP5k9Lb+rFpi/L/RMPP
+
+    - name: Copying authorized_key for osergiyuk... 
+      authorized_key:
+        user: osergiyuk
+        exclusive: yes
+        key: ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAsRvKwrb1IVh9D47pxd6nMmHHYw97KEvNb9jjT2s26fM2Assn7y/wCNqjJ0ivufX+d6R3qMQxrZRzkO3rhuF+EqUmk8X1YJYV7EghKvnSVbANQatvp6Nmi9HCeILqgMAt0bWPwZNgvMzaki+vzHOJHw4fdusFOmmhNrEdxAi70IUMLypArEv9/kOG2RJScfoVoqOkgML2X97SOtDL8g/2l/cWba321+wBvId3eqd+A+VK1wYMLCXGaosejFlUOpmljDQh7ci3u8CfyETS2lMVzBWIA7QZadM4uJZbX8XTce4ZCp96S8jR4HNmcGHh82U6Ru9ro7tFVGNqSBxoZCiKHQ==

@@ -56,6 +56,8 @@
   tcp
   state
 
+  iptables -m tcp -h 	# get help on the module
+
 
  Examples:
   iptables --list --numeric --list [chain[rulenum]]
@@ -67,8 +69,6 @@
  	iptables-save > /etc/iptables.save
  	iptables-restore <filename>
 
-  # Get help on the module:
-  iptables -m tcp -h 
   # Allow ssh connection:
    
  Tools:

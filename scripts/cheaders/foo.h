@@ -7,6 +7,6 @@ int liw();
 int anch();
 int match(char *exp,int ps);
 void print_word(int fd,char *word,struct scheme fmt);
-void step(int fd,char *word,struct scheme fmt,int match);
+int match(char *exp,int ps);
 int re_fdb(int fd,char *pattern,struct scheme fmt,int ms);
 void usage(FILE* stream,int exit_code);

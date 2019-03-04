@@ -1,4 +1,12 @@
 
  foreach loop:
- 	
 
+
+ switch(n) {
+  case label1:
+    ;
+    break or continue;
+
+  default:
+    ;
+ }

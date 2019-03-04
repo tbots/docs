@@ -1,18 +1,93 @@
 
- Docker is a command-line client, a background daemon and a set of remote services. It utilizes Linux technology called containers, or Unix "jail" concept. Unlike virtual machines, Docker
- containers don't use hardware virtualisation. Programs running inside Docker contrainers interface directly with the host's Linux kernel. Because there is no additional layer between the
- program running inside the container and the operating system, no resources are wasted by running redundant software or simulating virtual hardware - Docker is not a virtualisation technology,
- instead, it assists in utilising the container technology already built in operating system.
+ Docker is a command-line client, a background daemon and a set of remote services. It utilizes Linux technology called containers (jail). Unlike virtual machines, Docker
+ containers don't use hardware virtualisation. Programs running inside Docker contrainers interact directly with the host's Linux kernel. Because there is no additional layer between the
+ program running inside the container and the operating system, no resources are wasted by running redundant software or simulating virtual hardware.
+ 
+ Docker runs two programs in user space: docker daemon and docker cli. Docker cli is the user interface for the docker daemon. Each running container is
+ the child process of the docker daemon and the delegate process is running in its own memory subspace of the user space. Programs running inside a 
+ container can access only their own memory and resources as scoped by the container. The containers are isolated with respect to eight aspects:
 
- Images are defined by a Dockerfile. Dockerfile defines an environment inside a container.
- Commands:
+  + PID namespace					process identifiers and capabilities
+	+ UTS namespace					host and domain name
+	+ MNT namespace					filesystem access and structure
+	+ IPC namespace					process communication over shared memory
+	+ NET namespace					network access and structure
+	+ USR namespace					user names and identifiers
+	+ chroot()							controls the location of the filesystem root
+	+ cgroups								resource protection
+
+ Linux namespaces and cgroups take care of containers at runtime. 
+
+ Docker image is a bundled snapshot of  all the files that should be available to a program running inside a container. It is possilbe to create as many
+ container from image as desired. Containers started from the same image does not share changes to their file systems. Images are the shipable units of the
+ Docker ecosystem. Images are distributed using indexes and registers.
+
+ At present, Docker runs natively on Linux and comes with a single virtual machine for OS X and Windows environments. 
+
+ Images are defined by a Dockerfile. Dockerfile defines an environment inside a container. Run `docker info' to find a 'Docker Root Dir'.
+
+ `docker run' starts a process with its own file system, its own networking, and its own isolated process tree. Link can be added to another container
+ with `-l (--link)' option. The client container then can access the exposed port via a private networking interface. Docker will set some environment
+ variables in the client container to help indicate which interface and port to use.
+ 
+ Invocation.
+
+  What is the config file pointed by `~/.docker?
+
+  What will display the -D/--debug option
+  Socket?
+
+  -l, --log-level   debug|info|warn|error|fatal   <-> default: info
+
+  To remove an image first stop and remove all the used containers and then remove the images.
+
+ [BUILD]
+
+  When building an image default path to Dockerfile is ./Dockerfile.
+
+	Examples:
+
+		docker build --tag=<tag> <PATH>
+
+
+
+		# -p list								publish a container's port(s) to a host
+		# -d, --detach					run container in background and print container ID
+		# -i, --interactive			keep STDIN open even if not attached
+		# -t, --tty							allocate a pseudo-tty
+		# --rm									automatically 
+
+		
+
+ Examples:
 
  	docker --version
  	docker version
 	docker info
-	docker image ls
-	docker images
-	docker container
+
+  docker --config <file> -D/--debug
+
+	docker image ls|images|list [--no-trunc] [--all]
+	docker image build
+	docker image inspect 
+
+	docker run --rm -idp 4000:80 image
+  docker run --name <container-name> --volume /some/content:/usr/shar/nginx/html:ro --detach <image>
+  docker run --interactive[=true|false] --tty --link web:web --name web_test busybox:latest /bin/bash
+
+
+	docker ps -a
+
+	docker system df [-v|-f]		# show docker disk usage
+	docker system prune
+
+	docker container list --all --no-trunc --last 2 --size
+  docker container ls -l
+  docker container ls --latest
+
+	docker container exec --interactive CONTAINER COMMAND
+	docker container prune --force			# remove all stopped containers
+	docker search <image>
 	docker build --tag=<tag>
 
 	docker-compose exec -it container shell
@@ -20,4 +95,7 @@
 
  Directories:
  	
-	/var/lib/docker/
+ 	/etc/docker.json
+	/etc/key.json
+	/var/lib/docker/overlay/imagedb		# images
+  /var/lib/docker/image/overlay2/imagedb/content/sha256/IMAGE_ID*

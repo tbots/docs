@@ -1,0 +1,7 @@
+- name: create users
+  #hosts: 10.2.2.191
+  hosts: localhost
+  vars:
+    user: osergiyuk
+  roles:
+    - users

@@ -2,6 +2,9 @@
  Global arrays and values:
 
  $_SERVER 
+  
+  PHP_SELF      - script name
+
 
  Form variables can be accessed with:
  	

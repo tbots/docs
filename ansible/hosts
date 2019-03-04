@@ -8,9 +8,12 @@
 #   - You can enter hostnames or ip addresses
 #   - A hostname/ip can be a member of multiple groups
 
-[my]
+[prod]
 cz-prg-vrt-fe-api-01.kendaxa.net
-10.2.2.191
+
+[abs]
+weekend
+
 # Ex 1: Ungrouped hosts, specify before any group headers.
 
 ## green.example.com
