@@ -9,3 +9,5 @@
 
  -a, --append
  			append the user to the supplemental GROUPS mentioned by the -G option without removing him from the other groups
+
+ newgrp <orig_grp>

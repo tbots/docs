@@ -1,0 +1,6 @@
+ 
+ - name: - controls services on remote hosts
+   service:
+     enabled:
+     name: <service_name>
+     state: reloaded|restarted|started|stopped

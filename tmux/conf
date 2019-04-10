@@ -8,6 +8,11 @@
 
  Commands:
 
+  attach-session [-dEr] [-c working-directory] [-t target-session]          (alias: attach)
+    
+    If run from outside tmux, create a new client in the current terminal and attach it to targent session. If used from inside, switch the current client. If `-d' is specified,
+    any other clients attached to the session are detached.
+    
   attach 
 		DESCRIBE_ME
 
@@ -40,21 +45,36 @@
 		The -A flag makes new-session behave like attach-session if session-name already exists.
 
 
- 	 new-window [-adkP] [-c start-directory] [-F format] [-n window-name] [-t target-window] [command]
-		DESCRIBE_ME
-
 	 kill-window 
 	 	DESCRIBE_ME
 
 	 select-layout
 	  DESCRIBE_ME
+
+
+ Creating a new window.
+
+  To create a new window use `new-window` command. The syntax is:
+    new-window [-adkP] [-c start-directory] [-F format] [-n window-name] [-t target-window] [command]
+
+  With -a, the new window is inserted at the next index up from the specified target-window, moving windows up if necessary, otherwise target-window is the new window location.
+
 		
-	 split-window
+ Splitting windows:
+
+	 split-window [-bdhvP] [-c start-directory] [-l size | -p percentage] [-t target-pane] [shell-command] [-F format]
+      (alias: splitw)
+
+   Create a new pane by splitting target-pane. -h is for horizontal split and -v a vertical split; if neither specified, -v is assumed.
 		DESCRIBE_ME
 
 	 source-file
 
- Options:
+ 
+ Configuration file options
+
+   To see all the options: `tmux show-options -g`.
+    
 
    bind
 	 set-option
@@ -62,10 +82,18 @@
 	 allow-rename
    status-bg
    status-fg
+   
+   status-left
+   status-right
 
- Examples:
+   
+ Setting options examples:
+  
+   set status-style bg=black,fg=green
+ 
 
 
+ Key bindings
 
  !				Break the current pane out of the window.
  "				Split the current pane into two, top and bottom.
@@ -92,12 +120,15 @@
 
  ?				help
 
+
+ 
  Configuration files:
 
  	~/.tmux.conf
 
  
- [PROCEDURES]
+
+ Procedures
 
  1. If it is a gap >1 between numbers in the two tmux windows, run `move-window -r' to get them resorted in the proper order and closing the gap.
 

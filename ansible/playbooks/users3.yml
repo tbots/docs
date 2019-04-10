@@ -1,6 +1,7 @@
 - name: Configuring users
-  hosts: ph-debian-all
-  remote_user: root
+  hosts: abs
+  remote_user: osergiyuk
+  become: yes
   vars:
     osergiyuk:
       name:     osergiyuk

@@ -31,6 +31,8 @@
 
  This group of options controls general APT behavior as well as holding the options for all of the tools.
 
+
+ 
  apt list --installed package_name
  								list installed packages
 

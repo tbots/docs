@@ -1,7 +1,0 @@
-
- Supported Data and Time Formats
-
-
- date() format string:
-
- 	d				Day of the month, 2 digits with leading zeroes					01 to 31

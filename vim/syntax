@@ -1,0 +1,29 @@
+
+ VIM_SCRIPT
+
+  ```
+  let i = 1
+  while i < 10
+    echo "count is" i
+    let i += 1
+  endwhile
+  ```
+
+    
+ Syntax files.
+
+ $VIMRUNTIME/syntax/syntax.vim
+ $VIMRUNTIME/filetype.vim
+ $VIMRUNTIME/syntax/synload.vim
+ $VIMRUNTIME/plugin 
+ $VIMRUNTIME/ftplugin
+
+ See defined colors in "$VIMRUNTIME/colors" directory. Test colors by running a ":runtime syntax/colortest.vim" command
+ Run :helptags to add documentation.
+
+ :syntax enable     # enable syntax highlighting by running "source $VIMRUNTIME/syntax/syntax.vim"
+
+
+ syntax.vim
+
+  This file is used for ":syntax on". It installs the autocommands and starts highlighting for all buffers.

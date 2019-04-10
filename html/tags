@@ -9,9 +9,11 @@
 	Everything inside this element is shown inside the main browser window. 
 
 
+
  <head>
 
   Comes before body element. Contains information about the page.
+
 
 
  <title>
@@ -19,9 +21,11 @@
 	Page title. Seen on the title bar.
 
 
+
  <h1>,<h2>,<h3>,<h4>,<h5>,<h6>
  
   HTML has six levels of headings: <h1> is used for main headings and others used for additional subdivision respectively.
+
 
 
  <p>
@@ -29,14 +33,17 @@
   Paragraph
  
  
+
  <b>
 
   Bold
 
 
+
  <i>
 
   Italic
+
 
 
  </br>, <br/>
@@ -142,6 +149,10 @@
 																			in an <input> element
 
  min						number								Specifies a minimum value of the input element
+
+
+ "formtarget" attribute is used to specfiy the response window. "_self" will display the result of the submit in the same window, "_blank", 
+ "_parent" and "_top" will display a result in a separate tab. The "formtarget" attribute overrides the "target" attribute of the <form> element.
 
 
 

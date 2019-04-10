@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:
+  db-1:
+    container_name: "db-1"
+    image: mysql:test
+
+  site-1:
+    container_name: "zizkovsiska.cz"
+    image: wordpress:4
+    read_only: true
+    ports:
+      - "80:80"
+    volumes:
+      - /run/lock/apache2
+      - /run/apache2
+    environment:
+      - WORDPRESS_DB_NAME=site-1
+      - WORDPRESS_DB_HOST=db-1
+      - WORDPRESS_DB_USER=root
+      - WORDPRESS_DB_PASSWORD=ch2demo
+    links:
+      - db-1

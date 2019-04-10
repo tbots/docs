@@ -1,0 +1,15 @@
+
+
+	[MODULES]
+		
+		yum
+		apt
+    apt_key
+    copy
+		debug
+		user
+		file
+		git   [!]
+		ping
+		service
+		webservers

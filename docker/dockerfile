@@ -1,0 +1,68 @@
+
+ A Dockerfile must start with a `FROM` instruction. It specifies a base image from which resulting image is belt. `FROM` may only be 
+ preceded by by one or more `ARG` instructions, which declare arguments that are used in `FROM` lines in the Dockerfile.
+
+ Parser Directives
+
+  Parser directives are optional and affect the way in which subsequent lines in a Dockerfile are handled. Parser directives do not add 
+  layers to the build, and will not be shown as a build step. A single directive may only be used once.  Once a comment, empty line or builder(FROM)
+  instruction has build processed, Docker no longer looks for parser directives, therefore they must be at the very top of the Dockerfile.
+  The supported parser directives are 'syntax' and 'escape'.
+
+
+  
+ FROM <image>[:<tag>|@<digest>] [AS <name>]
+
+  The FROM instruction initializes a new build stage and sets the Base image for the subsequent instructions. It can appear multiple times within a 
+  single Dockerfile to create multiple images or use one build stage as a dependency for another. 
+
+
+ WORKDIR   /path/to/workdir
+
+  
+  The WORKDIR instructions sets the working directory for any RUN, CMD, ENTRYPOINT, COPY and ADD instructions that follow it in the 
+  Dockerfile. If the WORKDIR doesn't exist, it will be created even if it's not used in any subsequent Dockerfile instruction.
+
+  The WORKDIR instruction can be used multiple times in a Dockerfile. If a relative path is provided, it will be relative to the path
+  of the previous WORKDIR instruction.
+
+
+ ADD [--chown=<user>:<group>] <src>... <dest>
+
+  Enclose <pathspec> in double quotes to preserve whitespace
+
+  The ADD instruction copies new files, directories or remote file URLs from <src> and adds them to the filesystem of the at the
+  path <dest>.
+
+  Multiple <src> resources may be specified but if they are files or directories, their paths are interpreted as relative to the source
+  of the context of the build.
+  
+  Each <src> may contain wildcards and matching will be done using Go's filepath.Match rules. The <dest> is an absolute path, or a path relative
+  to WORKDIR, into which the source will be copied inside the destination container. When adding files or directories that contain special characters
+  they need to be escaped following Golang rules.
+
+  All the new files and directories are created with a UID and GID of 0, unless an optional `--chown' flag specifies a given username, groupname, or
+  UID/GID combination to request specific ownership of the content added. The format of the `--chown' flag allows for either username and groupname srings
+  or direct integer UID and GID in any combination. Providing username without a groupname or a UID without GID will use the same numeric UID as the GID. If
+  a username or groupname was provided, the container's root filesystem /etc/passwd and /etc/group files will be used to perform the translation from name
+  to integer UID or GID respectively. Till /etc/passwd and /etc/groups are present on the system it is an error when name or numeric translation is not possible.
+
+  In the case where <src> is a remote file <URL>, the destination will have permissions of 0600. If the remote file being retrieved has an HTTP Last-Modified
+  header, the timestamp from that header will be used to set the `mtime` on the destination file.
+
+  ADD obeys the following rules:
+    
+    + The <src> path must be inside the context of the build
+    + If <src> is a URL and <dest> does not end with a trailing slash, the a file is downloaded from the URL and copied to <dest>
+    + If <src> is a URL and <dest> does end with a trailing slash, the a filename is inferred from the URL and he file is downloaded
+      to <dest>/<filename>. 
+    + If <src> is a directory, the entire contents of the directory are copied, including filesystem metadata
+    + If <dest> does not exist it is created along with the missing directories in a PATH.
+
+
+  Not resolved variables are treated literaly without expanding.
+
+
+  Examples:
+    
+    docker build --file(-f) <Dockerfile>

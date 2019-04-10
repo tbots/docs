@@ -1,3 +1,8 @@
+
+ Command line commands (the commands start with `:`):
+
+  :edit       Edit the current file. Reloads buffer. 
+  
  ignorecase
  ruler
 	backup

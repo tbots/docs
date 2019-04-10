@@ -1,0 +1,7 @@
+
+ name   :package[=version][*]     # a list of package names
+ state  :absent
+         latest                   ensures that the package is latest version
+         present
+         build-dep                ensures that the package build dependecies are installed
+         update_cache             `apt update'

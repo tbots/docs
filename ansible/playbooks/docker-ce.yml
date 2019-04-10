@@ -1,0 +1,73 @@
+---
+- name: Configuring users
+  hosts: abs
+  remote_user: osergiyuk
+  become:      yes
+  vars:
+    ansible_become_pass: child_In_Time3
+
+    obsolete_packages:
+      - docker
+      - docker-engine
+      - docker.io
+      - containerd
+      - runc
+
+    system_packages:
+      - sudo
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg2
+      - software-properties-common
+
+    docker_packages:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+
+  tasks:
+    - name: Remove obsolete packages
+      apt:
+        name      : "{{ item }}"
+        state     : absent
+      loop: "{{ obsolete_packages }}"
+
+    - name: Installing system packages
+      apt:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+      loop: "{{ system_packages }}"
+
+    - name: Add a GPG key
+      apt_key:
+        url:  https://download.docker.com/linux/debian/gpg
+        state: present
+
+    - name: Add apt repository
+      apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/debian stretch stable
+        update_cache: yes
+
+    - name: Install docker packages
+      apt:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+      loop: "{{ docker_packages }}"
+
+    - name: Copy daemon.json file
+      copy:
+        src:  /home/osergiyuk/docs/ansible/templates/daemon.json
+        dest: /etc/docker/daemon.json
+        owner: root
+        group: root
+        mode:  0644
+
+    - name: Restart docker service
+      service:
+        name: docker
+        state: restarted
+        #args: 
+        #enabled: yes

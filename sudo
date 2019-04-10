@@ -1,2 +1,7 @@
 
+ sudo -V will can reveal editor
+
+ Defaults !env_reset
+
+ sudo -E -u osergiyuk touchfile
  All the actions performed by sudo(1) are logged in /var/log/messages.

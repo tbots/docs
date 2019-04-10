@@ -36,11 +36,13 @@
 		[HIGH_PRIORITY]
 		[STRAIGHT_JOIN]
 
+
+  SELECT User FROM mysql.user;
 	
 	***
 
 	Examples:
-		
+	PUT UNDER APPROPRIATE SECTION	
 	 Change column name:
 
 		ALTER TABLE tbl_name CHANGE col_name col_name DATA_TYPE

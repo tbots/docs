@@ -14,6 +14,9 @@
 			SestHandler application/x-httpd-php
 		</FilesMatches>
 
+ Installing php7.0_module on Debian:
+
+  php7.0 php-mysql  
  Usage.
 
  	PREFIX/bin/httpd -l 							list compiled-in modules

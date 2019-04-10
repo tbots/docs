@@ -1,0 +1,26 @@
+---
+- name: Installing apache2 and php
+  hosts: abs
+  remote_user: osergiyuk
+  become: yes
+  vars:
+    ansible_ssh_private_key_file: /home/osergiyuk/.ssh/id_rsa
+    ansible_become_pass: child_In_Time3
+    packages:
+      - apache2
+      - php7.0
+      - php7.0-mysql
+
+  tasks:
+    - apt:
+        name      :   "{{ item }}"
+        state     :   present
+        update_cache: yes
+      loop: "{{ packages }}"
+      notify: start apache2
+
+  handlers:
+    - name: start apache2
+      service:
+        name: apache2
+        state: started
