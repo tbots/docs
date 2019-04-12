@@ -74,6 +74,13 @@
   .gitignore file is read each time when `git status` or `git add` is invoced.
 
  
+ Branches.
+
+  To list all the branches, run:
+  	$ git branch -a
+
+
+
  Environment variables:
 
  	$GIT_DIR

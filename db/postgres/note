@@ -1,0 +1,17 @@
+
+ Commands used:
+ --------------
+
+ sudo apt install postgresql postgresql-contrib			# install postgres database
+ sudo su - postgres
+ psql
+
+
+ # psql
+ \conninfo
+
+
+ Note:
+ -----
+ 
+ After installation there is a 'postgres' database user with the role 'postgres', and a system account 'postgres'.
