@@ -2,7 +2,3 @@ set nocompatible
 set number
 set autoindent
 set tabstop=2
-
- Mappings:
-  
-	[i] copy word and past it under				// pu under

@@ -1,3 +1,6 @@
+# Install NGINX conatiner
+docker run --detach \
+
 # Create MySQL host.
 docker run -d \
   -e  MYSQL_ROOT_PASSWORD=ch2demo \
