@@ -1,0 +1,2 @@
+
+ find <dir> -name <name> -type f,d,socket? -mindepth N -maxdepth N -not -empty -print

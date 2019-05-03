@@ -1,0 +1,1 @@
+ansible test -m shell -a 'cat /etc/passwd' | awk -F: '/\/home/ {print $1}'

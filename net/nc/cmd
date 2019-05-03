@@ -1,0 +1,8 @@
+
+ nc -l -p [HOST]      # default is the localhost
+
+ -l       listen to inbound connections
+ -p       port to listen to
+
+
+ nc [options] <host> <port>     # send data to a port

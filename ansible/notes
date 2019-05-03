@@ -68,6 +68,8 @@
   To set additional variables as a key/value pair use `--extra(-e)' option.
    $ ansible localhost -m ping -e 'ansyble-python-interpreter=/usr/bin/python'
 
+  Use --args(-a) to specify a module argument.
+
 
   Tasks.
 

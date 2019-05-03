@@ -1,0 +1,6 @@
+
+ wget -O - http://web:80
+
+
+ -O <file>
+ --output-document=file

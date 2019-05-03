@@ -1,0 +1,4 @@
+
+ REST stands for "REpresentational State Transfer". It is a concept or architecture for managing information over the internet. REST
+ concepts are refered to as resources. A representation of a resource must be stateless. It is usually representated by JSON format.
+

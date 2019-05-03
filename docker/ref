@@ -5,14 +5,18 @@
 	docker info
 
   # 
-  # DOCKER EXEC
+  # DOCKER EXEC - run a command in a running container
   #
-  docker exec -it <container> <command> [<arg>...]      # run a command in a running container
+  docker exec <container> <command> [<arg>...]      
+
+    docker exec -it 
 
   #
   # DOCKER IMAGE
   #
-	docker image ls|images|list [--no-trunc] [--all] [--quiet]
+
+	# docker image ls [--no-trunc] [--all] [--quiet] 
+
 	docker image build
 	docker image inspect --format "{{ State.Running }}" <container>
   docker image prune -af    # --all --force
@@ -20,8 +24,8 @@
   #
   #   DOCKER RUN
   #
-  docker run [--add-host <list] [--env(-e)] [--rm] [--interactive(-i)] [--tty] [--detach(-d)] [--name <name>] [--volume <src>:<dest>] 
-             [--cidfile <file>] [
+  docker run [--add-host <list] [-a, --attach <list>] [--env(-e)] [--rm] [--interactive(-i)] [--tty] [--detach(-d)] [--name <name>] [--volume <src>:<dest>] 
+             [--cidfile <file>] [cpu-period <int>] [cpu-quota <int>] [cpu-rt-period <int>] [cpu-rt-runtime <int>] [-c, --cpu-shares <int>]
 
    docker run --rm -idp 4000:80 <image>    # --rm  delete container after stopped
 	 docker run -d --name namespaceA busybox:latest /bin/sh -c "sleep 30000"
@@ -58,12 +62,13 @@
 	docker system df [-v|-f]		# show docker disk usage
   docker system prune -af --volumes
 
+
   #
   # DOCKER CONTAINER
   #
 
-  docker container list
-
+  # docker container list
+  
 	docker container list --all --no-trunc --last 2 --size    # defualt is to list only running containers
   docker container ls -l
   docker container ls --latest    # will display even if container is stopped

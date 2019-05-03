@@ -1,0 +1,4 @@
+FROM busybox
+
+COPY hello.sh /script/
+ENTRYPOINT [ "/bin/sh", "-c", "/script/hello.sh" ,"Maria"]

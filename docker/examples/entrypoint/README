@@ -1,0 +1,15 @@
+
+ ENTRYPOINT usage examples.
+
+ Build an images with:
+  $ docker build --tag shell_access -f Dockerfile1 .
+  $ docker build --tag binary_access -f Dockerfile2 .
+
+ When specified in the shell form (Dockerfile1), '/bin/sh -c' is called underline, that is opposite from exec form where executable
+ is called directly.
+
+ Run containers with:
+  $ docker run --rm shell_access
+  $ docker run --rm binary_access
+
+ Note, when exectuable is called directly variable interpolation is not happening.

@@ -1,0 +1,7 @@
+
+ wget(1) is a non-interactive network downloader. It supports downloads through HTTP, HTTPS, FTP and HTTP proxies. It can follow links in HTML, XHTML, and CSS pages, to create
+ local versions of remote web sites, fully recreating the directory structure of the original site (recursive downloading). While doing that, wget respects the Robot Exclusion
+ Standard (/robots.txt). Wget can be instructed to convert the links in downloaded files to point at the local files, for offline viewing. It was designed for robustness over
+ slow or unstable connections; if a download fails due to a network problem, it will keep retrying until the whole file has been retrieved. If the server supports regetting, it
+ will instruct the server to continue the download from where it left off. wget does not support Client Revocation Lists (CRLs) so the HTTPS certificate you are connecting to
+ might be revoked by the site owner.

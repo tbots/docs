@@ -8,117 +8,29 @@
   The "Compose" file is a YAML file defining services, networks and volumes. The default path for a "Compose" file is ./docker-compose.yml.
 
 
- [DIRECTIVE REFERENCE]
+ Directive reference:
 
-  container_name: <name>
-
-
-  BUILD
-
-    Configuration options that are applied at build time.
-      
-      build:
-        context: ./vehiclemanagement-service
-        dockerfile: Dockerfile
-        args:
-          buildno: 1
-
-
-    If `image` is specified as well as build, then the Compose names the build image with the image name and optional tag, if specified.
-
-  
-  
-  CONTEXT
-
-    Either a path to a directory containing a Dockerfile, or a url to a git repository. Path is relative to Compose file directory.
-
-
-
-  DOCKERFILE
-
-    Alternate Dockerfile name found under build context.
-
-
-
-  IMAGE
-
-    Specify the image to start the container from. Can either be a repository/tag or partial image ID.
-
-    If the image does not exist, Compose attempts to pull it, unless you have also specified build, in which case it builds it using the specified options and
-    tags it with the specified tag.
-
-  
-
-
-  ARGS
-
-    Add build arguments, which are environment variables accessible only during the build process. You can omit the value when specifying a build argument, in
-    which case its value at build time is the value in the environment where compose is running.
-
- 
- 
-  CACHE_FROM
-
-    A list of images that the engine uses for cache resolution.
-
-
-
+  container_name: container
+  build
+    context: ./vehiclemanagement-service
+    dockerfile: Dockerfile
+    image: ai:8
+    args:
+      buildno: 1
+  cache_from
   LABELS
-
-    Add metadata to the resulting image using Docker labels. Either array or a dictionary is allowed. 
-
-
-
   SHM_SIZE
-
-    Set the size of the /dev/shm partition for this build's containers. Specify as an integer value representing the number of bytes or as string expressing a byte value.
-
-
-
   TARGET
-
-    Build the specified stage as defined inside the Dockerfile.
-
-
-
   cap_add, cap_drop
-
-    Add or drop container capabilities (man 7 capabilities).
-
-
-
   cgroup_parent
-
-    Specify an optional parent cgroup for the container
-
-
-
-  Deploy
-
-    Specify configuration related to the deployment and running of services. This only takes effect when deploying to a swarm with `docker stack deploy`, and is
-    ignored by `docker-compose up` and `docker compose run`.
-
-
-   +Replicas
-
-     If the service is replicated (which is the default), specify the number of containers that should be running at any given time.
-
-
-   +Resources
-     
-     Configure resource constraints.
-
-
-   +Restart Policy (restart_policy)
-    
-     Configures if and how to restart containers when they exit. Replicates `restart`.
-      - condition   one of `more`, `on-failure` or `any` (default: any)
-      - delay       how long to wait between restart attempts, specified as a duration (us,ms,s,m,h, default: 0)
+  deploy
+   replicas
+   resources
+   restart_policy
+      - condition   
+      - delay      
       - max_attempts
-                    how many times attempt to restart a container before giving up (default: never give up). If the restart does not succeed within
-                    the configured window, this attempt doesn't count toward the configured max_attempts value. 
-      - window      how long to wait before deciding if a restart has succeeded, specified as a duration (default: decide immediately)
-
+      - window    
 
 
  Creating services:

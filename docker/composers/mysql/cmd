@@ -1,0 +1,50 @@
+# Run NGINX conatiner
+docker run \
+  --detach \
+  --name web nginx:latest
+        
+# Run ch2_mailer container
+docker run 
+  --detach \
+  --name mailer \
+    dockerinactin/ch2_mailer
+
+# Test NGINX container connectivity
+docker run \
+  --interactive \
+  --tty \
+  --link web:web \
+  busybox:latest \
+    /bin/sh
+
+# Command to test a webserver
+wget -O - http://web:80
+
+
+# Create a testing agent container
+docker run -it \
+  --link web:web \
+  --link mailer:mailer \
+  --name agent
+    dockerinaction/ch2_agent
+
+# Create MySQL host.
+docker run -d \
+  -e  MYSQL_ROOT_PASSWORD=ch2demo \
+  --name db1 \
+  --cidfile=db1.cid \
+    mysql:5
+
+# Create Wordpress host.
+docker create \
+  --name ec \
+  --link $(cat db1.cid):mysql \
+  -e WORDPRESS_DB_NAME=erotic_city \
+  -e WORDPRESS_DB_HOST=wpdb \
+  -e WORDPRESS_DB_USER=root \
+  -e WORDPRESS_DB_PASSWORD=root \
+  -p 80 \
+  --read-only \
+  -v /run/lock/apache2 \
+  -v /ru/apache2 \
+    wordpress:4
