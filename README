@@ -1,4 +1,10 @@
 
+ I am studying:
+
+  1. Logging
+  2. Networking
+
+
  Wokring with git history.. revert commit..
  Start understanding diff(1).
  Started to read apt.conf(5) --> continue... . Part of hacking of the ansible scripts.
@@ -6,6 +12,15 @@
  How to work with newgrp(1)
  Read apache2ctl(8)
  
+ Logging.
+
+  1. logger
+  2. logwatch
+  3. logrotate
+  4. rsyslogd
+  5. last(1)
+ One day read about System Monitor application
+ Explore run-parts(8)
  Organize colours treatment
 
  Read group(5)
@@ -37,3 +52,6 @@
 
 
  Hack all the scripts!
+
+ find name of the process owning socket (netstat)
+ find name of the process owning socket (fuser)

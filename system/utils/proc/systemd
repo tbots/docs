@@ -83,3 +83,74 @@
 
  	systemctl list-unit-files --type= --state=
 	systemctl is-enabled <service>; echo $?
+
+ [DIRECTORIES]
+
+
+ service unit			.service			system service
+ target unit			.target				group of systemd units
+ automount unit			.automount			filesystem automount point
+ device unit			.device				device file recognized by kernel
+ mount unit			.mount				file system mount point
+ path unit			.path				file or directory in a file system
+
+
+
+ [Unit]
+ 					contains generic options that are not dependent on the type of the unit. These options provide unit description,
+					specify the unit's behavior, and sets dependencies to other units.
+
+ 	- Description
+					unit description
+
+	- Documentation
+					provides a list of URIs referencing documentation for the unit
+
+	- After
+					defines the order in which units are started. The unit starts only after the units specified in Aftetr are active.
+					Unlike Requires, After does not explicitly activate the specified units. The Before option has the opposite 
+					functionality to After.
+
+	- Requires	
+					configure dependencies on other units. The units listed in Requires are activated together with the unit. If any of the 
+					required units fail to start, the unit is not activated.
+
+	- Wants				
+					Configures weaker dependencies than Requires. If any of the listed units does not start successfully, it has no impact on
+					the unit activation. This is the recommended way to establish custom unit dependencies.
+
+	- Conflicts	
+					Configures negative dependencies, an opposite to Reuires.
+
+
+ [unit_type]
+					lists a type specific directives
+
+	[Service]
+
+		Type
+					Configures the unit process startup type that affects the functionality of ExecStart and related options.
+
+					 simple		the default value. The process started with ExecStart is the main process of the service.
+					 
+					 forking	the process started with ExecStart spawns a child process that becomes the main process of the
+							service. The parent process exits when the startup is complete.
+
+					 oneshot	this type is similiar to simple, but the process exits before starting consequent units.
+				
+					 dbus		this type is similiar to simple, but consequent units are started only after the main process
+							gains a D-BUS name.
+
+					 notify		this type is similiar to simple, but consequent units are started only after a notification message
+							is sent via the sd_notify() function
+
+					 idle		similiar to simple, the actual execution of the service binary is delayed until all jobs are finished,
+							which avoids mixing the status output with shell output of services.
+
+		ExecStart		Specifies commands or scripts to be exectuted when the unit is started. ExecStartPre and ExecStartPost specify custom
+					commands to be executed before and after ExecStart. Type=oneshot enables specifying multiple custom commands that are
+					then executed sequently.
+						
+ [Install]
+ 					contains information about unit installation used by systemctl enable and disable commands.
+

@@ -1,0 +1,4 @@
+
+ gpg --full-generate-key    # >= 2.1.17
+ gpg --list-secret-keys --keyid-format LONG
+ gpg --armor --export <key_id>

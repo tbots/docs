@@ -1,0 +1,20 @@
+
+ Neighbors (ARP-NDP)
+
+ TCP/IP uses ARP (Address Resolution Protocol) protocol to transalte an IPv4 address into MAC address (physical network address). It maps layer 3 (IPv4 address) to
+ layer 2 (physical or MAC) to enable communication between hosts residing on the same subnet. 
+
+ ARP is used by hosts that directly connected on a local network and uses either or both unicast and broadcast transmissions directly to each other. The host finds
+ the physical address of another host on its network by sending an ARP query packet that includes the IP address of the receiver. As a broadcast protocol, it can 
+ create excessive amounts of network traffic. To minimize the broadcast traffic, an ARP cache is maintained to store and reuse previously learned ARP information.
+
+ NDP in IPv6 is similar to ARP in IPv4. The main purpose of both protocols is to enable a host (node) to determine the link layer address (MAC address) of the node
+ it wants to communicate with in the local area network, and to find out the link layer address of the router through which it can access a node in an external network.
+ Thus, the actual exchange of the messages can take place between the two nodes. Apart from neighbour discovery, NDP functionality includes router discovery, neighbor
+ presence, redirects, network options (as in DHCP options) and stateless auto-configuration. Similar to ARP, NDP is also susceptible to flooding and poisoning attacks.
+
+ NDP has neighbor solicitations analogous to ARP request and neighbor advertisements to ARP replies. Unsolicited neighbor advertisements in IPv6 correspond to
+ gratuitous ARP replies in IPv4. Static neighbor configuration projects the neighbor cache from trusted or vulnerable nodes in the network. Static neighbor discovery
+ helps to prevent solicit requests for configured entries and ignores any incoming solicit or advertised ND for configured entries.
+
+ Run `arp -a` or `ip neigh show` to list ARP tables (arp_cache) and `ip ntable show` to display neighbour table (ndisc_cache).

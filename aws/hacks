@@ -1,2 +1,0 @@
-
- yum info <package> | grep Location

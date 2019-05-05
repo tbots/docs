@@ -1,0 +1,15 @@
+
+ #Modern Linux systems log all authentication attempts in a /var/log/auth.log file.
+
+ last reboot    # show a log of all reboots since /var/log/wtmp file was created
+
+ # Use lastb to display entries in /var/log/btmp.log
+ 
+ last --dns   # (-d)  translate the IP addresses
+ last -df /var/log/wtmp.1
+ last --fulltimes -df /var/log/wtmp.1 # -F, --fulltimes   print full login and logout times and dates
+ last -Fd -4    # display last four entries from wtmp (-n, --limit N)
+
+ # Use lastlog to see last entry for the user login. Read from /etc/log/lastlog.
+
+ lastlog $USER  # equivalent to the last -dF -1 $USER
