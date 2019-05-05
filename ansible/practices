@@ -1,0 +1,5 @@
+  Tips.
+
+    To avoid password prompting when running under priveleged user account edit a 'sudoers' file with the `NOPASS' option.
+
+

@@ -1,1 +1,3 @@
 ansible test -m shell -a 'cat /etc/passwd' | awk -F: '/\/home/ {print $1}'
+ansible -m setup <host>
+ansible <host> -m debug -a "msg={{ group_names }}"

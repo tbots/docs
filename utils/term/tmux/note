@@ -1,63 +1,18 @@
  
- In tmux, a session is displayed on screen by a client and all sessions are managed by a single server. The server and each client are separate processes which communicate through a 
- socket in /tmp. 
+ In tmux, a session is displayed on screen by a client and all sessions are managed by a single server. The server and each client are separate processes 
+ which communicate through a socket in /tmp.  
 
- Usage: 	tmux [-2CluvV] [-c shell-command] [-f file] [-L socket-name] [-S socket-path] [command [flags]]
+ Examples:
 
-	-2			Force tmux to assume the terminal supports 256 colours. [PLEASE EXPLORE]
+  tmux new-session -s docker  # create new session names docker
+  tmux new-session -d -s ansible    # create session in detached mode
+  tmux new-window -t <session:window> -a -n ssh   
+  # or neww, insert new window at the next index from the target-window,
+  # moving up windows if necessary; DO NOT use index, use window name instead to
+  # specify a target window
 
- Commands:
-
-  attach-session [-dEr] [-c working-directory] [-t target-session]          (alias: attach)
-    
-    If run from outside tmux, create a new client in the current terminal and attach it to targent session. If used from inside, switch the current client. If `-d' is specified,
-    any other clients attached to the session are detached.
-    
-  attach 
-		DESCRIBE_ME
-
-  list-session     # same as `tmux ls'
-		DESCRIBE_ME
-
-  kill-pane 
-		DESCRIBE_ME
-
-  resize-pane [-DLMRUZ] [-t target-pane] [-x width] [-y height] [adjustment]
-		DESCRIBE_ME
-
-  join-pane [-bdhv] [-l size |-p percantage] [-s src_pane] [-t dst-pane]		(alias: joinp)
-		DESCRIBE_ME
-
-  swap-pane [-dDU][-s src-pane][-t dst-pane] (alias: swapp)
-		DESCRIBE_ME
-
-	 swap-window [-d] [-s src-window] [-t dst-window] 												(alias: swapw)
-	 	DESCRIBE_ME
-
-	 new-session [-AdDEP] [-c start-directory] [-F format] [-n window-name] [-s session-name] [-t target-session] [-x width] [-y height] [shell-command]
-	 	(alias: new)
-
-	 	Create a new session with name session-name. The new session is attached to the current terminal unless -d is given. window-name and shell-command are the name of and shell
-	 	command to execute in the initial window. If -d is used, -x and -y specify the size of the initial window (80 by 24 if not given). <<< ???
-
-		If run from a terminal, any termios(4) special characters are saved and used for new windows in the new session. <<< ???
-
-		The -A flag makes new-session behave like attach-session if session-name already exists.
-
-
-	 kill-window 
-	 	DESCRIBE_ME
-
-	 select-layout
-	  DESCRIBE_ME
-
-
+  tmux new -A -s ex       # attach or create session ex; no error if session already exists
  Creating a new window.
-
-  To create a new window use `new-window` command. The syntax is:
-    new-window [-adkP] [-c start-directory] [-F format] [-n window-name] [-t target-window] [command]
-
-  With -a, the new window is inserted at the next index up from the specified target-window, moving windows up if necessary, otherwise target-window is the new window location.
 
 		
  Splitting windows:
