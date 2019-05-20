@@ -102,6 +102,7 @@
 
  ~~~ Examples
 
-  tail -1000 file.txt | vim -     # read only specific amount of lines
-  #
-  # or from within an editor run   :r !head -1000
+ $ tail -1000 file.txt | vim -     # read only specific amount of lines
+                                  # or from within an editor run   :r !head -1000
+ 
+ :s/^M//g     " <Ctrl-V> + <Ctrl-M>

@@ -1,4 +1,6 @@
 
+ Global:
+  log ?
  maxconn 
  log
  user
@@ -6,4 +8,3 @@
  stats socket
  nbproc
  nbthread
-

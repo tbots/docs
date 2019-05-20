@@ -1,17 +1,37 @@
+ Note:
+ -----
+ 
+ After installation there is a 'postgres' database user with the role 'postgres', and a system account 'postgres'.
 
- Commands used:
- --------------
+ Installation.
 
  sudo apt install postgresql postgresql-contrib			# install postgres database
  sudo su - postgres
  psql
 
+ psql shell.
 
- # psql
- \conninfo
+  \conninfo
+  \l               list databases
+  \d                describe table
+  \dt                   display table list
+  \c[onnect] <dbname>
+  \h                    get help on SQL commands syntax
+  \?                    list all psql slash commands
+  \set                  system variables list
+  \q                    quit
 
 
- Note:
- -----
- 
- After installation there is a 'postgres' database user with the role 'postgres', and a system account 'postgres'.
+ Examples:
+  
+  CREATE TABLE Books(BookId int, BookName text, BookCost int);
+  INSERT INTO Books VALUES(1001, "Who will cry when you die", 299);
+  UPDATE Books SET bookcost = 2900 WHERE bookname LIKE '%'with%';
+
+ LIKE or NOT LIKE '%' (zero or more) '_' (one)
+ ILIKE  # Like LIKE but case-insesitive
+
+ LIKE ~~     NOT LIKE !~~
+ ILIKE ~~*   NOT ILIKE !~~*
+
+ LIKE works only with strings

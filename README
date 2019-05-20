@@ -1,8 +1,22 @@
+	
+ Create a script that on ls -> lsi will list contents of the docker images directory and translate them to their
+ respective names on the fly :).
+
+ Create a script that will tag tasks with their names, sed(1).
+
+ Maybe even better syntax highlighting for the sed(1)...
 
  I am studying:
 
   1. Logging
+    \ syslog-ng
   2. Networking
+    \ /usr/share/examples/ifupdown..
+  3. Undertand bash-completition 
+  4. Continue on "Docker in Action"
+  5. init(1), systemd(1) and telinit(8), systemd-system.conf(5)
+    \ man 7 cgroups
+    \ps xawf -eo pid,user,cgroup,args
 
 
  Wokring with git history.. revert commit..
@@ -55,3 +69,8 @@
 
  find name of the process owning socket (netstat)
  find name of the process owning socket (fuser)
+
+
+ Questions:
+	- delete everything except of [a-zA-Z0-9-], any character class available?
+	- how to add ansible hosts file to the bash_completition?

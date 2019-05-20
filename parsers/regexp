@@ -1,0 +1,5 @@
+
+ The file lists pattern matching and string manipulation examples using standard GNU tools. Enjoy!
+
+ // Strip server number from the cannonical name. Also, try to get a domain in the separate variable.
+ echo 'cz-prg-server-01.spol.cz' | sed 's/^\([a-zA-Z-]\+\)\([0-9]\+\).*/\1 \2/'

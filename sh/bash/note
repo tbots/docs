@@ -17,7 +17,7 @@
 	/etc/bash.bashrc includes /etc/debian_chroot
 	~/.profile sources ~/.bashrc
 
- 
+
  Non-login shell startup files:
 
  	~/.bashrc
@@ -107,3 +107,11 @@
  SHOPT BUILTIN
  
  	shopt -s extglob
+
+
+
+ Working with variables:
+  
+  To list all the exported variables:
+   
+  $ export -p

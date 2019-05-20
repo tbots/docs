@@ -1,15 +1,18 @@
- SYSTEMD 
+ 
+ systemd(1) - system and service manager
   
- 	This is an initialization system for bootstrapping the user space and managing all processes subsequent to system start. It was developed to
-	replace the sysvinit system and address some of the shortcomings of it. Currenlty, systemd is the default initialization and service management
-	process of almost all modern Linux distributions.
+ *To find out real initial process run `ls -l /proc/1/exec`
 
-	Systemd is generally considered to be more efficient, allows parallel operations, has fewer dependencies, allows for service prioritization and
-	precedence, and reduces start up time.
+ This is an initialization system for bootstrapping the user space and managing all processes subsequent to system start. It was developed to
+ replace the sysVinit system and address some of the shortcomings of it. Currenlty, systemd is the default initialization and service management
+ process of almost all modern Linux distributions.
 
-	Systemd provides a dependency system between various entities called "units" of 12 different types. 
+systemd(1) is generally considered to be more efficient, allows parallel operations, has fewer dependencies, allows for service prioritization and
+precedence, and reduces start up time.
 
-	Units are named as their configuration files. systemd knows various kinds of dependencies, including positive and negative requirment dependencies, as well as ordering dependencies. If no of the 
+systemd provides a dependency system between various entities called "units" of 11 different types. 
+
+Units are named as their configuration files. systemd knows various kinds of dependencies, including positive and negative requirment dependencies, as well as ordering dependencies. If no of the 
 	ordering dependencies are present units start in parallel. Processes systemd spawns are placed in individual Linux control groups named after the unit which they belong to in the private systemd
 	hierarchy. 
 

@@ -12,4 +12,4 @@
   $ docker run --rm shell_access
   $ docker run --rm binary_access
 
- Note, when exectuable is called directly variable interpolation is not happening.
+ [!] Note, when exectuable is called directly variable interpolation is not happening.

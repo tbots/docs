@@ -12,3 +12,6 @@
 /* Resize pane */
  
 
+ Setting options examples:
+  
+   set status-style bg=black,fg=green

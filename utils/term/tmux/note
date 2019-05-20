@@ -7,11 +7,15 @@
   tmux new-session -s docker  # create new session names docker
   tmux new-session -d -s ansible    # create session in detached mode
   tmux new-window -t <session:window> -a -n ssh   
+
   # or neww, insert new window at the next index from the target-window,
   # moving up windows if necessary; DO NOT use index, use window name instead to
   # specify a target window
 
   tmux new -A -s ex       # attach or create session ex; no error if session already exists
+
+  tmux att -d -t <session>  # attach to a session and detatch all the other clients
+
  Creating a new window.
 
 		
@@ -44,7 +48,7 @@
    
  Setting options examples:
   
-   set status-style bg=black,fg=green
+   :x
  
 
 

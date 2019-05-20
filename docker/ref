@@ -1,50 +1,37 @@
-
+  
+  // Invocation examples
   docker [--config <file>] [--debug(-D)]
  	docker --version
  	docker version
 	docker info
 
-  # 
-  # DOCKER EXEC - run a command in a running container
-  #
-  docker exec <container> <command> [<arg>...]      
+  // Runs a command in a running container
 
-    docker exec -it 
+  // List images
 
-  #
-  # DOCKER IMAGE
-  #
-
-	# docker image ls [--no-trunc] [--all] [--quiet] 
-
+  // Build images
 	docker image build
-	docker image inspect --format "{{ State.Running }}" <container>
+	docker image inspect --format "{{ State.Running }}" syslog-ng
   docker image prune -af    # --all --force
 
-  #
-  #   DOCKER RUN
-  #
-  docker run [--add-host <list] [-a, --attach <list>] [--env(-e)] [--rm] [--interactive(-i)] [--tty] [--detach(-d)] [--name <name>] [--volume <src>:<dest>] 
-             [--cidfile <file>] [cpu-period <int>] [cpu-quota <int>] [cpu-rt-period <int>] [cpu-rt-runtime <int>] [-c, --cpu-shares <int>]
-
-   docker run --rm -idp 4000:80 <image>    # --rm  delete container after stopped
-	 docker run -d --name namespaceA busybox:latest /bin/sh -c "sleep 30000"
-	 docker run --name <container-name> --volume /some/content:/usr/shar/nginx/html:ro --detach <image>
-	 docker run --interactive[=true|false] --tty --link web:web --name web_test busybox:latest /bin/bash
-	 docker run -it --name spring /bin/bash
-	 docker run -d --publish-all(-P) 
-   docker run -d -e MYSQL_ROOT_PASSWORD=ch2demo --name db1 --cidfile db1.cid mysql:5 
+  // Running containers
+  docker run --rm -idp 4000:80 rsyslogd
+	docker run -d --name namespaceA busybox:latest /bin/sh -c "sleep 30000"
+	docker run --name web-server --volume /some/content:/usr/shar/nginx/html:ro --detach nginx:latest
+	docker run --interactive[=true|false] --tty --link web:web --name web_test busybox:latest /bin/bash
+	docker run -it --name spring /bin/bash
+	docker run -d --publish-all(-P) 
+  docker run -d -e MYSQL_ROOT_PASSWORD=ch2demo --name db1 --cidfile db1.cid mysql:5 
+  docker run -d --dns ? --env-file ? 
+    --expose or --port?
+    --hostname
 
 
-  # 
-  #   DOCKER RM
-  #
+  // Remove containers
   docker rm --force(-f) CONTAINER...   # remove one or more containers; force removal running containers
   docker rm -f $( docker ps -aq )   # stop and delete all containers
 
-  #
-  #   DOCKER SERVICE
-  #
+  // Manage swarm services
   docker service ls 
   docker service ps 
   docker service rm 
@@ -105,10 +92,11 @@
 
   docker stack [OPTIONS] COMMAND    # manage Docker stacks
 
- #
- # Docker files and directories
- #
- 	
+
+
+
+# Docker files and directories
+
  	/etc/docker/daemon.json
         Sets: storage_drivers
 
@@ -118,6 +106,7 @@
 	/var/lib/docker/image/overlay/imagedb/content/sha256		# images (overlay driver)
   /var/lib/docker/image/overlay2/imagedb/content/sha256/IMAGE_ID*     # images (overlay2 driver)
 
+  $HOME/.docker/config.json     # auth{}
   What is the config file pointed by `~/.docker?
   What will display the -D/--debug option
   Socket?

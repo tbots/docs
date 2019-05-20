@@ -1,7 +1,0 @@
-
-
- update-alternatives --config editor
- 													set system default editor
-
- ln -s <path_to_editor> /etc/alternatives/editor
- 													set system default editor manually

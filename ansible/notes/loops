@@ -1,5 +1,5 @@
 
- Looping constructs
+ Looping constructs.
 
   template:
     src="{{ item }}" dst=/etc/sudoers.d/"{{ item | basename }}"
@@ -21,6 +21,7 @@
 		name: "{{ item.name }}"
 	with_flattened: "[ {{ansible}}, {{admins}} ]" 
 
+  # In the vars/main.yml
 	admins:
 		- "{{ osergiyuk }}"
 
