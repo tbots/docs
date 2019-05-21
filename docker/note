@@ -26,8 +26,8 @@
  Daemon socket.
 
   The Docker daemon can listen for Docker Engine API requests via three different types of socket: unix, tcp, and fd.
-
   By default a Unix domain socket (or IPC socket) is created at /var/run/docker.sock, requiring either root permission, or docker group membership.
+
   
 
 
