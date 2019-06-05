@@ -1,0 +1,18 @@
+
+ m//			Pattern matching operator
+
+ 	$a =~ m/Bob/;			
+
+	If starting from a '/', 'm' can be omitted. Alternate delimiters are allowed with the 'm' prefix present, thus allowing to avoid escaping of the 
+	backslash:
+		
+		$_ = '../home';
+		print "matched\n" if m/..\//;		
+		print "matched\n" if m{../};			# same
+
+
+	s///
+
+		$_ = 'putta';
+		s<putta>(\1 lacurra);
+		print "$_\n";

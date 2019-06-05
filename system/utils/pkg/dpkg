@@ -1,0 +1,4 @@
+
+ dpkg -b
+ dpkg -x
+ dpkg -i --dry-run

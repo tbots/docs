@@ -1,0 +1,8 @@
+
+ AHCI (Advanced Host Controller Interface)  is standard for the storage interface that lets software, typically on OS to communicatice with the SATA devices. AHCI enabled some
+ of the capabilities inherent in SATA devices to actually be used on the OS side, i.e. hot swapping devices. Native Command Queuing (NCQ) on hard drives is a prominent feature
+ introduced in SATA on the hardware side and AHCI on the OS side. Rather that operating on a traditional serial command queuing, first-in, first-out command execution process,
+ NCQ lets disks including SSD's to optimize how they handle simultaneous storage operations. The benefits are different, depending on the type of storage in use. 
+
+ The NVMe (Nonvolatile Memory Express) standard has been developed to replace older interfaces, such as SATA, and introduce new command management capabilities. VNMe is designed
+ for flash, eliminating the downsides that come from supporting modern storage media with old protocols.

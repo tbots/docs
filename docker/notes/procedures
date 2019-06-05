@@ -1,0 +1,10 @@
+
+ Passing a local volume and modifying files in place.. what gonna happen if you specify RO option?
+
+  docker run -it --rm --name nginx --volume "${PWD}/code:/code" --volume "${PWD}/conf.d:/etc/nginx/conf.d" --publish "8080:80" -h websrv01 nginx:latest /bin/bash
+
+ This will override all the files in conf.d directory.
+
+ To add file to the conf.d use `--volume "${PWD}/conf.d/site.conf:/etc/nginx/conf.d/site.conf"
+
+ [!] Types should match.

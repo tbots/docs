@@ -1,0 +1,5 @@
+FROM busybox
+
+COPY hello.sh /script/
+ENTRYPOINT [ "/script/hello.sh" ]
+CMD [ "Maria" ]

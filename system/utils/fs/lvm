@@ -1,0 +1,5 @@
+
+ vgs
+ pvs
+ vgdisplay		# volume groups
+ lvdisplay		# logical volumes

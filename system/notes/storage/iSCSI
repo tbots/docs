@@ -1,0 +1,26 @@
+
+ iSCSI (Internet Small Computer Systems Interface) is a protocol that allows iSCSI commmands to be transmitted over a network.  Like a Fibre Channel, iSCSI provides all o
+ f the necessary components for the construction of a Storage Area Network. iSCSI is defined in RFC 7143. For iSCSI communication, the following components talk with each other:
+		· iSCSI Initiator
+		· iSCSI Target
+
+ iSCSI Initiator
+
+ 	A client in an iSCSI storage network is called iSCSI initiator Node. The iSCSI initiator then connect to a server, the iSCSI target, and send iSCSI commands to the iSCSI target.
+	The iSCSI commands are packaged in IP packets for this purpose. The following forms of iSCSI iniators are available:
+		
+	 · iSCSI hardware initiator: a PCI-X or PCIe card, which implements the iSCSI fuctionality. Such a card is also called an iSCSI HBA (host bus adapter). In the server's operating
+	   system, such an iSCSI HBA appears to be a RAID controller or an FC HBA. With an iSCSI HBA booting a servers through iSCSI is possible. 
+
+	 · iSCSI software initiator: an iSCSI initiator implemented by software. The computing operations of the iSCSI initiator are performed by the server's CPU in this soution and not
+	 	 Standard network cards are used on the hardware side for communication with the iSCSI target.
+
+ iSCSI Target
+  
+	A server in an iSCSI storage network is called the iSCSI Target Node or simply iSCSI Target. Such an iSCSI target can provide one or more so-called logical units or LUs. The following
+	iSCSI targets are available:
+		
+		· as a hardware as iSCSI storage arrays
+		· as a software as iSCSI target software for installation on a standard server
+
+

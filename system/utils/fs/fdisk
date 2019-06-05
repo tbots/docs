@@ -1,0 +1,14 @@
+
+ Partitioning divides disk drive into one or more logical disks. Each partition is treated as a separate disk with its own
+ file system. Partition information is stored in a partition table. There are two types of partitions that can be created
+ using fdisk(1):
+ 	
+	- Primary partitions
+	- Extended partitions
+
+
+ The original partitioning scheme for PC hard disks allowed only four partitions, called primary partitions. To create more than
+ four partitions, one of these four partitions can be divided into many smaller partitions, called logical or extended partitions.
+
+ Examples:
+ 	sudo fdisk -l | grep '\Sdev\S[^0-9 ]\+ '			# display only disks

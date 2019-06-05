@@ -1,4 +1,5 @@
 	
+ Lately, started with apt(1), few things are still not clear
  Create a script that on ls -> lsi will list contents of the docker images directory and translate them to their
  respective names on the fly :).
 

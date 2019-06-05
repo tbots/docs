@@ -1,0 +1,12 @@
+
+ ------------
+  KERNEL 
+ ------------
+ /etc/modules.conf		list modules to be added automatically
+
+ modprobe kvm kvm_intel					load required modules
+ modprobe -r kvm kvm_intel			load required modules
+ lsmod | grep kvm								list modules
+
+
+ /var/lib/libvirt/images/				image directory

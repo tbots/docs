@@ -1,0 +1,119 @@
+  
+  // Invocation examples
+  docker [--config <file>] [--debug(-D)]
+ 	docker --version
+ 	docker version
+	docker info
+
+  // Runs a command in a running container
+
+  // List images
+
+  // Build images
+	docker image build
+	
+	docker image inspect --format "{{ State.Running }}" syslog-ng
+  docker image prune -af    # --all --force
+
+	// Remove images
+	docker rmi --force <image_id>			// is it possible to remove it by name?
+
+  // Running containers
+  docker run --rm -idp 4000:80 rsyslogd
+	docker run -d --name namespaceA busybox:latest /bin/sh -c "sleep 30000"
+	docker run --name web-server --volume /some/content:/usr/shar/nginx/html:ro --detach nginx:latest
+	docker run --interactive[=true|false] --tty --link web:web --name web_test busybox:latest /bin/bash
+	docker run -it --name spring /bin/bash
+	docker run -d --publish-all(-P) 
+  docker run -d -e MYSQL_ROOT_PASSWORD=ch2demo --name db1 --cidfile db1.cid mysql:5 
+  docker run -d --dns ? --env-file ? 
+    --expose or --port?
+  docker run -d --rm --hostname websrv01 --network default
+																								#  ^ this is the default network nam
+
+  // Examining a container
+	docker top
+
+
+  // Execute a command in a running container
+  docker container exec --interactive --tty CONTAINER COMMAND       # run command in a running container
+
+  // Removing containers
+  docker rm --force(-f) CONTAINER...   # remove one or more containers; force removal running containers
+  docker rm -f $( docker ps -aq )   # stop and delete all containers
+	docker rm -f $(docker container ps --latest -q)		# remove last container
+
+  // Manage swarm services
+  docker service ls 
+  docker service ps 
+  docker service rm 
+
+  #
+  #   DOCKER PS
+  #
+	docker ps -a
+
+  #
+  #   DOCKER LOGS
+  #
+  docker logs --details --follow 
+
+	docker system df [-v|-f]		# show docker disk usage
+  docker system prune -af --volumes
+
+
+
+  # docker container list
+  
+	docker container list --all --no-trunc --last 2 --size    # defualt is to list only running containers
+  docker container ls -l
+  docker container ls --latest    # will display even if container is stopped
+
+
+  docker container start [--attach] [--interactive] [--detach-keys <string>]
+
+  docker container stop --time(-t) N CONTAINER...
+  docker container prune --force			# remove all stopped containers
+
+  docker container rm -fv $(docker ps -aq)    # force removal of the running containers 
+
+  
+  #
+  # DOCKER CREATE
+  #
+  docker create [--add-host <list>] [--attach(-a) <list>]  [--blkio-weight uint16] [--blkio-weight-device <list>]
+
+	docker create --detach --cidfile /tmp/web.cid nginx
+	docker create --hostname <hostname> -d --name <name> <container>
+	docker create --env WORDPRESS_DB_HOST="" busybox:latest env
+
+	docker search <image>
+
+	docker build --tag=<tag>
+
+  # docker-compose
+  docker-compose ps --services      # list all the services
+	docker-compose up -d service
+
+  docker swarm COMMAND    # manage swarms
+
+  docker stack [OPTIONS] COMMAND    # manage Docker stacks
+
+
+
+ ***
+ FILES AND DIRECTORIES
+
+
+ 	/etc/docker/daemon.json # storage_drivers
+  /etc/docker/key.json 		# what is it for?
+	/var/lib/docker/image/overlay/imagedb/content/sha256								# images (overlay driver)
+  /var/lib/docker/image/overlay2/imagedb/content/sha256/IMAGE_ID*     # images (overlay2 driver)
+  /var/run/docker.sock
+  ~/.docker/config.json     # auth{}
+
+  
+ ***
+ Dockerfile commands quick reference
+
+ 	FROM <image>[:<tag>|@<digest>] [AS <name>]

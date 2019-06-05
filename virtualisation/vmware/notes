@@ -1,0 +1,14 @@
+
+ A virtual disk is a file or set of files that appears as a physical disk drive to a guest operating system. The files can be on the host or remote machine. Virtual disks
+ can be as larger as 950GB (IDE or SCSI). Depends on the size of the virtual disk and the host operating system, VMware creates one or more files to hold each virtual disk.
+
+ By default, the actual files used by the virtual disk start out small and grow to their maximum size as needed. The main advantage of this approach is the smaller file size.
+ Smaller files require less storage space and are easier to move if you want to move the virtual machine to a new location. However, it takes longer to write data to a disk
+ configured in this way.
+
+ Virtual disks can be configured so all disk space is allocated at the time the virtual disk is created. This approach provides enhanced performance and is useful if you are
+ running performance-sensitive applications in the virtual machine.
+
+ A virtual disk of either type can stored on either type of physical disk or storage media. A key advantage of virtual disks is their portability. 
+
+ VMware vmdk files are stored in ~/vmware/<vmname>/ directory < PLEASE EXAMINE

@@ -1,0 +1,4 @@
+
+ Examples etc.,
+
+ 	$  declare -a letters=({a..z}); echo "${#letters[@]}";		# get number of letters in the alphabeth

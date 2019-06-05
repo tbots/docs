@@ -1,0 +1,15 @@
+
+ The /etc/fstab file contains an information about the filesystems the system can mount. It is only read by the programs but not written. The order of records is 
+ important because fsck(8), mount(8), and umount(8) sequentaly iterate through fstab.
+
+ Examples:
+ 	mount -a			# mount all filesystems mentioned in fstab(5)
+	mount -l -t xfs		# limit lab
+
+ FILESYSTEM INDEPENDENT OPTIONS
+
+ 	remount
+						Attempt to remount an already mounted file system. This is commonly used to change the mount flags for a filesystem, especially to make read-only filesystem writable. It
+						doesn't change device or mount point.
+ mount [-l|-h|-V]
+ mount -t <type> <dev> <dest>
