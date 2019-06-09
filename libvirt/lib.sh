@@ -43,7 +43,7 @@ function err() {
 # 	find disks
 #
 function find_disks() {
-	for L in `fdisk -l | sed -n '/^Disk \(\/.*[^0-9]\):.*/s//\1/p'`
+	for L in `disk -l | sed -n '/^Disk \(\/.*[^0-9]\):.*/s//\1/p'`
 	do
 		echo "$L"
 	done

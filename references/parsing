@@ -1,0 +1,1 @@
+ip -o a s | awk '{if ($3 == "inet") print $2 "\t" $4}'

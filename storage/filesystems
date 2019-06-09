@@ -1,0 +1,82 @@
+
+ Linux filesystem contains files that are arranged on a disk or other block storage device in directories. A Linux filesystem is a single tree with the / directory as its root directory.
+ Each block device, such as a hard drive partition, CD-ROM, or floppy disk, actually has a filesystem on it. Single tree view of the filesystem is created by mounting the filesystems on different 
+ devices at a point in the tree called a mount point. Usually, the kernel starts this mount processs by mounting the filesystem on same hard drive partition as /.While the mount process actually
+ mounts the file system on some device, it is common to simply say that you "mount the device", which is understood to mean "mount filesystem on the device".
+
+ FHS directories in /:
+ 	/bin						essential command binaries
+	/boot						static files of the boot loader
+	/dev						device files
+	/etc						host-specific configuration
+	/lib						essential shared libraries and kernel modules
+	/media					mount point for the removable media
+	/mnt						mount point for mounting system temporary
+	/opt						add-on application software packages
+	/sbin						essential system binaries
+	/srv						data for services provided by this system
+	/tmp						temporary files
+	/usr						secondary hierarchy
+	/var						variable data
+
+ 
+ Partitioning divides disk drive into one or more logical disks. Each partition is treated as a separate disk with its own file system. Partition information is stored in the partition table or
+ partition scheme. Before hard disk can be used it needs to have partition scheme configured on it. That will allow hard disk to be divided into partitions and recognized by the Operating System.
+ There is two partition tables available: MBR and GPT.
+
+  MBR (Master Boot Record) is the older one thus has more compatibility with all the operating systems and hardware; it allowed up to four primary partitions to be created. In order to allow
+	more than four partitions, one of them can be converted into an extended one (logical) in which case it can contain an addtional twenty three (23) partitions taking the 
+	total number of partitions to twenty six (26). The number was choosen to match the number of available letters to name the drives. Alternate systems were able to overcome this
+  limit if bigger number of logical partitions was required. The MBR system has one major limitation that is it is limited to the 2TB of the usable space. Larger disk can be used but only 2TB will be available.
+
+	Traditionally, a hard drive is formatted into 512 byte sectors. All the sectors on a disk platter that can be read without moving the head consitute a track. Disks usually have more than one platter.
+	The collection of tracks on the various platters that can be read without moving the head is called a cylinder. The geometry of a hard drive is expressed in cylinders, tracks (or heads) per cylinders,
+	and sectors/tracks. 
+
+	Limitations on the possible sizes for cylinders, heads, and sectors used with DOS operating systems, resulted in BIOS translating geometry values so that larger hard drives could be supported. Eventually,
+	even this methods were insufficient. LBA (Logical Block Addressing) technology solved this problem by ?. Thus the geometry on a modern disk bears little or no relation to the real physical sector layout.
+	The larger disks in use today have forced an extension to LBA known as LBA48 which reserves up to 48 bits
+				
+  GPT (GUID Partition Table) come as a replacement for MBR, and it supports up to 128 partitions without the need to change to convert primary to logical partitions like a MBR requires, hard disks in size
+	of Zettabytes. Prior using a GPT several requirements should be satisfied: 
+		+   BIOS that supports UEFI (Unified Extensible Firmware Interface) 
+		+   64bit hardware and software 
+		+   32bit systems will be able to use GPT formatted disks as a data drive
+
+	MBR and GPT disks can be converted between each other. With the WIndows operating system it will need the entire disk to be erased, while on the Linux systems convertion is possible without
+	erasing the data. 
+
+
+
+ Up to four partitions can be created 
+ 	
+
+ /proc/mount
+ /proc/interrupts
+ /proc/dma
+
+ File systems.
+
+	/proc
+	/dev
+ 	/sys				// sysfs
+ 
+ Files:
+ 	
+	/dev/rtc
+	/etc/fstab
+	/proc/mountes
+	/sys/block
+
+ 
+ Utilities:
+ 	
+	lscpu
+	lsblk
+	lsscsi
+	lspci
+	lsraid
+	lsdev
+
+ Partitioning divides disk drive into one or more logical disks. Each partition is treated as a separate disk with its own
+ file system. Partition information is stored in a partition table. 

@@ -1,2 +1,14 @@
 
  /etc/init.d
+ Interactive or login shell, startup files:
+
+ 	/etc/profile			# include /etc/bash.bashrc and /etc/profile.d
+	~/.bash_profile, ~/.bash_login, ~/.profile 		# the first found is read
+	~/.bash_logout
+
+	/etc/bash.bashrc includes /etc/debian_chroot
+	~/.profile sources ~/.bashrc
+
+ Non-login shell startup files:
+
+ 	~/.bashrc

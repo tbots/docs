@@ -2,3 +2,15 @@
  Examples etc.,
 
  	$  declare -a letters=({a..z}); echo "${#letters[@]}";		# get number of letters in the alphabeth
+
+ cp id_rsa{,1}.pub		# great
+
+ # ln treatest relative path in relation to the destination file
+ ls -l 
+  file1
+  file2
+  test/
+
+ ln -s ../file1 test/
+ ls -l test/
+  file1 -> ../file1

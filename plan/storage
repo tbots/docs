@@ -1,6 +1,8 @@
 
  · https://www.thomas-krenn.com/en/wiki/ISCSI_Basics#cite_note-1
 
- How to use fsck(1) utility and how it integrates with fstab(5).
-
- Next to do is to pass partitioning tutorial and advance an hour with the fdisk(1) manual.
+ How to use fsck(1) utility and how it integrates with fstab(5).			->11:00
+ 
+ \
+  +-- creating a script for the disks and partitions and flags?
+ Understand partx

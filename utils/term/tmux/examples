@@ -1,0 +1,20 @@
+
+/* Binding a key bind   <key> <command> */
+
+ bind   r     source-file ~/.tmux.conf
+
+
+/* Splitting windows */
+
+ split-window -v -c ~ -p 40 -t :0 "vim <file>"
+
+
+/* Resize pane */
+ 
+
+/* Swap windows */
+
+ swap-window -s 2 -t 1			
+ Setting options examples:
+  
+   set status-style bg=black,fg=green

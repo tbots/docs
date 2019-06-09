@@ -1,0 +1,7 @@
+
+ fdisk is a dialog-driven program for creation and manipulation of partition tables. Block devices can be divided into one or more logical disks called 
+ partitions. This division is recorded in the partition table, usually found in sector 0 of the disk. It understands GPT, MBR, Sun, SGI and BSD partition tables.  
+ All partitioning is driven by device I/O limits by default. fdisk(8) is able to optimize the disk layout for the 4K-sector size and use an alignment 
+ offset on modern devices for MBR and GPT. 
+
+ 

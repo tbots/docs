@@ -1,3 +1,0 @@
-# Basic regular expressions assumed
-# Find sourced files within a shell script
-/^\s*(source|\.)/ {print $2} 
