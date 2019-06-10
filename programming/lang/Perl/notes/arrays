@@ -1,5 +1,0 @@
-
- $#array			# index of the last element in the array
- scalar @array		# array length
-
- print "@array\n";		# when quotes are in effect whitespaces are preserved

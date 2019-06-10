@@ -1,3 +1,0 @@
- string ini_get( string $varname )										- returns the value of the configuration option
- bool asort (&$array [, int $sort_flags = SORT_REGULAR]);
- string numberformat(float $number [, int $decimals = 0]);

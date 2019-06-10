@@ -1,6 +1,0 @@
-
- After statement execution results can be retrieved at once to be buffered by the client or by the read row by row. Client-side result set buffering
- allows the server to free resources associated with the statement results as early as possible. It is recommended to use buffered results sets. 
- mysqli_query() combines statement execution and result set buffering. Navigation through the result sets is fast because it is held in client memory.
- It is often easier to scale by client than to scale by server.
- The character set must be set either at the server level, or with the API function mysqli_set_charset() for it to affect mysqli_real_ecape_string().
