@@ -1,0 +1,4 @@
+
+ P for prompt. When "ed" is started, text first appended at the end of the file.
+ "m" for move, i.e. "5m0p", The "m" command sets the current line to the last line moved.
+

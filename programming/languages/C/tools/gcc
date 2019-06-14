@@ -1,0 +1,25 @@
+
+ Options:
+
+ 	-I <dir>
+				add <dir> to the end of the main include path
+
+	-L 
+			add path to the linked library
+
+
+ Compilation options:
+
+ 	-g 		Generate debug information in default format.
+
+ Default directories:
+
+ /usr/local/include			/* headers */
+ /usr/include
+
+ /usr/local/lib				/* libraries */
+ /usr/lib
+
+ Global variabes:
+
+ 	C_INCLUDE_PATH

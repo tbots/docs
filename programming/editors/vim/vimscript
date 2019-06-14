@@ -1,0 +1,99 @@
+
+ VIM Script
+
+  Loops
+ 	
+	 :while {condition} 
+    :{statement} 
+   :endw[hile]
+
+	Example:
+   Yank text to any register and then execute it from the command prompt with "@" command.
+   let i=1
+   while i < 10
+	   echo "i " i
+	 	 let i += 1
+   endw
+
+
+	"for" loop
+
+	 Generic form:
+	   for {var} in {list}
+	   endfo{r}
+
+		Note, the ':' is optional
+
+	   for i in range(0,9)
+	    ech "i " i
+	   endfor
+
+
+	Example:
+   Yank text to any register and then execute it from the command prompt with "@" command.
+   let i=1
+   while i < 10
+	   echo "i " i
+	 	 let i += 1
+   endw
+
+    
+	 Numbers
+
+	Vim understands four types of numbers: binary, octal, decimaland hexadecimal. Depending on the prefix,
+	the numbers interpreted differently. Use '0x' for the hexadecimal and '0' for the octal, and '0b' for
+	the binary number system.
+		
+	To see a list of the currently defined variables, just run "let" without arguments.
+		
+
+		
+
+  Arithmetics.
+
+   :let {variable} = {expression} 
+
+    Set internal variable to the result of the expression. The variable will get the type
+    from the expression. Value of the variable does not reset between evaluations in the
+    same file(buffer).
+
+
+  Echoing commands.
+
+   :ec[ho] {expr1}...
+
+    Echoes each expression, with a space in between. The first expression starts on a new line.
+    If there is a new line in a form:
+      :echo "word1" "\n" "word2"
+    
+    word2 is written on the new line with the space before, to avoid it write:
+      :echo "word1" "\nword2"
+    or
+      :echo "word1\nword2"
+      
+    See `:h :echoh!` for output highlighting. 
+
+    Examples:
+      :echo "the value of the 'shell' is " &shell
+
+	:for {var} in {list}
+	:if
+	:finish
+	:echo [&command]
+	:echoh
+	:range
+	:messages
+	:&command " will not work out of echo
+
+ 	
+	Comments (") are allowed 
+	++ operator will not work
+ :echo expand('$variable')
+ :echo $variable
+
+ "	 Source a global configuration file if available
+ if filereadable("/etc/vim/vimrc.local")
+  source /etc/vim/vimrc.local
+endif
+
+Redirection to a register (wow! redir)

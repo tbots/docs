@@ -1,0 +1,29 @@
+
+
+ Predifined PHP constants:
+
+ PHP_SELF               stores a script name
+ PHP_INT_MAX						
+ PHP_EOL                /n, </br>,
+ DIRECTORY_SEPARATOR    / 
+    Global Arrays
+
+
+ $_SERVER[...]
+
+	 $_SERVER[DOCUMENT_ROOT] 			defaults to the DocumentRoot directive in VirtualHost configuration
+  
+
+
+    Form Variables
+ 	
+ 	
+	$_REQUEST
+	$_GET
+	$_POST
+
+
+
+    Predifined Constants
+
+ 	

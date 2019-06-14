@@ -1,0 +1,134 @@
+running with ' --verbose' flag for the commands
+action: editc
+header: dec.h
+
+*** in hdr() ***
+processing file 'and.c'
+in fnc()
+elements of 'functions[@]' array:
+atoi
+binary_print
+
+in editc()
+processing function: atoi
+In _inc():
+fn: atoi
+In get_man(), searching for man page for the function 'atoi'
+found man page at "/usr/share/man/man3/atoi.3.gz"
+'/usr/share/man/man3/atoi.3.gz' -> './atoi.3.gz'
+function found at: 40
+function definition: .BI "int atoi(const char *" nptr );
+include statements preceding the function:
+38:.B #include <stdlib.h>
+index in the end of loop: 1 -> 38
+include statement: '#include <stdlib.h>'
+include statement '#include <stdlib.h>' was not written yet
+elements of 'headers[@]' array:
+#include <stdlib.h>
+
+removed 'atoi.3'
+in editc()
+processing function: binary_print
+in _lhdr
+C_INCLUDE_PATH: 
+in get_lhdr()
+header file for the 'binary_print' function was not found
+header was not found
+using a default one - "dec.h"
+modified header: #include "dec.h"
+checking for the duplication in the headers[]...
+statement '#include "dec.h"' was not written yet
+in _dfile()
+C_BASE: /home/l1/C/src
+source files found
+/home/l1/C/src/binary_print/binary_print.c:void binary_print(unsigned int value) 
+
+/home/l1/C/src/binary_print/binary_print.c was not stored yet..storing for the further parsing
+
+in editc()
+all the function in file 'and.c' are processed
+elements of 'headers[@]' array:
+#include <stdlib.h>
+#include "dec.h"
+
+
+in inc_wr()
+include directive found; inserting on the line '3'
+in inc_wr()
+elements of 'headers[@]' array:
+#include <stdlib.h>
+#include "dec.h"
+
+in inc_wr()
+processing header '#include <stdlib.h>'
+header "#include <stdlib.h>" was already included
+in inc_wr()
+processing header '#include "dec.h"'
+header "#include "dec.h"" was already included
+***
+
+in header_wr()
+in _dec()
+searching declarations in and.c
+declarations found: 
+elements of 'declarations[@]' array:
+
+in link_file(); checking if need to link and.c...
+*** in hdr() ***
+processing file '/home/l1/C/src/binary_print/binary_print.c'
+in fnc()
+elements of 'functions[@]' array:
+printf
+
+in editc()
+processing function: printf
+In _inc():
+fn: printf
+In get_man(), searching for man page for the function 'printf'
+found man page at "/usr/share/man/man3/printf.3.gz"
+'/usr/share/man/man3/printf.3.gz' -> './printf.3.gz'
+function found at: 42
+function definition: .BI "int printf(const char *" format ", ...);"
+include statements preceding the function:
+40:.B #include <stdio.h>
+index in the end of loop: 1 -> 40
+include statement: '#include <stdio.h>'
+include statement '#include <stdio.h>' was not written yet
+elements of 'headers[@]' array:
+#include <stdio.h>
+
+removed 'printf.3'
+in editc()
+all the function in file '/home/l1/C/src/binary_print/binary_print.c' are processed
+elements of 'headers[@]' array:
+#include <stdio.h>
+
+
+in inc_wr()
+include directive found; inserting on the line '2'
+in inc_wr()
+elements of 'headers[@]' array:
+#include <stdio.h>
+
+in inc_wr()
+processing header '#include <stdio.h>'
+header "#include <stdio.h>" was already included
+***
+
+in header_wr()
+in _dec()
+searching declarations in /home/l1/C/src/binary_print/binary_print.c
+declarations found: 
+void binary_print(unsigned int value);
+elements of 'declarations[@]' array:
+void binary_print(unsigned int value);
+
+processing declaration: 'void binary_print(unsigned int value);' for the function 'binary_print'
+in get_lhdr()
+header file for the 'binary_print' function was not found
+writing default header 'dec.h'
+searching for the 'binary_print' function declaration
+declaration for the 'binary_print' was not found in 'dec.h'
+appending at the end
+in link_file(); checking if need to link /home/l1/C/src/binary_print/binary_print.c...
+'./binary_print.c' -> '/home/l1/C/src/binary_print/binary_print.c'

@@ -1,0 +1,2 @@
+
+ eol() 		- return last character offset on the line cursor is positioned on

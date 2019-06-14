@@ -1,0 +1,15 @@
+
+ Package		- class
+ Reference	- class object
+ Subrouting - method 
+
+ Class is defined in the .pm file.
+
+ To construct an object use new(). It will always pass a class name as the first element in @_.
+
+ To create an instance of a class you create a reference that knows what class it belongs to. The built-in
+ function bless is used to bless the reference to a class
+
+ object = bless $reference, $classname;
+
+ Get Perl version from within script:    print $^V;

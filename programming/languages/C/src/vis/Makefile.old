@@ -1,0 +1,11 @@
+OBJ = 0.1D.o crstat.o exch.o	sstr_h.o sstr.o lst.o lst_o.o lst_or.o vsrd.o \
+				null.o printable.o ftl.o ec_malloc.o 
+
+0.1D:		$(OBJ)
+						cc -o 0.1D $(OBJ)
+
+$(OBJ) :		defs.h func_defs.h
+
+.PHONY	:		clean
+clean		:
+						rm -rf *.o 

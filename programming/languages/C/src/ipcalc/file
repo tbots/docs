@@ -1,0 +1,60 @@
+processing --write-include
+shifting 1
+$*: --debug ipcalc.c
+processing --debug
+shifting 1
+$*: ipcalc.c
+processing ipcalc.c
+shifting 1
+$*: 
+running with ' --verbose' flag for the commands
+action: editc
+header: 
+
+*** in hdr() ***
+processing file 'ipcalc.c'
+in fnc()
+elements of 'functions[@]' array:
+printf
+
+in editc()
+processing function: printf
+In _inc():
+fn: printf
+In get_man(), searching for man page for the function 'printf'
+found man page at "/usr/share/man/man3/printf.3.gz"
+‘/usr/share/man/man3/printf.3.gz’ -> ‘./printf.3.gz’
+function found at: 41
+function definition: .BI "int printf(const char *" format ", ...);"
+include statements preceding the function:
+39:.B #include <stdio.h>
+index in the end of loop: 1 -> 39
+include statement: '#include <stdio.h>'
+include statement '#include <stdio.h>' was not written yet
+elements of 'headers[@]' array:
+#include <stdio.h>
+
+removed ‘printf.3’
+in editc()
+all the function in file 'ipcalc.c' are processed
+elements of 'headers[@]' array:
+#include <stdio.h>
+
+
+in inc_wr()
+include directive found; inserting on the line '1'
+in inc_wr()
+elements of 'headers[@]' array:
+#include <stdio.h>
+
+in inc_wr()
+processing header '#include <stdio.h>'
+header "#include <stdio.h>" was already included
+***
+
+in header_wr()
+in _dec()
+searching declarations in ipcalc.c
+declarations found: 
+elements of 'declarations[@]' array:
+

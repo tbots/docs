@@ -1,0 +1,41 @@
+
+ Syntax files.
+
+ $VIMRUNTIME/syntax/syntax.vim
+ $VIMRUNTIME/filetype.vim
+ $VIMRUNTIME/syntax/synload.vim
+ $VIMRUNTIME/plugin 
+ $VIMRUNTIME/ftplugin
+
+ See defined colors in "$VIMRUNTIME/colors" directory. Test colors by running a ":runtime syntax/colortest.vim" command
+
+ :syntax enable     
+ 	^ enable syntax highlighting by running "source $VIMRUNTIME/syntax/syntax.vim", this file is used for ":syntax on" and
+		it installs the autocommands and starts highlighting for all buffers.
+
+ To see currently defined items:
+ 	
+	:sy[ntax] [list [group-name]]
+
+ To see all the currently active highlighting groups, run 
+ 	
+	:source $VIMRUNTIME/syntax/hitest.vim
+
+	If :echohl WarningMsg, the group is used now for the following :echo, :echon, and echomsg commands (also used for
+	the input() prompt.
+
+ To see all the set options on the file:
+	:set [all]
+
+ Case match for syntax items can be ignored with the
+ 	:syntax case match
+ 	:syntax case ignore
+
+
+ References:
+ 	syntax.txt	-> :syn-qstart
+	usr_44.txt
+
+ Commands in syntax.vim -> exe, so, runtime, au, set, let, unlet,
+
+ See echoh

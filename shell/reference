@@ -14,3 +14,19 @@
  ln -s ../file1 test/
  ls -l test/
   file1 -> ../file1
+
+
+ # Show "apt search" output within a one line
+ apt search php7.2 2> /dev/null | head  | sed '1,2d; /^\s*$/d' | perl -p -e 's/\/.*//;'
+
+ # Checking for leftover withing a variable
+ #
+ # From /usr/sbin/apache2ctl
+ if test ${0##*apache2ctl-} != $0			
+ #
+ # if "*apache2ctl-" string was stripped it is already not equals to $0
+ then 
+ 		APACHE_CONFDIR=/etc/apache2-${0##*apache2ctl-}		# name of the version number
+ else
+ 		APACHE_CONFDIR=/etc/apache2
+ fi

@@ -1,0 +1,12 @@
+ Text objects:
+
+ 	aw		a word		(surrounding whitespaces are included)
+	aW
+	iw		inner word
+	as		a sentense
+	is		inner sentense
+	ap		paragraph (with empty lines after)
+	ip		paragraph (without an empty lines included)
+	a[]   backwards to the [
+	i[]
+	ab, a(, a)

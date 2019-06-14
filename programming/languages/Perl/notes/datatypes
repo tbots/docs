@@ -1,0 +1,53 @@
+
+ Numeric literals.
+
+ 	Underscores are allowed within a numeric literal to improve readability, since dots and commas are not allowed to be used as a number delimiter.
+	
+		my $x = 4_294_967_296;
+		my $bin = 0b1111_0000;		#  can be used with binary, octal and hexadecimal values as well
+
+	
+	String literals.
+
+	 A single-quoted string must be separated from a preceding word by a space because a single quote is a valid (though archaic) character in an identifier, and
+	 has the same meaning as "::". (Used to separate namespaces).
+
+	 [!] Notable escape sequences to test:
+	 				·		\033			octal value for ASCII table
+					·		\o{33}		same octal value
+					·		\x7f			hex notation
+					·		\x{263a}	dunno
+					·		\N{LATIN SMALL LETTER E WITH ACUTE} 		the named character which is corresponds to "é" (0xE9 in Unicode)
+					·		\N{U+E9} 		same 0xE9 in Unicode (é)
+					·		\cC					Control-C
+
+				# translation escapes
+				  ·		\u				force next character to titlecase (Unicode characters as well)
+				  ·		\l				force next character to lowercase
+					·		\U				force all the following characters to uppercase; ends at \E
+
+			'·'		<- how to get it's value?
+
+	 Identifier in the '{}' construct is forced to be a string, thus '$days{"Feb"}' can be written as '$days{Feb}', anything more complicated in a subscript is interpreted 
+	 as an expression and have to be quoted (i.e., '$days{"Feb 29th"}').
+
+	Alternate quoting constructs:
+
+		q//			single quoted string			''						doesn't interpolates
+		qq//		double-quoted string			""						interpolates
+		qx//		command execution					``						interpolates
+		qw//		word list									()						doesn't interpolates
+		m//			pattern match							//						interpolates
+		s///		pattern substitution			s///					interpolates
+		y///		character translation			tr///					doesn't interpolates
+		qr//		regular expression				""						interpolates
+
+	A name that has no other interpretation in the grammar are called barewords and will be treated as if it were a quoted string. To avoid confustion with the reserved words a worning
+	is issued if found. 
+
+ Arrays
+
+ $#array			# index of the last element in the array
+ scalar @array		# array length
+
+ print "@array\n";		# when quotes are in effect whitespaces are preserved

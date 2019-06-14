@@ -1,0 +1,2 @@
+
+ Use memset(2) or bzero(2) to zero a memory location.

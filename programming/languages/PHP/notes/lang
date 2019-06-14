@@ -1,0 +1,85 @@
+
+ Working with files.
+
+
+                                                                                     Opening file
+
+   To open a file use fopen() function. The definition is:
+      resource fopen( string $filename, string $mode [, bool $use_include_path = FALSE [, resource $context ]] )
+      
+   File can be opened in the following modes:
+			
+		r			open for reading only; place the file pointer at the beginning of the file. Error if file does not exist.
+		r+		open for reading and writing; place the file pointer at the beginning of the file. Error if file does not exist.
+		w			open for writing only; place the file pointer at the beginning of the file and truncate the file to
+					zero length. If the file does not exist, attempt to create it
+		w+		open for reading and writing; place the file pointer at the beginning of the file and truncate the file to
+					zero length. If the file does not exist, attempt to create it
+		a			Open for writing only; place the file pointer at the end of the file. If the file does not exist, attempt to create it. In this mode,
+					fseek() has no effect, writes are always appended.
+		a+		Open for reading and writing; place the file pointer at the end of the file. If the file does not exist, attempt to create it. 
+		x			Create and open file for writing only; place the file pointer at the beginning of the file. If the file already exists, the fopen()
+					call will fail by returning and generating an error of level E_WARNING. 
+		x+		Create and open for reading and writing; otherwise has the same behavious as with 'x'.
+		c			Open the file for writing only; If the file does not exist, it is created. If it exists, it is neither truncated, nor the call to this function
+					fails. The file pointer is positioned on the beginning of the file. 
+		c+		Open the file for reading and writing; otherwise it has the same behavior as 'c'.
+		e			Set close-on-exec flag on the opened file descriptor.
+	
+	For the file to be created in a directory it has to have an execution flag set. When file is created from the script it created as:
+		 -rw-r--r-- 1 www-data www-data    0 Feb 11 15:45 file
+	
+	In addition a write flag should be set on the directory to allow file writing even if execution flag was set.
+
+
+    Writing a file.
+
+  To write a file either of fwrite(), fputs() or file_put_contents() functions can be used. The definitions are:
+    int fwrite( resource $handle , string $string [, int $length] );    // writes the size contents of string to the file stream pointed by handle.
+    int file_put_contents( string $filename,
+                           string $data,
+                           [, int $flags
+                           [, resource $context]]);
+
+  The file_put_contents() will write string contained in $data to the file named $filename without any need for an fopen() and fclose() calls. The function
+  is a matched pair for a file_get_contents().
+
+  String length can be obtained using strlen() function.
+  int filesize( string $filename );
+
+
+ 
+ Editing file path.
+
+  DIRECTORY_SEPARATOR constant can be used instead of literal '/'. 
+
+
+ Changing file mode.
+
+	bool chmod( string $filename, int $mode)
+
+		Octal. Prefix with zero (0). File owner can change the mod by default.
+
+	
+	*Environment
+
+	 $_SERVER[DOCUMENT_ROOT] 			defaults to the DocumentRoot directive in VirtualHost configuration
+
+
+	Error handing.
+    
+		error_get_last();
+
+ Control Flow Constructs
+
+ foreach loop:
+
+
+ switch(n) {
+  case label1:
+    ;
+    break or continue;
+
+  default:
+    ;
+ }

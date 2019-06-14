@@ -1,0 +1,19 @@
+#!/bin/bash
+#
+# Comment lines in specified range.
+# A lot of useful things can be done, for example
+# to allow a comment character to specified.
+#
+# Usage: comm LINE_ADDRESS	FILE
+#
+function usage() {
+	echo "Usage: com LINE_ADDRESS FILE"
+	exit 0
+}
+
+if [ $# -ne 3 ] 
+then
+	usage
+fi
+
+sed -i "$1,$2s/^/#/" $3

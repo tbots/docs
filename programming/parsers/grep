@@ -1,0 +1,10 @@
+
+ #examples
+ grep -ril * -e EXP
+ The major options:
+
+ 	+ --binary-files=[binary|text|without-match]
+
+			without-match  -I
+	
+	+ -l, --files-with-matches 

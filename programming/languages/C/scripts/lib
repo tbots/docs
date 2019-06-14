@@ -1,0 +1,11 @@
+# 
+# Bash functions library.
+#
+ 
+
+# memory address found in file
+function mem_addr() {
+	# expect filename
+	# expect placeholder for memory address
+	m=`grep -o -m1 '0x[0-9a-fA-F]\+' $filename`
+}

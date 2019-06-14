@@ -1,0 +1,65 @@
+
+ Current character read always printed in grey. Previous characater printed depending on the match result.
+
+ Corner casees are handled using anchor() function. It will examine anchor character, one of '<','>','^', and '$'. And will call related function
+ to find out character position. Return values are MATCH and DOES_NOT_MATCH.
+
+ Pattern matching algorithm uses struct mtchfl to keep tracking indexes and characters with examined expression. The definition is as follows:
+
+ 	struct mtchfl {
+		int next_pattern_index;
+		int repeat_pattern;
+		int atom_index;
+		char anchor;
+		char repetition_character;
+	}
+
+ The main idea behind matching algorithm is that it is two indexes that are used to keep track of the examined characters within expression. ps is the current 
+ pattern index to be examined, fl.np is index in expression of the next pattern (np) to be examined on the next iteration.
+
+ When anchor is found, can be one of the '^','$','\<','\>' anch() function is called and appropriate test issued to get a positional match result. The return value
+ defined by two constants: MATCH (0) and DOES_NOT_MATCH (-1).
+
+
+  re_fdb() call declares an array of character arrays - atoms. The default buffer is atom[0] and each matched 
+ character will be stored there. Each bracket will cause new backreference to be initialized.
+
+Structures, purpose?
+
+Parsing script, where?
+
+main() -> re_fdb() 
+
+re_fdb() - create a man page
+ 
+ Pattern offset (p) 
+ Returned/new offset (o)
+ Read call return value (ret)
+ Next read start offset (st)
+
+ **atoms[] - char pointers array. At index 0 stored whole matched expression, further
+ indexes correspond to the matched backtricks.
+
+ Pattern offset and returned offsets are set to 0 at the very start of the matching cycle.
+
+ Cursor offset is read for each call? Maybe better to remember it?
+
+
+ match(char *regexp, int pat_i) 
+ 	
+	where the fuck constants defined? DOES_NOT_MATCH for example ?!
+	headers included in the each functcion definition
+
+
+ here character can be visualized with the call to step()
+
+ step(int fd, char *word, struct scheme fmt, int match); 
+ 	why fd?
+
+ 	Visualization algorithm works as follows:
+		
+		Each read cs.p, cs.c and cs.f are set (struct char_st). Currently read character is always displayed in CUR_CH_CLR. When becoming a previously read character,
+		the match result is examined and character gets redrawn accordingly.
+
+		The formatting option of FULL_MATCH will highlight the matched portion of the file only if whole expression matched. If expression matched partially it will be redrawn back
+		to the regular color. To redraw partially matched string print_word() function was designed.

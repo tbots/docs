@@ -1,4 +1,11 @@
 
- Continue on apt configuration
+ [!]Continue on apt configuration
+ Pass logrotate tutorial
+ Read "man 5 locale"
+ Read about:
+ 	apt-transport-https
+	lsb-release 
+	ca-ceritificates
+	linuxbase.org
  command-not-found(1)
  partx(1)

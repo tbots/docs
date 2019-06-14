@@ -1,0 +1,2 @@
+
+ Even though the php script didn't have an executable flag set it will run under apache until parent directory has an executable flag.

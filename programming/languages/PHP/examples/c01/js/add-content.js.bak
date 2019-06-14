@@ -1,0 +1,17 @@
+var today = new Date();		// create a new object
+var hourNow = today.getHours();
+var greeting;		// declare new variable
+
+if (hourNow >= 18) {
+	greeting = "Good evening!";
+}
+else
+if (hourNow >= 12) {
+	greeting = "Good afternoon!";
+}
+else
+if (hourNow >=0 ) {
+	greeting = "Good night!";
+}
+
+document.write('<h3>' + greeting + '</h3>');

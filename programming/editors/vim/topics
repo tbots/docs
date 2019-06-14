@@ -1,0 +1,24 @@
+	intro
+	pattern
+	motions
+	text-objects
+	operators
+	internal-variables
+	startup
+	write-filetype-plugin
+	syntax
+	highlight (hi)
+	syn-define
+	range
+	recording
+	map.txt 
+	ins-completition
+	CTRL-W        ; window commands
+:help filetype-indent-on ; enable loading of file type plugins 
+:help ftplugin
+:help write-plugin
+
+
+[!] Currently reading usr_44.txt
+[!] NEXT: usr_41.txt		" vim script
+:help map.txt

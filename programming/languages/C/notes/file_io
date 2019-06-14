@@ -1,0 +1,24 @@
+
+ Most file I/O on a UNIX system can be performed using only five functions: open(2), read(2), write(2), lseek(2), and close(2). This functions are often referred to
+ as unbuffered I/O, in contrast to the standard I/O routines. The term unbuffered means that each read or write invokes a system call in the kernel. These unbuffered
+ I/O functions are not part of ISO C, but are part of POSIX.1 and the Single Unix Specification.
+
+ To the kernel, all the open files are referred to by file descriptors. A file descriptor is a non-negative integer. When file is opened or created the lowest available
+ file descriptor is returned. File descriptor then passed as an argument to the I/O functions.
+
+ By convention, UNIX shells associate file descriptor 0 with the standard input of a process, file descriptor 1 with the standard ouput, and file descriptor 2 with the 
+ standard error. The convention is used by the shells and many applications; it is not a feature of the UNIX kernel. Nevertheless, many applications would break if
+ these associations weren't followed.
+
+ Although their values are standardized by POSIX.1, the magic numbers 0, 1, and 2 should be replaced in POSIX-compliant applications with the symbolic constants 
+ STDIN_FILENO, STDOUT_FILENO, STDERR_FILENO to improve readability. These constants are defined in the <unistd.h> header.
+
+ File descriptors range from 0 through OPEN_MAX-1. 
+
+ A file is opened or created by using one of the open(2) or openat(2) functions. The file descriptor returned by one of this function calls is guaranteed to be the
+ lowest numbered unused descriptor. The fd parameter distinguishes the openat(2) function from open(2). There are three possiblities:
+
+ 	1. The path parameter specifies an absolute path name. In this case, the fd parameter is ignored and the openat(2) function behaves like an open(2) function.
+ 
+
+ When file offset is set to 1 read call performed with count of -1 return value will be 0 even though offset was moved back. 
