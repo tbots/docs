@@ -3,7 +3,8 @@
  		Administration
 
  "apache2ctl" script is designated for the apache2 server administration. Default enviornment variables for apache2ctl
- stored under "envvars" file. 
+ stored under "envvars" file that is sourced from within "apache2ctl". Both of the scripts will try to setup a SUFFIX
+ variable (looks buggy right now).
 
  "envvars" will set SUFFIX if directory is in form of "/etc/apache2-" (that is set accordingly by the /usr/sbin/apache2ctl
  and actually affected by the it's own name).
@@ -16,12 +17,24 @@
 	APACHE_RUN_DIR={/var/run/apache2$SUFFIX}
 	APACHE_LOCK_DIR={/var/lock/apache2$SUFFIX}
 	APACHE_LOG_DIR={/var/log/apache2$SUFFIX}
+	APACHE_LYNX=
+	APACHE_ULIMIT_MAX_FILES=
+	APACHE_ARGUMENTS=
+	APACHE2_MAINTSCRIPT_DEBUG=
+	APACHE_SYSTEMD_SERVICE=apache2$SUFFIX
 	SUFFIX=
 
- Mentioned files:
+ Sourced files:
 	/etc/apache2/envvars
  	/etc/init.d/apache2
 	/usr/sbin/apache2ctl
+
+ Commands:
+ 	$ apache2ctl -t -D DUMP_VHOSTS		# vhosts settings
+	$ apache2ctl -t -D DUMP_RUN_CFG		# run settings
+	$ apache2ctl -V										# compilation options
+
+ System unit file:
 
  	
  Configuration.

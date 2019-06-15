@@ -1,0 +1,17 @@
+
+ 		Process Management
+
+ The first process run is the init process responsible for booting all of the services. It is easily seen with "file /proc/1/exe".
+ The first target called is the default target unit file (/lib/systemd/system/default.target). It can be overriden with `--unit'
+ flag.
+ 
+ Configuration is read from /etc/systemd/system.conf and /etc/systemd/system.conf.d directory when run as a system instance, from
+ /etc/systemd/user.conf and /etc/systemd/user.conf.d when run a user instance. Unit files are located under /lib/systemd/system by
+ default.
+
+ To list all the understood configuraiton items run:
+ 	
+	$ systemd --dump-configuration-items
+
+
+ Logging -> --
