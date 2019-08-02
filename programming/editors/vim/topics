@@ -1,4 +1,5 @@
 	intro
+	vim-variables
 	pattern
 	motions
 	text-objects
@@ -22,3 +23,6 @@
 [!] Currently reading usr_44.txt
 [!] NEXT: usr_41.txt		" vim script
 :help map.txt
+
+Expressions... in vimscript...
+help expression-syntax

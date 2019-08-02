@@ -1,0 +1,12 @@
+
+ In case of running vim as root but need a vimrc of the user that evaluated to root. Example from /usr/share/vim/vimrc
+	
+	if $SUDO_USER == 'osergiyuk'			" this is the example of checking shell variable
+ 	 source /home/osergiyuk/.vimrc
+	endif
+
+ #Quick reference commands:
+ $ tail -1000 file.txt | vim -     # read only specific amount of lines
+                                  # or from within an editor run   :r !head -1000
+ 
+ :s/^M//g     " <Ctrl-V> + <Ctrl-M>

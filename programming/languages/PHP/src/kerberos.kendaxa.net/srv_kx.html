@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+		  h1 {
+        border-bottom:2px solid black;
+ 	    }
+
+			.srv-usr {
+				width:200px;
+				text-align:left;
+			}
+			#hdr.srv-usr {
+				border-bottom:5px solid red;
+			}
+			#input {
+				width:250;
+				text-align:end;
+			}
+		</style>
+	</head>
+	<body>
+
+		<h1>HELLO YOU</h1>
+		<form action="show_acl.php" method="post">
+			<table >
+				<tr>
+					<th class="srv-usr" id="hdr">Server</th>
+					<th class="srv-usr" id="hdr">User</th>
+					<th class="srv-usr"></th>
+				</tr>
+				<tr>
+					<td>
+						<select name="server">
+							<option value="core-01">core-01</option>
+							<option value="core-02">core-02</option>
+						</select>
+					</td>
+					<td>
+						<select name="user">
+							<option value="v.caponi">Valerio Caponi</option>
+							<option value="a.mikulic">Adam Mikulic</option>
+						</select>
+					</td>
+					<td id="input">
+						<input type="submit" value="Show ACL" >
+					</td>
+				</tr>
+			</table>
+		</form>
+
+	</body>
+</html>

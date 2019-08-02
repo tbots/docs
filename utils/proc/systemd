@@ -9,11 +9,12 @@
  units start in parallel. Processes systemd spawns are placed in individual Linux control groups named after the unit which they belong to in the private systemd
  hierarchy. 
 
-	Boot flow:
+Boot flow:
+---------
 
 	 	BIOS load (EFI)
 		BIOS scans for the primary disk's boot sector
-		Boot sector provides an the MBR (Master Boot Record), within the first 512 bytes of the active drive
+		Boot sector provides a MBR (Master Boot Record), within the first 512 bytes of the active drive
 		Boot loader is executed (alternative boot selection)
 		Linux kernel is read and executed
 		Device initialization, module loading, and the initial RAM disk (initrd) is loaded
@@ -28,54 +29,70 @@
 		Systemd sets the runlevel as indicated in the default target
 		System login prompt is displayed
 
-	SYSTEMD Runlevels
+SYSTEMD runlevels:
+-----------------
 
-		0 - poweroff.target (Shutdown)
-		1 - rescue.target (Single User/Rescue Shell)
-		2 - multi-user.target (Non-Graphical, Full Network, Multi-User)
-		3 - multi-user.target (Non-Graphical, Full Network, Multi-User)
-		4 - multi-user.target (Non-Graphical, Full Network, Multi-User)
-		5 - graphical.target (Graphical Desktop, Multi-User)
-		6 - reboot.target	(Reboot)
+	0 - poweroff.target (Shutdown)
+	1 - rescue.target (Single User/Rescue Shell)
+	2 - multi-user.target (Non-Graphical, Full Network, Multi-User)
+	3 - multi-user.target (Non-Graphical, Full Network, Multi-User)
+	4 - multi-user.target (Non-Graphical, Full Network, Multi-User)
+	5 - graphical.target (Graphical Desktop, Multi-User)
+	6 - reboot.target	(Reboot)
 
-	Files:
-		
-		/etc/systemd/system.conf		// system instance
-		/etc/systemd/system.conf.d
-		
-		/etc/systemd/user.conf			// user instance
-		/etc/systemd/user.conf.d
 
-		/lib/systemd/system					// unit directory
-		/lib/systemd/system/default.target
+
+Files:
+-----		
+
+	/etc/systemd/system.conf		// system instance
+	/etc/systemd/system.conf.d
+	
+	/etc/systemd/user.conf			// user instance
+	/etc/systemd/user.conf.d
+
+	/lib/systemd/system					// unit directory
+	/lib/systemd/system/default.target
 																// default target
 
-	Unit states:
-		
-		active|inactive|activated|deactivated|failed
-	
-	Unit types:
-		
-		service 			start the control daemons and the processes they consist of
-		socket				encapsulate local IPC or network sockets in the system, useful for socket-based activation
-		target				used to group units, or provide well-known synchronization points during boot up
-		device				expose kernel devices in systemd and may be used to implement device-based activation
-		mount					control mount points in the file system 
-		automount			automount capabilities, for on-demand mounting of the file system as well as parallelized boot up
-		timer					usefull for triggering activation of other units based on timers
-		swap					encapsulate memory swap partitions or files of the operating system
-		path					used to activate other services when file system objects change or modified
-		slice 				used to group units which manage system processes
-		scope					manage foreign processes instead of starting them
 
-	Help files:
+
+Unit states:
+-----------
+		
+	active          inactive
+  activated       deactivated
+                  failed
+	
+
+
+Unit types:
+----------
+		
+	service 			start the control daemons and the processes they consist of
+	socket				encapsulate local IPC or network sockets in the system, useful for socket-based activation
+	target				used to group units, or provide well-known synchronization points during boot up
+	device				expose kernel devices in systemd and may be used to implement device-based activation
+	mount					control mount points in the file system 
+	automount			automount capabilities, for on-demand mounting of the file system as well as parallelized boot up
+	timer					usefull for triggering activation of other units based on timers
+	swap					encapsulate memory swap partitions or files of the operating system
+	path					used to activate other services when file system objects change or modified
+	slice 				used to group units which manage system processes
+	scope					manage foreign processes instead of starting them
+
+
+
+Help files:
+----------
 
 		systemd-system.conf(5),systemd.unit(5),systemd.service(5),systemd.sockets(5),daemon(7),systemd.target(5),systemd.device(5),systemd.mount(5),
 		systemd.automount(5),systemd.timer(5),systemd.swap(5),systemd.path(5),systemd.slice(5),systemd.scope(5),systemd.special(7),
 		systemd.generator(7)
 
 
- Utilities:
+Utilities:
+---------
 
  	systemctl list-unit-files --type= --state=
 	systemctl is-enabled <service>; echo $?

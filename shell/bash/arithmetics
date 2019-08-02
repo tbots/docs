@@ -1,4 +1,0 @@
-
- Variable can be incremented using $((...)) construct.
-
- 	echo $((++j))		# 1

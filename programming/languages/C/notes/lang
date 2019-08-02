@@ -1,7 +1,0 @@
-
- Arrays
-
-	Array is a list of n elements of specific data type.
-	
-	Array name decays into a pointer to its first member, thus *a points to a[0] element.
-

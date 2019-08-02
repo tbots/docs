@@ -1,26 +1,25 @@
 
- To install PHP:
+Installation
+------------
  	 
-	$ sudo apt install php7.2-cli
-	$ sudo apt install apt-transport-https lsb-release ca-certificates
+ sudo apt install php7.2-cli php-mysql   
+ sudo apt install apt-transport-https lsb-release ca-certificates
 
 
- Configuration file after installation:
- 	
-	/etc/php/7.2/cli/php.ini
+Extenstions
+-----------
 
- Run `php -i` to get more information about php installed.
+Extenstion configuration goes to:
+ /etc/php/<version>/mods_enabled
 
- Enable mysqli extension:
+To find the configuration file and scanned directories:
+ php -i     # extension dir
 
- 	Modify php.ini
+To find where extesions are placed:
+ php -i | grep -i extension.*dir
 
- 
- Notable configuration directives:
- 	
-	allow_url_fopen
+To list installed modules:
+ php -m
 
-
- Packages:
- 	
-	php7.2-cli
+Notable configuration directives:
+ allow_url_fopen

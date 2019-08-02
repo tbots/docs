@@ -1,5 +1,4 @@
 
- What is the reference here?
  A shell is a macro processor that executes commands. The term macro processor means functionality where text and symbols are expanded to create
  larger expressions. 
 
@@ -15,55 +14,85 @@
 	~/.bash_logout
 
 	/etc/bash.bashrc includes /etc/debian_chroot
-	~/.profile sources ~/.bashrc
+	Note that .profile sources .bashrc.
 
 
  Non-login shell startup files:
 
  	~/.bashrc
 
- ARRAYS 
-	Array declaration.
-		
-		declare -a ARRAY
 
-	Retrieving array length..
-
-		${#ARRAY[@]}						expands to the number of the elements in array
-
- 	Array assignment.
-
-		declare -a ARRAY=( "one" "two")
-
-	To dereference ARRAY:
-
-		var=ARRAY
-									only first element
-
-		var=${ARRAY[@]}
-									all array elements
+                                                            [[[ Data Types ]]]
 
 
- SCALARS
++-------+
+| Array |
++-------+
 
- 		${#var}
-									get varible character length
+To declare an array, use 'declare' buil-in. Arrays can be of two types: indexed and named. Use `-a' for former and
+`-A':
+
+	declare -a boxes			# declare indexed array
+	declare -A animals		# declare hashed array
 
 
- Shortcuts:
+Retrieving array length
 
- 	<Alt>+<C> 							capitalize the character under cursor and jump to the end of the word
-	<Alt>+<R>								revert changes done on the whole line
-	<Ctrl>+<_>							undo
-	Ctrl>+<O>							execute command found by the `Ctrl+R'
+	${#ARRAY[@]}						expands to the number of the elements in array
+
+
+Array assignment
+
+	declare -a ARRAY=( "one" "two")
+
+
+To dereference array
+
+	var=ARRAY     # only first element
+
+	var=${ARRAY[@]}   # all array elements
+
+
+
+
+
+
+ 					
+Strings
+ 
+ ${parameter:-word}	(use default values)
+ 		if parameter is unset or null, the expansion of word is substituted, otherwise the value of parameter is substituted
+
+ ${1/${2:0:2}		# strip first two letters of $opt
+
+To retrieve number of characters in the variable:
+  ${#var}
+
+  var=hello
+  echo ${#var}    # 5
 
  
- Computation.
-
-  (( ... )) construct should be prefixed by '$' when used within command.
 
 
- Builtin variables:
+ 
+Arithmetics.
+
+  (( ... )) construct should be prefixed by '$' when used within command. Why?
+
+ Variable can be incremented using $((...)) construct.
+
+ 	echo $((++j))		# 1
+
+
+
+                                                            [[[ Variables ]]]
+ 
+  
+To list all the exported variables:
+    
+ export -p
+   
+ 					Built-in Variables
 
  	$BASH
 					The path to bash binary itself
@@ -104,14 +133,25 @@
 					A colon-separated list of search path available for the CD command.
 
 
- SHOPT BUILTIN
+
+
+                                                            [[[ Built-in Commands ]]]
  
  	shopt -s extglob
 
 
+fc will allow to display or execute commands from the history list
 
- Working with variables:
-  
-  To list all the exported variables:
-   
-  $ export -p
+
+	                                                          [[[	Shortcuts ]]]
+ 
+ 	<Alt>+<C> 							capitalize the character under cursor and jump to the end of the word
+	<Alt>+<R>								revert changes done on the whole line
+	<Ctrl>+<_>							undo
+	Ctrl>+<O>							execute command found by the `Ctrl+R'
+
+
+Comparisons.
+
+:x
+exi

@@ -1,2 +1,0 @@
-
- ${opt/${2:0:2}		# strip first two letters of $opt

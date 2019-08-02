@@ -1,12 +1,64 @@
 
 
- Predifined PHP constants:
+ Functions:
+  
+  __FUNCTION__      calling function name
+                                                                      Funtcions that apply to functions
 
+ func_num_args()        - returns number of arguments passed to the function
+ func_get_args()        - returns an array comprising a function's argument list
+ function_exists()      - return true if the given argument was defined
+ call_user_func()       - call the user defined function; used when function name is determined in the run time
+ create_function()      -
+
+
+                                                                      Array functions
+
+ int count()            - count all elements in array, or something is onbject
+
+                                                                      String manipulation functions
+ array str_split()      - convert string into array by splitting it each N element
+ array preg_split()     - split string into array by regular expression
+
+ get_class()
+
+                                                                     Functions to determine variable type
+
+	is_array()
+	is_float(),is_double(),is_real()
+	is_long(),is_int(),is_integer()
+	is_string()
+	is_bool()
+	is_object()
+	is_resource()
+	is_null()
+	is_scalar()		// integer/boolean/string/float
+	is_numeric()
+	is_callable()	// checks for the validity of function name
+	isset();
+	intval();
+
+
+                                                                                  Time Functions
+
+ 	date_create - Alias of DateTime::__construct
+	date_diff		- Alias of DateTime::diff()
+	int strtotime ( string $time [, int $now = time() ] )
+	string date ( string $format [, int $timestamp = time() ] )
+	date_default_timezone_get() 
+
+
+  error_get_last()['message']
+ Predifined constants:
+
+ DIRECTORY_SEPARATOR    / 
+ __FUNCTION__           calling function name
  PHP_SELF               stores a script name
  PHP_INT_MAX						
  PHP_EOL                /n, </br>,
- DIRECTORY_SEPARATOR    / 
-    Global Arrays
+
+
+Global Arrays
 
 
  $_SERVER[...]
@@ -15,15 +67,9 @@
   
 
 
-    Form Variables
+Form Variables
  	
  	
 	$_REQUEST
 	$_GET
 	$_POST
-
-
-
-    Predifined Constants
-
- 	

@@ -1,0 +1,22 @@
+
+ The file lists pattern matching and string manipulation examples using standard GNU tools. Enjoy!
+
+ // Strip server number from the cannonical name. Also, try to get a domain in the separate variable.
+ echo 'cz-prg-server-01.spol.cz' | sed 's/^\([a-zA-Z-]\+\)\([0-9]\+\).*/\1 \2/'
+
+
+Get all the variables set in apache2ctl. Try to remove lines like 'ERROR=$?'
+  sed -n 's/^\(.* \)\?\([A-Z_]\+\)=\(\S\+\)\|\(\$([^)]\+)\).*/\2\t\3/p' /usr/sbin/apache2ctl
+
+ Find action value in the html form
+
+ \C				if appears anywhere within a pattern, the case is ignored for whole pattern
+
+
+Show "apt search" output within a one line
+ apt search php7.2 2> /dev/null | head  | sed '1,2d; /^\s*$/d' | perl -p -e 's/\/.*//;'
+
+Display only ifname and ipv4 address it assigned
+ ip -o a s | awk '{if ($3 == "inet") print $2 "\t" $4}'
+
+# Get number of letters in the alphabeth 

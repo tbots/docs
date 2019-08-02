@@ -1,0 +1,8 @@
+/* CSS for adding content example. */
+
+@import url(http://fonts.googleapis.com/css?Open+Sans:800italic);
+
+body { /* affects all the document body */
+	font-family: "Courier New", Courier, monospace;	
+	background :  url("../images/constructive-backdrop.jpg") no-repeat center center fixed;
+}

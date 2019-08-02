@@ -1,32 +1,48 @@
 
-  # Create table.
-	CREATE TABLE tbl_name (definition [NOT NULL] [AUTO_INCREMENT] [, ...] [, PRIMARY KEY(col)]);
-	CREATE TABLE [AS] SELECT (column [AS column][,...]) FROM tbl_name
-		[WHERE condition [...]]
+#
+# Create table
+#
+CREATE TABLE tbl_name (definition [NOT NULL] [AUTO_INCREMENT] [, ...] [, PRIMARY KEY(col)]);
+CREATE TABLE [AS] SELECT (column [AS column][,...]) FROM tbl_name
+	[WHERE condition [...]]
 	
-  # Modify column
-	ALTER TABLE tbl_name 
-		MODIFY col_name DATA_TYPE
-		CHANGE col_name col_name DATATYPE			- rename?
-		#RENAME COLUMN col_name col_name
+#
+# Modify column
+#
+ALTER TABLE tbl_name 
+	MODIFY col_name DATA_TYPE
+	CHANGE col_name col_name DATATYPE			- rename?
+	#RENAME COLUMN col_name col_name
 
-  # Add column
-  ALTER TABLE table ADD [COLUMN] 
-		column definition 
-		[FIRST|AFTER column];     
+#
+# Add column
+#
+ALTER TABLE table ADD [COLUMN] 
+	column definition 
+	[FIRST|AFTER column];     
 
-  # Insert data.
-	INSERT INTO tbl_name [(COLUMN[, ...])] VALUES (value[,...]);
+#
+# Insert data
+#
+INSERT INTO tbl_name [(COLUMN[, ...])] VALUES (value[,...]);
 
-  # Update column value
-	UPDATE tbl_name SET field = value [, field = value] ...
-		[WHERE clause]
+#
+# Update column value
+#
+UPDATE tbl_name SET field = value [, field = value] ...
+	[WHERE clause]
 
-	DROP [DATABASE|SCHEMA] [IF EXISTS] db_name
+#
+# Delete/Drop database
+#
+DROP [DATABASE|SCHEMA] [IF EXISTS] db_name
 
-	DROP [TEMPORARY] TABLE [IF EXISTS]
-		tbl_name [, tbl_name] ...
-		[RESTRICT|CASCADE]
+#
+# Delete/Drop table
+#
+DROP [TEMPORARY] TABLE [IF EXISTS]
+	tbl_name [, tbl_name] ...
+	[RESTRICT|CASCADE]
 
 	SHOW {DATABASES | SCHEMAS}
 		[LIKE 'pattern' | WHERE expr]
@@ -86,3 +102,82 @@
 
  	UPDATE tbl_name SET col_name = 'value' WHERE ....;                i
 							// update column value
+
+ [SQL COMMANDS] 
+	
+	CREATE TABLE tbl_name (col_def..., PRIMARY KEY(col_name))
+
+	ALTER TABLE tbl_name 
+		MODIFY col_name DATA_TYPE
+		CHANGE col_name col_name DATATYPE			- rename?
+		#RENAME COLUMN col_name col_name
+  ALTER TABLE tbl_name ADD [COLUMN] col1_name col1_definition [FIRST|AFTER col_name];     
+
+	UPDATE tbl_name SET field = value [, field = value] ...
+		[WHERE clause]
+
+	DROP [TEMPORARY] TABLE [IF EXISTS]
+		tbl_name [, tbl_name] ...
+		[RESTRICT|CASCADE]
+
+	SHOW {DATABASES | SCHEMAS}
+		[LIKE 'pattern' | WHERE expr]
+
+		 if the server was started with the --skip-show-database option, statement can not be used unless
+		 SHOW DATABASES privelege is set
+
+
+	SELECT 
+		[ALL | DISTINCT | DISTINCTROW]
+		[HIGH_PRIORITY]
+		[STRAIGHT_JOIN]
+
+	
+	***
+
+	Examples:
+		
+	 Change column name:
+
+		ALTER TABLE tbl_name CHANGE col_name col_name DATA_TYPE
+
+	 
+	 Add a column:
+
+ 	ALTER TABLE tbl_name ADD PRIMARY KEY(col_name);            
+  																				// add primary key index
+
+  ALTER TABLE tbl_name ADD UNIQUE [idx_name] (col_name);  
+																					// add a unique index
+
+  ALTER TABLE tbl_name MODIFY col_name col_definition;        
+																					// change column definitions
+
+
+  CREATE tbl_name DEFAULT CHARSET utf8 COLLATE utf8_unicode_ci;   
+																					// create table and specify the collation
+
+	DROP 
+  SHOW CHARACTER SET;
+							// print default collation for the character set
+
+  SELECT * FROM information_schema.SCHEMATA;   
+																					// print default character set and collations for the databases
+
+  SELECT table_name,engine FROM information_schema.TABLES WHERE table_schema = 'database_name';   
+																					// check database engine (MySQL)
+
+ 	SELECT * FROM sqlite_master;   
+							// SQLite equivalent of SHOW TABLES;
+
+  SELECT * FROM table HAVING COUNT condition;     
+							// check for a duplicates example
+
+  SELECT * FROM MetaData;          
+							// Get SQL version used by the server
+
+ 	UPDATE tbl_name SET col_name = 'value' WHERE ....;                i
+							// update column value
+
+	
+	SELECT * FROM information_schema.tables WHERE table_name LIKE "project%"

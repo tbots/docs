@@ -1,5 +1,7 @@
 
- Functions Reference
+
+ Functions Reference 
+ -------------------
 
 
                                                                       Funtcions that apply to functions
@@ -8,7 +10,7 @@
  func_get_args()        - returns an array comprising a function's argument list
  function_exists()      - return true if the given argument was defined
  call_user_func()       - call the user defined function; used when function name is determined in the run time
- create_function();
+ create_function()      -
 
 
                                                                       Array functions
@@ -21,7 +23,7 @@
 
  get_class()
 
-                                                                      Functions to determine variable type
+                                                                     Functions to determine variable type
 
 	is_array()
 	is_float(),is_double(),is_real()
@@ -38,44 +40,13 @@
 	intval();
 
 
-                                                                                  Time functions.
-
- DateTimeInterface is meant so that both DateTime and DateTimeImmutable can be type hinted for. It is not possible to implement this interface with userland
- classes.
-
- Date and Time Functions
+                                                                                  Time Functions
 
  	date_create - Alias of DateTime::__construct
 	date_diff		- Alias of DateTime::diff()
-
-
-
-	strtotime - Parse about any English textual datetime description into a Unix timestamp.
-
 	int strtotime ( string $time [, int $now = time() ] )
-		
-	 The function expects to be given a string containing an English date format and will try to parse that format into a Unix timestamp (the number of
-	 seconds since January 1 1970 00:00:00 UTC), relative to the timestamp given in now, or the current time if now is not supported.
-
-	 Each parameter of this function uses the default time zone unless a time zone is specified in that parameter. 
-
-	 Parameters:
-
-	 		time		A date/time string (see formats).
-
-			now			The timestamp which is used as a base for the calculation of relative dates. 
-							
-
-	date - Format a local time/date
-
 	string date ( string $format [, int $timestamp = time() ] )
-
-	 Returnes a string formatted according to the given format string using the given integer timestamp or the current time if no timestamp is given. timestamp
-	 is optional and defaults to the value of time().
-
-	 Parameters:
-
-	 		format	
-							The format of the output date string (see formats).
-	
 	date_default_timezone_get() 
+
+
+  error_get_last()['message']

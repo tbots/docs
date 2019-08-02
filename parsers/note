@@ -1,0 +1,28 @@
+
+ sed script files allows comment by prepending line with '#'
+
+ Normally, a line is read into the pattern space and each command in the script, one right after the other, is applied on that line.
+	/[0-9]/!d			# delete all line that does not include numbers
+
+	\< does not works within script   # :( 
+
+	/{pattern}/s/{pattern}/{string}/{0 < num < 512}
+							substituses num occurance of the pattern
+
+
+ Character classes.
+
+  [:alnum:]
+	[:alpha:]
+	[:blank:]
+	[:cntrl:]
+	[:digit:]
+	[:graph:]
+	[:lower:]
+	[:print:]			// [:alnum:] [:punc:]
+	[:punct:]
+	[:space:]
+	[:upper:]
+	[:xdigit:]
+
+ \u   capitalize first character

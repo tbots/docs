@@ -4,13 +4,50 @@
 
 	-p FILE...		open files in tabs on invocation
   -o FILE...    open file in separate windows (:args)
+ 	-u <vimrc>		use vimrc instead of any .vimrc
+	-u NORC 			skips initializations without reading a file
+	-u NONE 			also skips loading plugins
+
+ 
+Splitting windows
+  
+ split vsplit splitbelow splitright
 
 
- Command line command.
+	CTRL-W w   jump to the next split
+	CTRL-W H|J|K|L   move split
 
-	packadd
-	scriptnames
-	[address]@{0-9a-z".=*+}					" execute commands in a buffer as they were command-line commands
+	:tabedit <filename>			add a new tab
+
+	gt		go to the next tab
+	gT		go to the previous tab
+
+
+===========================
+Command line command (:cmd)
+===========================
+
+To copy/yank text in a register:
+	:[range]y[ank] [x]
+---
+
+To put the text from a register (default to the " register) after a line (defaults to current line):
+	:[line]pu[t] [x]
+---
+
+packadd
+---
+
+scriptnames
+---
+
+To execute commands stored in a buffer:
+	:[address]@{0-9a-z".=*+}					
+
+Default register is "
+---
+
+
 	split
 	vsplit
 	only      ; CTRL-w CTRL-O
@@ -54,26 +91,21 @@
 	" 			last position in a file
 	.				last edit in a file
 
-  split
-  vsplit
-  splitbelow
-  splitright
+=================
+= CONFIGURATION =
+=================
+ 
+To see all file sourced:
+
+ :scriptnames
 
 
-	CTRL-W w   jump to the next split
-	CTRL-W H|J|K|L   move split
+ The main configuration file is "/etc/vim/vimrc", that in turn sources "~/.vimrc".
 
-	:tabedit <filename>			add a new tab
+ To see currently set options:
+	:set [all]
 
-	gt		go to the next tab
-	gT		go to the previous tab
-
-
- Configuration files.
-
- /etc/vim/vimrc
-
- Configuration options:
+ Common configuration options:
  
  	ignorecase
  	ruler
@@ -87,35 +119,51 @@
 	list
 	listchars=tab:>-
 
- Command lines options:
 
- 	-u <vimrc>			Use vimrc instead of any .vimrc
-
-									vim -u NORC
-
-										skips initializations without reading a file
-
-									vim -u NONE
-
-										also skips loading plugins
-
- Sourced files: 
-
-	~/.vimrc
+ To check for a feature, if set, use has() function. To see all the features: ":help feature-list"
 
 
- In case of running vim as root but need a vimrc of the user that evaluated to root. Example from /usr/share/vim/vimrc
-	
-	if $SUDO_USER == 'osergiyuk'
- 	 source /home/osergiyuk/.vimrc
-	endif
- @{0-9a-z"".=*+}[count] 
- 
- @e			# execute contents of the register "e"	[command mode]
+
+==========
+= SYNTAX =
+==========
 
 
-#Quick reference commands:
- $ tail -1000 file.txt | vim -     # read only specific amount of lines
-                                  # or from within an editor run   :r !head -1000
- 
- :s/^M//g     " <Ctrl-V> + <Ctrl-M>
+Syntax files:
+
+ $VIMRUNTIME/syntax/syntax.vim
+ $VIMRUNTIME/filetype.vim
+ $VIMRUNTIME/syntax/synload.vim
+ $VIMRUNTIME/plugin 
+ $VIMRUNTIME/ftplugin
+
+ See defined colors in "$VIMRUNTIME/colors" directory. Test colors by running a ":runtime syntax/colortest.vim" command
+
+ Enable syntax highlighting by running ':syntax enable'. The command is equivalent to "source $VIMRUNTIME/syntax/syntax.vim",
+ this file is used for ":syntax on" and it installs the autocommands and starts highlighting for all buffers.
+
+ To see currently defined items:
+ 	
+	:sy[ntax] [list [group-name]]
+
+ To see all the currently active highlighting groups, run 
+ 	
+	:source $VIMRUNTIME/syntax/hitest.vim
+
+
+ Case match for syntax items can be ignored with the
+ 	:syntax case match
+ 	:syntax case ignore
+
+
+ References:
+ 	syntax.txt	-> :syn-qstart
+	usr_44.txt
+
+ Commands in syntax.vim -> exe, so, runtime, au, set, let, unlet,
+
+ See echoh
+	If :echohl WarningMsg, the group is used now for the following :echo, :echon, and echomsg commands (also used for
+	the input() prompt.
+
+ To see all the set options on the file:

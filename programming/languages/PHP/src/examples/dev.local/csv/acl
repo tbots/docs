@@ -1,0 +1,7 @@
+number,description
+5, kerberos access to local user + direct root access (ssh key)
+4,  kerberos access to local user + "su -" allowed (no sudo)
+3, kerberos access to local user + direct switch user to root (via sudo ALL:ALL)
+2, kerberos access to local user + restricted sudo privileges
+1,  kerberos access to local user
+0, no access

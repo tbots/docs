@@ -1,0 +1,4 @@
+
+ fuser -n tcp 42857
+
+ Was probably possible to kill it...

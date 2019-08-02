@@ -1,0 +1,5 @@
+
+Output and formatting options.
+
+  string number_format ( float $number [, int $decimal = 0 ] );
+  string number_format ( float $number , int $decimals = 0, string $dec_point = "." , string $thousands_sep = "," );

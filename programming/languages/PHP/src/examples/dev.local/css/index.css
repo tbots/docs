@@ -1,0 +1,66 @@
+
+* {
+	/*font-size: 15px; */
+	font-variant: small-caps;}
+
+div::after {
+  content: "";
+	background-image: url("../images/three-headed-beast.jpg");
+	background-size:100%;
+  opacity: 0.15;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+
+h1 {
+	border-bottom:2px solid black;
+}
+
+th {
+	text-align:left;
+	border-bottom:2px solid red;
+}
+
+.first_col {
+	width:300px;
+}
+
+.second_col {
+	width:300px;
+}
+
+.third_col {
+	width:400px;
+}
+
+hr { 
+	margin: 10px 0px 40px;}
+
+#input {
+	text-align:end;
+}
+
+textarea {
+	font-family: "Courier New", Courier, monospace;
+	font-weight: bold;
+	font-size: 15px; }
+
+.popup { 
+	display: none;
+	position: fixed;
+  top: 10%;
+  height: 50%;
+  width: 50%;
+  left: 25%;
+  background: #fff;
+  box-shadow: 3px 6px 15px #000;
+  z-index: 1;
+}
+
+.popup.active {
+	display: block;
+}

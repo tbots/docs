@@ -1,0 +1,10 @@
+
+ The plan:
+ --------
+  
+  1. Continue connecting processorder.php to database
+  
+  1. Explore /etc/php directory
+    1.1 Read  /etc/php/<version>/cli/php.ini
+
+

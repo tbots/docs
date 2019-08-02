@@ -1,0 +1,8 @@
+
+--    cp id_rsa{,1}.pub		# id_rsa.pub -> id_rsa1.pub
+--    declare -a letters=({a..z}); echo "${#letters[@]}"		# get number of letters in the alphabeth
+--    ln(1) calculates path to the source file starting from destination directory
+--    if test ${0##*apache2ctl-} != $0	# apache2ctl- part got truncated
+--    export -p		# dump exported variables
+--    ${var##*/}	# all until last '/' leave only last element of the path
+--    if [ x$var = x ]		# meaning $var is empty

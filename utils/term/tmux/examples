@@ -1,6 +1,0 @@
-
- bind   r     source-file ~/.tmux.conf
- bind '"' split-window -v -c "#{pane_current_path}"
- set-option -g status-style bg=black,fg=green
- split-window -v -c ~ -p 40 -t :0 "vim <file>"
- swap-window -s 2 -t 1			

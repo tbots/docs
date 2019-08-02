@@ -34,3 +34,37 @@
  [!] If package requires (depends) installation of another package then the prompt is issued. 
 
  [!!] Try to figure out how APT_CONFIG variable is triggered
+
+
+APT REPOSITORIES
+
+(https://wiki.debian.org/SourcesList)
+
+
+Repositories specification found in the following location:
+ /etc/apt/soucres.list
+ /etc/apt/soucres.list.d
+
+The entries follow the format:
+
+ <archive> <url> <distribution> [component1 [component2 [component3]]]
+
+The first word on each line, deb or deb-src, indicates the type of the archive. "deb", short for the "Debian
+package", indicates that the archive contains binary packages, the pre-compiled packages (the most commonly
+used). "deb-src" indicates source packages, which are the original program sources plus the Debian control
+file (.dsc) and the diff.gz containing the changes needed for packaging the program.
+
+Next repository URL follows (https://wiki.debian.org/DebianRepository)
+
+The 'distribution' can be either release code name (alias) or the release class respectively. 
+
+Copmonent is on of the:
+
+ main     consists of DFSG-copmliant packages which do not rely on software outside this area to operate; these are the only
+          packages considered part of the Debian distribution
+
+ contrib  contain DFSG-compliant software, but have dependencies not in main (possible packaged for Debian in non-free)
+
+ non-free contains software that does not copmly with the DFSG
+
+

@@ -1,0 +1,73 @@
+
+Semantic tags
+
+
+ <h1></h1>
+ <h2></h2>
+ <h3></h3>
+ <h4></h4>
+ <h5></h5>
+ <h6></h6>
+
+ <p></p>
+
+ <b></b>
+
+ <i></i>
+
+ <sup></sup>
+
+ <sub></sub>
+
+ <br />
+
+ <hr />     horizontal rule
+
+ <strong></strong>
+
+ <em></em>      italic by default
+
+ <blockquote cite="source"> ... </blockquote>
+                start with tab character
+
+ <q> ... </q>
+                quotation 
+
+ <abbr title="full name"> ... </abr>
+
+ <acronym title="full name"> ... </acronym>
+
+ <cite> ... </cite>
+
+ <dfn> ... </dfn>
+
+ <address> ... </address>
+
+ <del> ... </del>
+ 
+ <ins> ... </ins>
+
+ <s> ... </s>
+
+
+
+Ordered, unordered and definition lists.
+
+<ol type="" >
+  <li> ... </li>
+  ...
+</ol>
+
+  Indented by tab
+
+<ul>
+  <li> ... <li>
+  ...
+<ul>
+
+<dl>
+  <dt> ... </dt>
+    I think that this is defined termin
+  <dd> ... </dd>
+    Maybe definition description?1kg Kind Ed
+</dl>

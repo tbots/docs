@@ -12,26 +12,29 @@
   tmux att -d -t <session>  # attach to a session and detatch all the other clients
 
 	
- To create a new window:
+To create a new window:
 
-  tmux new-window -t <session:window> -a -n ssh   
+ tmux new-window -t <session:window> -a -n ssh   
 
-  # or neww, insert new window at the next index from the target-window,
-  # moving up windows if necessary; DO NOT use index, use window name instead to
-  # specify a target window
+Creating a new window.
 
- Creating a new window.
-
- Moving windows.
+Moving windows.
   
-	To move windows use move-window (alias: movew) command. The syntax is:
-		move-window [-ardk] [-s src-window] [-t dst-window]
+To move windows use move-window (alias: movew) command. The syntax is:
+	move-window [-ardk] [-s src-window] [-t dst-window]
 
-	If it is a gap >1 between numbers in the two tmux windows, run `move-window -r' to get them resorted in the proper order and closing the gap.
+If it is a gap >1 between numbers in the two tmux windows, run `move-window -r' to get them resorted in the proper order and closing the gap.
 		
- Splitting windows:
+Splitting windows:
 
-	 split-window [-bdhvP] [-c start-directory] [-l size | -p percentage] [-t target-pane] [shell-command] [-F format]
+ split-window [-bdhvP] [-c start-directory] [-l size | -p percentage] [-t target-pane] [shell-command] [-F format]
       (alias: splitw)
 
-   Create a new pane by splitting target-pane. -h is for horizontal split and -v a vertical split; if neither specified, -v is assumed.
+Create a new pane by splitting target-pane. -h is for horizontal split and -v a vertical split; if neither specified, -v is assumed.
+
+
+ bind   r     source-file ~/.tmux.conf
+ bind '"' split-window -v -c "#{pane_current_path}"
+ set-option -g status-style bg=black,fg=green
+ split-window -v -c ~ -p 40 -t :0 "vim <file>"
+ swap-window -s 2 -t 1			

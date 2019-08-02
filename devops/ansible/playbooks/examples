@@ -1,0 +1,18 @@
+
+
+1. To avoid password prompting when running under priveleged user account edit a 'sudoers' file
+with the `NOPASS' option.
+
+2. Each task can be tagged (--tags) and then referd to an invocation using task name.
+
+3. To execute shell command from the command line:
+
+ansible test -m shell -a 'cat /etc/passwd' | awk -F: '/\/home/ {print $1}'
+
+Note "shell" module usage.
+
+4. Get all variables on the host?
+ansible -m setup <host>
+
+5. Print debug message
+ansible <host> -m debug -a "msg={{ group_names }}"

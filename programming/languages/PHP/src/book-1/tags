@@ -1,0 +1,31 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+DEBUG	mysqli.php	/^define( 'DEBUG', true );   # set to 0 to disable$/;"	d
+OILPRICE	processorder.php	/^    define('OILPRICE',10);$/;"	d
+SPARKPRICE	processorder.php	/^    define('SPARKPRICE',4);$/;"	d
+TIREPRICE	processorder.php	/^    define('TIREPRICE',100);$/;"	d
+address	processorder.php	/^	  $address = $_REQUEST['address']; $/;"	v
+date	processorder.php	/^	  $date    = date('H:i, jS F Y');       # 00-23:00-59 1-31(st,nd,rd,th) January-December YYYY$/;"	v
+host	db.php	/^$host    = "localhost";$/;"	v
+init_db	db.php	/^function init_db( $mysqli ) {$/;"	f
+mode	processorder.php	/^    $mode = 'w';$/;"	v
+mysqli	db.php	/^$mysqli = mysqli_connect( $host, $user, $password )$/;"	v
+oilqty	processorder.php	/^		$oilqty  = $_REQUEST['oilqty'];$/;"	v
+orders_table	db.php	/^$orders_table = "orders";$/;"	v
+outputstring	processorder.php	/^    $outputstring = $date."\\t".$tireqty." tires \\t".$oilqty." oil\\t"$/;"	v
+password	db.php	/^$password= "sweet";$/;"	v
+q	mysqli.php	/^function q( $mysqli, $query ) {$/;"	f
+query	mysqli.php	/^  $query = preg_replace( '\/\\s+\/', ' ', $query );$/;"	v
+schema	db.php	/^$schema  = "bob_shop";$/;"	v
+sparkqty	processorder.php	/^		$sparkqty= $_REQUEST['sparkqty'];$/;"	v
+store_order	db.php	/^function store_order($mysqli) {$/;"	f
+tireqty	processorder.php	/^		$tireqty = $_REQUEST['tireqty'];$/;"	v
+totalamount	processorder.php	/^    $totalamount = $tireqty  * TIREPRICE$/;"	v
+totalamount	processorder.php	/^    $totalamount = 0.0;$/;"	v
+totalamount	processorder.php	/^    $totalamount=number_format($totalamount, 2, '.', ' ');$/;"	v
+totalqty	processorder.php	/^    $totalqty = array_sum( $_REQUEST );$/;"	v
+user	db.php	/^$user    = "root";$/;"	v

@@ -1,0 +1,112 @@
+ 
+																											=== Docker Compose ===
+
+The "Compose" file is a YAML file defining services, networks and volumes. The default path
+for a "Compose" file is ./docker-compose.yml.
+
+The `docker-compose up` command will build, (re)create, start and attach containers to a service. 
+Unless service are running and `--no-deps` was specified, this command also starts all linked services.
+If there is existing container for a service and service configuration was changed, `docker-compose up`
+picks up the changes by stopping and recreating the containers, preserving mounted volumes.
+
+To prevent Compose from picking up the changes, use `--no-recreate` flag. To force Composer recreate 
+containers use `--force-recreate`. 
+
+ 
+
+Linking to a service
+
+ link:
+ 	mariadb:database-service
+
+ "database-service" is an alias now and it is a dependency that will be started before a dependent service
+  
+
+Building an image
+
+ build: ./dir
+ image: webapp:latest
+
+ build:
+ 	 context: ./dir
+	 dockerfile: <filename>
+	 image: webapp:latest
+
+ Directive reference:
+
+  container_name: container
+  build
+    context: ./vehiclemanagement-service
+    dockerfile: Dockerfile
+    image: ai:8
+    args:
+      buildno: 1
+  cache_from
+  LABELS
+  SHM_SIZE
+  TARGET
+  cap_add, cap_drop
+  cgroup_parent
+  deploy
+   replicas
+   resources
+   restart_policy
+      - condition   
+      - delay      
+      - max_attempts
+      - window    
+
+
+ Creating services:
+
+  docker-compose up --detach --force-recreate --build --always-recreate-deps
+  docker-compose up -d --build        # build images before starting containers
+
+ Run a single command in a container(service):
+  
+  docker-compose run <service> <command> [<args>...]
+
+
+ List environment variables set in container:
+  
+  docker-compose run <service> env
+
+ 
+ Remove containers and volumes:
+
+  $ docker-compose down --volumes --rmi {all|local}
+
+
+ version: '3'
+ services:
+    web:
+      build: .
+      ports:
+        - "5000:5000"
+      volumes:
+        - .:/code     
+      redis:
+        image: "redis:alpine"
+
+    ^
+    ^
+      in this example current directory `.` is mounted under `/code` directory inside a container allowing you to do direct modifications to the files without
+      a need to recreate an image
+
+
+ Directive reference:
+  args
+  build
+  cache_from
+  context
+  container_name
+  image
+  ports
+  volumes
+  labels
+  networks
+  target
+  logging
+  environment
+  env_file
+  entrypoint

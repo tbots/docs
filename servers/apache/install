@@ -1,0 +1,17 @@
+ 
+
+Installing php from source
+
+ ./configure --with-apxs2=/usr/local/apache2/bin/apxs
+
+	--with-config-file-path=PATH			Set the path in which to look for php.ini [PREFIX/lib]
+
+
+Installing apache2 from source.
+
+  ./configure --enable-so
+
+			--enable-so 			DSO capability. This module will automatically enabled
+												unless you build all modules statically.
+
+ 	--prefix=/usr/local/apache2      default prefix

@@ -1,0 +1,8 @@
+
+Error handling functions
+------------------------
+
+ error_get_last()
+
+
+Use '@' to suppress any warnings.

@@ -1,0 +1,19 @@
+
+ When website accessed first time init_db() function is called to initialize the database. Three initial tables will be created: users, acl and hosts.
+ There is a csv directory that list all the data which is used to populate tables. For each host there is a csv with the list of the users and
+ their respective acl numbers. hosts table is iterated and table is created for each server filling it using corresponding csv file. See db.php and
+ db_connect.php files for the insights.
+
+ Functionality includes: 
+  + displaying acl per user per server
+  + displaying list of users per acl per server
+  + removing user from the acl of particular server
+  + reseting user acl on the server
+  + adding a user to server acl
+  + displaying list servers where user has an acl set
+ 
+
+
+ Featured improvements:
+ 	+ More pretty pop-up box, make it with the white background
+  + Reset fields output no click elsewhere

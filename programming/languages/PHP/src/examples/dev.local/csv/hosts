@@ -1,0 +1,15 @@
+hostname,project,description
+cz-prg-terminal-core-01.kendaxa.net,SE,Terminal server(testing)
+de-fra-cpu-ml-01.kendaxa.net,ML,Machine Learning
+cz-prg-gpu-ml-01.kendaxa.net,ML,Machine Learning
+cz-prg-gpu-ml-02.kendaxa.net,ML,Machile Learning (VRT Team)
+de-fra-hadmaster-di-01.kendaxa.net,DI,Innovation Lab
+de-fra-hadmaster-di-02.kendaxa.net,DI,Innovation Lab
+de-fra-hadslave-di-01.kendaxa.net,DI,Innovation Lab
+de-fra-hadslave-di-02.kendaxa.net,DI,Innovation Lab
+de-fra-hadslave-di-03.kendaxa.net,DI,Innovation Lab
+cz-prg-www-recaro-01.kendaxa.net,Recaro,
+cz-prg-www-recaro-02.kendaxa.net,Recaro,
+cz-prg-oracledb-recaro-01.kendaxa.net,Recaro,
+cz-prg-www-fexcom-01.kendaxa.net,Fexcom,
+cz-prg-nominatim-di-01.kendaxa.net,DI,Innovation Lab

@@ -1,0 +1,227 @@
+
+ Docker is a command-line client, a background daemon and a set of remote services. It utilizes Linux technology called containers (jail).
+ Unlike virtual machines, Docker containers don't use hardware virtualisation. Programs running inside Docker contrainers interact directly
+ with the host's Linux kernel. Because there is no additional layer between the program running inside the container and the operating system,
+ no resources are wasted by running redundant software or simulating virtual hardware.
+ 
+ Docker runs two programs in user space: docker daemon and docker cli. Docker cli is the user interface for the docker daemon. Each running container is
+ the child process of the docker daemon and the delegate process is running in its own memory subspace of the user space. Programs running inside a 
+ container can access only their own memory and resources as scoped by the container. The containers are isolated with respect to eight aspects: pid namespace,
+ uts namespace,	mnt namespace (filesystem access and structure), ipc namespace, net namespace (network access and structure), usr namespace (user names and identifiers + chroot()),
+ cgroups (resource protection).
+
+ When invoking docker following is the notable options to consider:
+
+  -l, --log-level   debug|info|warn|error|fatal   <-> default: info
+
+ Linux namespaces and cgroups take care of containers at runtime.  At present, Docker runs natively on Linux and comes with a single virtual machine for OS X,
+ and Windows environments. 
+
+ Every running program or process on a Linux machine has a unique number - a process identifier (PID). A PID namespace is the set of possible numbers that 
+ identify the process. Linux provides facilities to create multiple PID namespaces. Each namespace has a complete set of possible PID's. This means that each
+ PID namespace will contain its own PID 1, 2, 3, and so on, that can refer to a different process. Creating a PID namespace for each container is a critical 
+ feature of Docker. You can affect process namespace by passing a namespace name as an argument to `--pid' option for `docker run' or `docker create' commands.
+
+
+
+Daemon socket.
+
+  The Docker daemon can listen for Docker Engine API requests via three different types of socket: unix, tcp, and fd.
+  By default a Unix domain socket (or IPC socket) is created at /var/run/docker.sock, requiring either root permission, or docker group membership.
+
+  
+
+
+Listing containers.
+
+  To gather information about containers use `docker container' or `docker ps' commands. 
+ 
+  Logs can be viewed with the `docker logs'. Log entries can be fitered with the timestamp or relative time value. Use `--timestamps(-t)' option to 
+  see timestamps in logs.
+
+  
+
+Images *
+
+ Docker image is a bundled snapshot of all the files that should be available to a program running inside a container. It is possilbe to create as many
+ container from image as desired. Containers started from the same image does not share changes to their file systems. Images are the shipable units of the
+ Docker ecosystem. Images are distributed using indexes and registers.
+
+ Images are defined by a Dockerfile. Dockerfile defines an environment inside a container. Run `docker info' to find a 'Docker Root Dir'.
+
+ To remove an image first stop and remove all the used containers and then remove the images.
+
+ To create a target image that refers to a source image run `docker tag` command:
+
+  $ docker tag 
+
+
+
+Building an image *
+
+  A `docker build' command builds an image from a Dockerfile and a context. The build's context is the set of files at a specified location PATH
+	or URL. [!]A context is processed recursively.
+
+  The build is run by the Docker daemon not the CLI. The first thing a build process does is sends the entire context (recursively) to the daemon.
+	[!]In most cases it is the best to start with an empty directory as context and keep your Dockerfile in that directory. 
+
+	To use a file in the build context, the Dockerfile refers to the file specified in an instruction, for example, a COPY instruction. To increase
+	the build's performance, .dockerignore file can be created to exclude files and directories from a context. 
+
+  When building an image default path to Dockerfile is ./Dockerfile, use `-f' option to specify an alternate path.
+
+	Examples:
+
+    docker build -t <name:tag> --pull -q <pathspec> -f <file>
+		docker build --tag=<tag> --build-arg <var>=value --name=<name> <Dockerfile>
+
+
+Running containers
+
+ `docker run' starts a process with its own file system, its own networking, and its own isolated process tree. Link can be added to another container
+ with `--link(-l)' option, the client container then can access the exposed port via a private networking interface and share environment variables with
+ the container; docker will set some environment variables in the client container to help indicate which interface and port to use (use `docker exec
+ <container> env' command to list them).
+
+ To get a shell on the container, run it with --interactive(-i) option, that will keep STDIN open and --tty(-t) to allocate a virtual terminal for the 
+ container (that will allow to pass signals to a container). Use `docker exec` instead on the already running container.
+
+ To create container following is the syntax of possible commands:
+    docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+    docker create [OPTIONS...] IMAGE [COMMAND] [ARG...]
+
+   Examples:
+    docker run --rm --pid host --name test ps   # host is the namespace
+		docker run --rm -idp 4000:80 <image>    # --rm  delete container after stopped; will not work :), please check; -i and -d are not compatible?
+	  docker run -d --name namespaceA busybox:latest /bin/sh -c "sleep 30000"
+	  docker run --name <container-name> --volume /some/content:/usr/shar/nginx/html:ro --detach <image>
+	  docker run --interactive[=true|false] --tty --link web:web --name web_test busybox:latest /bin/bash
+	  docker run -it --name spring /bin/bash
+	  docker run -d --publish-all(-P) 
+    docker run --rm -it --name bindmount -v $(pwd)/src:/src -v `pwd`/site.conf:/etc/nginx/conf.d/site.conf' nginx:latest /bin/bash
+    docker exec mailer ps   # run a ps(1) command in mailer container
+    # what about read only for MySQL example?
+
+   Examples:
+    docker create --cidfile /tmp/web.cid nginx:latest     # create container from the image
+
+ 
+
+Entrypoint *
+
+ A default entrypoint of the image (set in a Dockerfile) can be overriden with the `--entrypoint` option. 
+
+
+Recovering from failure *
+
+ Containers can be automatically restarted by specifying a --restart flag at container creation time. There are four supported modes:
+  - Never restart (default)
+  - Attempt to restart when failure is detected 
+  - Attempt for some predetermined time to restart when failure is detected 
+  - Always restart the container regardless of the condition
+
+ The default restart policy is "no".
+
+ Examples:
+  docker run -d --name backoff-detector --restart always busybox date
+
+ Cleaning up. Removing images and containers.
+
+  Either one of two commands can be used to remove containers in form of:
+   docker container rm [OPTIONS] CONTAINER...
+   docker system prune -af --volumes      # remove unused data, also images
+
+
+ Container logging
+
+  docker logs [OPTIONS] CONTAINER
+
+  Examples:
+	  docker logs web --details --timestamps --until 2019-03-12T15:25:50   # show logs before timestamp
+	  docker logs web --details -t --since 10m   # show logs since timestamp
+
+
+***************
+*** Volumes ***
+***************
+
+ Reference: https://docs.docker.com/storage/volumes/
+
+ By design, Docker containers do not store persistent data. Any data written to a container's writable layer will no longer be available
+ once the container stops running. Also, getting data written to a container back out of it for another process can be difficult. To solve
+ the issue of persistent data from a container, Docker has two options:
+
+ Bind mounts - file or folder stored anywhere on the container host filesystem, mounted into a running container. The main difference a bind mount has
+    from a named volume is that since it can exist anywhere on the host filesystem, processes outside of Docker can also modify it. Docker CLI
+    cannot be used to manage bind mounts.
+
+ Volumes:
+    It is a preferred way to store persistent data Docker containers create or use. The host filesystem also stores volumes, similar to bind
+    mounts, however, Docker completely manages them and stores them under storage directory.
+
+ Originally, the `-v` or `--volume` flag was used for standalone containers and the `--mount` flag was used for swarm services. Since version
+ 17.06 it is possible to use `--mount` with standalone containers as well. The `-v` syntax combines all the options together in one field, while 
+ `--mount` syntax separates them. 
+
+ -v or --volume consists of three fields, separated by colon. The fields must be in the correct order:
+ 
+ 	<src>:<dest>[:ro,consistent,delegated,cached,z,Z]
+
+ [!]	Source path should be specified as an absolute path. 
+
+
+Configuring local volume:
+
+
+ Passing a local volume and modifying files in place.. what gonna happen if you specify RO option?
+
+  docker run -it --rm --name nginx --volume "${PWD}/code:/code" --volume "${PWD}/conf.d:/etc/nginx/conf.d" --publish "8080:80" -h websrv01 nginx:latest /bin/bash
+
+ This will override all the files in conf.d directory.
+
+ To add file to the conf.d use `--volume "${PWD}/conf.d/site.conf:/etc/nginx/conf.d/site.conf"
+
+ [!] Types should match.
+		  
+
+
+ ***
+ Docker Registry
+
+  A Docker registry is a storage and distribution system for named Docker images. The same image might have multiple different versions,
+  identified by their tags. A Docker registry is organized into Docker repositories, where a repository holds all the versions of a specific image.
+	The registry allows docker users to pull images locally, as well as push new images to the registry.
+
+  To create a tag of the target image that refere to the source image:
+    $ docker tag <soucre_image>[:<tag>] <target_image>[:tag]
+  
+  Before pushing an image to repository you need to login first with `docker login`.  To push an image run:
+    $ docker push <user>/<repository>:<image:tag>
+
+
+ ***
+ Inspecting containers
+
+  docker inspect --format "{{.Key1.Key2}}" <container>
+
+  To see environment variables that is set in a container run `docker exec <container> env` command.
+
+  There are also environment variables that gonna be set by default depends on the way container was created (i.e. with the --link option).
+
+	Run `docker top` to see the processes running in a container. [!] NOTE the [ps OPTIONS] part. Once I fucking was studying it.
+
+ ***
+ Storage Driver
+
+  To set a storage driver to 'overlay' create /etc/docker/daemon.json with the '{ "storage" : "overlay" }'.
+  To see which driver is currently used `docker info | grep 'Storage Driver'`
+
+
+ Loading Images
+
+  To load image from a tar archive or STDIN use `docker load`.
+
+ 
+Ports.
+
+ Ports mapping are handled by "docker-proxy" daemon.

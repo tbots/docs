@@ -1,8 +1,0 @@
-
- a!a      '\w\+\>'
-
- start[a]				[b]*\>a
- start[a]				b*\>[a]
-
- \(\<a\w\+\)		abc
- ^ currently tested

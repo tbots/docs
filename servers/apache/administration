@@ -1,0 +1,58 @@
+
++----------------+
+| Administration |
++----------------+
+
+"apache2ctl" script is designated for the apache2 server administration. Default enviornment variables for apache2ctl
+stored under "envvars" file that is sourced from within "apache2ctl" right after APACHE_CONFDIR value is determined. 
+Both of the scripts will try to setup a SUFFIX variable if directory is in form of "/etc/apache2-*", wherever * is expanded
+to, SUFFIX is set to it's value.
+
+"envvars" file in turn will set few variables, in the time of writing variables are:
+
+ APACHE_CONFDIR={/etc/apache2}			# /usr/sbin/apache2ctl
+ APACHE_RUN_USER={www-data}				# /etc/apache2/envvars
+ APACHE_RUN_GROUP={www-data}			
+ APACHE_PID_FILE={/var/run/apache2$SUFFIX/apache2.pid}
+ APACHE_RUN_DIR={/var/run/apache2$SUFFIX}
+ APACHE_LOCK_DIR={/var/lock/apache2$SUFFIX}
+ APACHE_LOG_DIR={/var/log/apache2$SUFFIX}
+ APACHE_LYNX=
+ APACHE_ULIMIT_MAX_FILES=
+ APACHE_ARGUMENTS="-D $APACHE_CONFDIR"
+ APACHE2_MAINTSCRIPT_DEBUG=
+ APACHE_SYSTEMD_SERVICE=apache2$SUFFIX
+ SUFFIX=
+
+$HTTPD sets a path to the httpd binary. Consider the line:
+
+ HTTPD=${APACHE_HTTPD:-/usr/sbin/apache2}
+
+If APACHE_HTTPD is not set (that is probably to be expected to be set in the 'envvars') then '/usr/sbin/apache2' is the
+default binary.
+
+
+Operations
+----------
+ 
+apache2 information can be obtained from the different sources:
+
+ apache2ctl fullstatus
+ apache2ctl -S    # to see an information about virtual hosts
+ 
+
+ 	
+Modules
+-------
+
+All the modules go to:
+ /usr/lib/apache2/modules
+
+
++---------------+
+| Configuration |
++---------------+
+
+
+Configuration files
++ + + + + + + + + +

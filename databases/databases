@@ -7,13 +7,13 @@
 
  From the user's point of view, a database is a collection of one or more tables (and nothing but tables). 
  A table: 
- 					 * Is the database structure that holds data
+					 * Is the database structure that holds data
 					 * Contains data about a specific entity type. An entity type is a class of distinguishable real-world objects, events or concepts
-					 	 with common properties.
+					 	 with common properties
 					 * It is two-dimensional grid characterzed by rows and columns
 					 * Holds a data item called a value at each row-column intesection
-					 * Has at least one column and zero or more rows. A table with no rows is an empty table.
-					 * Has a unique name within a database/schema.
+					 * Has at least one column and zero or more rows. A table with no rows is an empty table
+					 * Has a unique name within a database/schema
 
  A DBMS (Database Management System) uses two types of tables: user tables and system tables. User tables store user-defined data. System tables
  contain metadata - data about database - such as structural information, physical details, performance statistics, and security settings. System

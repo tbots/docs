@@ -1,0 +1,33 @@
+
+To display a date, date() function is used. It expects a Unix timestamp value and an output format string. The definition is as follows:
+
+  string date ( string $format [, int $timestamp = time() ] );
+
+Timestamp is optional and default to the return value of time() that is a Unix timestamp for the current time.
+
+DateTimeInterface is meant so that both DateTime and DateTimeImmutable can be type hinted for. It is not possible to implement this interface with userland
+classes.
+
+ Date and Time Functions
+
+ 	date_create - Alias of DateTime::__construct
+	date_diff		- Alias of DateTime::diff()
+
+
+
+	int strtotime ( string $time [, int $now = time() ] )
+		
+	 The function expects to be given a string containing an English date format and will try to parse that format into a Unix timestamp (the number of
+	 seconds since January 1 1970 00:00:00 UTC), relative to the timestamp given in now, or the current time if now is not supported.
+
+	 Each parameter of this function uses the default time zone unless a time zone is specified in that parameter. 
+
+	 Parameters:
+
+	 		time		A date/time string (see formats).
+
+			now			The timestamp which is used as a base for the calculation of relative dates. 
+							
+
+	
+	date_default_timezone_get() 

@@ -1,0 +1,6 @@
+
+ sudo chown --recursive --verbose --from=root:root www-data: *
+
+To set a mode only on files:
+  
+  find PATH -maxdepth N -type d|f -exec sudo chmod MODE {} \;
