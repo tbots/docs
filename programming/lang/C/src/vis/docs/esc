@@ -1,0 +1,14 @@
+
+ Summary of escape codes used.
+
+ \033[D			move cursor character back
+ \033[2D		move cursor two characters back
+ \033[m			turn off character attributes
+ \033[?25l	hide cursor 
+
+ Colors:
+ 	
+	\033[41m	red background
+	\033[97m	white foreground
+
+ Matched character printed white on the red background.

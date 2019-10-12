@@ -1,0 +1,28 @@
+
+ Daemon Process
+
+ 	A daemon process is a process which runs in background and has no controlling terminal. 
+  Half-duplex UNIX Pipes
+
+ Basic Concepts
+
+	A pipe is a method of connecting the standard output of one process to the standard input of another. When a process creates a pipe, the
+	kernel sets up two file descriptors. One descriptor is used to allow a path of input into the pipe (write), while the other is used 
+	to obtain data from the pipe(read).
+
+	Child process will inherit all the open file descriptors of the parent.
+
+	All the data sent through the pipe traveling through the kernel.
+
+
+ Process indetification.
+
+  The pid_t data type is a signed integer type which is capable of representing a process ID. In the GNU C Library, this is an int.
+
+  getpid() function and getppid() will return current and parent process IDs respectively.
+
+ 
+ Creating a pipe.
+
+  fd[0] - reading
+	fd[1] - writing

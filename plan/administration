@@ -1,16 +1,7 @@
 
- systemd
- 	| -- https://www.digitalocean.com/community/tutorials/systemd-essentials-working-with-services-units-and-the-journal
-	| -- man systemd
+	· Complete networking fundamentals course
 
- [!][!]Continue on apt configuration
- Pass logrotate tutorial
- Read "man 5 locale"
- Read about:
- 	apt-transport-https
-	lsb-release 
-	ca-ceritificates
-	linuxbase.org
- command-not-found(1)
- partx(1)
+	· Understand MAC Collision Detection
 
+
+Read https://www.gnupg.org/gph/en/manual.html

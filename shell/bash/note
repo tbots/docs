@@ -137,10 +137,21 @@ To list all the exported variables:
 
                                                             [[[ Built-in Commands ]]]
  
- 	shopt -s extglob
 
+         
+ To list all the shell options:
+  
+  shopt
 
-fc will allow to display or execute commands from the history list
+ `-s' for set and `-u' to unset
+  
+ 
+ Options:
+
+  histappend 
+ 	extglob
+
+ Continue on all the shopt options under SHELL BUILTIN COMMANDS
 
 
 	                                                          [[[	Shortcuts ]]]
@@ -155,3 +166,10 @@ Comparisons.
 
 :x
 exi
+
+
+
+   HISTORY
+fc will allow to display or execute commands from the history list
+
+

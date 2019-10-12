@@ -1,0 +1,177 @@
+
+																			*** VIM Script ***
+
+To run examples here you can yank text to any register and then execute it from the command prompt with "@" command.
+
+==================
+LOOPING CONSTRUCTS
+==================
+ 	
+while loop
+
+The generic form of the whie loop:
+		:while {condition} 
+		  :{statement} 
+		:endw[hile]
+
+
+Examples:
+
+
+counting till '10':
+
+		let i=1
+		while i < 10
+		   echo "i " i
+		   let i += 1
+		endw
+
+Note that ':' is optional when running with the yanked text.
+
+Generic form of the "for" loop:
+    for {var} in {list}
+      {statement}
+    endfo{r}
+
+
+Looping through a range of numbers
+    for i in range(0,9)
+      echo "i " i
+	  endfor
+
+
+*VARIABLES
+
+ To set a variable use `let' command. To see all the variables run `let' without arguments.
+
+ let mood = "fine"
+
+Leftmost part can be also an expression in which case evaluated value will be assigned to the variable.
+
+let sum = 2 + 5 + 3
+
+Strings can conctanated this way:
+
+let greeting = "hello"
+let who="world" 
+let items = [ greeting, who ]			" create a list
+for item in items
+	echo item
+endfor
+let greeting .= ", ".who."!"
+echo greeting			# outputs  hello, world!
+
+To remove(unlet) a variable use "unlet" command. Append '!' to suppress error message:
+
+:unlet! greeting
+
+
+To check for an existence of the variable use 'exists' built-in.
+if exists("w")
+	echo "variable exists"
+else
+	echo "variable does not exist"
+endif
+
+0 is interpreted as false by vim, thus "if \"true\"" will result in false
+
+Examining registers.
+
+Value stored in a register can be examined as:
+
+if @a > 5
+
+Option value can be retrieved by prefixing its name with the ampersand:
+
+echo &ts		" 2
+let stops = &ts
+let &ts=5			" set new value for 'tabstop'
+echo stops		" still
+let &ts = stops		" restore original value
+
+
+Vim understands four types of numbers: binary, octal, decimaland hexadecimal. Depending on the prefix,
+the numbers interpreted differently. Use '0x' for the hexadecimal and '0' for the octal, and '0b' for
+the binary number system.
+		
+	
+When comparing strings to numbers, the string is first converted to a number. If it cannot be converted it
+is set to 0, resulting in "false" statement.
+
+let string = "5"
+echo 5 == string ? "equals to '".string."'" : "does not equal"			# equals to '5'
+unlet string
+echo 1 == string ? "true" : "false"
+
+
+Regular expression is done with the '=~' and '!~' operators. Append '#' to match the case (default), or '?' to ignore it.
+if "hello" ~ "hell"
+	echo "true"
+else
+	echo "false"
+endif
+		
+To see current setting:
+set ic ?
+echo &ic ? "ic is set" : "ic is not set"
+echo "ic is" &ic ? "set" : "not set"
+
+
+Command output
+
+echo, echo[m].. family of commands designed to provide and format script output.
+
+Echoing commands.
+
+:ec[ho] {expr1}...
+
+Echoes each expression, with a space in between. The first expression starts on a new line.
+If there is a new line in a form: 
+
+:echo "word1" "\n" "word2"
+    
+word2 is written on the new line with the preceding white space, as a workaround use following form:
+ 
+:echo "hello," "\nworld!"   # or :echo "word1\nword2" will result in the same
+
+But what if the we want variable interpolation? Consider the following:
+
+:let greeting="hello"
+:let who="world"
+:echo greeting.",\n".who
+      
+See `:h :echoh!` for output highlighting. 
+
+ 	
+Functions
+
+Generic form of the function definition:
+
+function Name()
+	...
+endf[unction]
+
+
+
+Important to note:
+	Comments (") are allowed 
+	++ operator will not work
+ :echo expand('$variable')
+ :echo $variable
+
+ "	 Source a global configuration file if available
+ if filereadable("/etc/vim/vimrc.local")
+  source /etc/vim/vimrc.local
+endif
+
+Redirection to a register (wow! redir)
+
+Quick reference:
+	
+	Functions:
+    filereadable
+		exists()
+    type()
+		sleep
+		'ic'
+		'noic'

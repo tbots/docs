@@ -32,6 +32,13 @@ Splitting windows:
 
 Create a new pane by splitting target-pane. -h is for horizontal split and -v a vertical split; if neither specified, -v is assumed.
 
+Join pane:
+
+ join-pane
+ join-pane -b -t :1 -p 30         # join to the left of or above of the destination pane
+                                  # otherwise will upper on the right or bottom
+ 
+
 
  bind   r     source-file ~/.tmux.conf
  bind '"' split-window -v -c "#{pane_current_path}"

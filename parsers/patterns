@@ -1,12 +1,16 @@
 
- The file lists pattern matching and string manipulation examples using standard GNU tools. Enjoy!
+#The file lists pattern matching and string manipulation examples using standard GNU tools. Enjoy!
 
  // Strip server number from the cannonical name. Also, try to get a domain in the separate variable.
  echo 'cz-prg-server-01.spol.cz' | sed 's/^\([a-zA-Z-]\+\)\([0-9]\+\).*/\1 \2/'
+ ^
+ ^ useful?
 
 
 Get all the variables set in apache2ctl. Try to remove lines like 'ERROR=$?'
   sed -n 's/^\(.* \)\?\([A-Z_]\+\)=\(\S\+\)\|\(\$([^)]\+)\).*/\2\t\3/p' /usr/sbin/apache2ctl
+
+ ^ nice
 
  Find action value in the html form
 
@@ -20,3 +24,10 @@ Display only ifname and ipv4 address it assigned
  ip -o a s | awk '{if ($3 == "inet") print $2 "\t" $4}'
 
 # Get number of letters in the alphabeth 
+
+
+# Truncate repeated whitespaces
+
+vim   s/\(\S\)\s\{2,\}\(\S\)/\1 \2/g
+
+# find path names in strace(2) output

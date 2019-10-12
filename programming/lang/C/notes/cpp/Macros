@@ -1,0 +1,26 @@
+
+Macros:
+ A macro is a fragment of code which has been given a name. Whenever the name is used, it is replaced by the contents of the macro. There are two kinds of macros. They differ
+ mostly in what they look like when they are used. Object-like macros resemble data objects when used, function-like macros resemble function calls.
+ 
+ It is possible to define any valid identifier as a macro, even if it is a C keyword. The preprocessor does not know anything about keywords. This can be useful if you wish to
+ hide a keyword (in example from an older compiler that does not understand it). However, the preprocessor operator defined can never be defined as a macro.
+
+Object-like Macros
+ 	
+ An object-like macro is a simple identifier which will be replaced by a code fragment. It is called object-like because it looks like a data object in code that uses it. They
+ are most commonly used to give symbolic names to numeric constants.
+ 
+ Macro gets created with the '#define' directive. '#define' is followed by the name of the macro and then the token sequence it should be an abbreviation for, which is variously 
+ referred to as the macro's body, expansion or replacement list.
+
+ By convention, macro names are written in uppercase. 
+
+ The macro's body ends at the end of the '#define' line. Replacement list may continue the definition onto multiple lines, if necessary, using backslash-newline. When the macro is 
+ expanded, however, it will all come out on one line. For example,
+ 	
+	#define NUMBERS 1, \
+					2, \
+					3
+	int x[] = { NUMBERS };
+
